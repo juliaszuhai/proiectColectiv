@@ -7,3 +7,4 @@ Entity Framework - Inheritance
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-inheritance-with-the-entity-framework-in-an-asp-net-mvc-application
 Entity Framework - Annotations (primary key, identity, max characters etc.) 
 https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/data-annotations
+https://stackoverflow.com/questions/13607512/how-to-specify-primary-key-name-in-ef-code-first
