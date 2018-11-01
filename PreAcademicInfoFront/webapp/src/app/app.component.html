@@ -1,0 +1,36 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+    <span>Welcome to my website</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" [matMenuTriggerFor]="menu">menu</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Hello</button>
+      <button mat-menu-item>World</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+Do you like my website:
+<mat-radio-group class="example-radio-group">
+  <mat-radio-group>
+    <mat-radio-button value="1">Yes</mat-radio-button>
+    <mat-radio-button value="2">No</mat-radio-button>
+  </mat-radio-group>
+</mat-radio-group>
+
+<form class="example-form">
+  Your email:
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="email" value="">
+  </mat-form-field>
+
+  Leave us a comment:
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Leave a comment"></textarea>
+  </mat-form-field>
+</form>
+
+
+<router-outlet></router-outlet>
