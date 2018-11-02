@@ -8,3 +8,6 @@ https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-sta
 Entity Framework - Annotations (primary key, identity, max characters etc.) 
 https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/data-annotations
 https://stackoverflow.com/questions/13607512/how-to-specify-primary-key-name-in-ef-code-first
+
+OAuth - Authentication logic 
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
