@@ -10,10 +10,7 @@ namespace PreAcademicInfo.Models
     public class FacultyEnroll
     {
         [Required]
-        public Faculty Faculty { get; set; }
-
-        [Required]
-        public Int32 GroupId { get; set; }
+        public Specializare Specializare { get; set; }
 
         [Required,ForeignKey("GroupId")]
         public Group Group { get; set; }

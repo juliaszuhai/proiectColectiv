@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PreAcademicInfo.Models
 {
-    public class Group
+    public class Admin : User
     {
         [Required]
-        public String NumeGrupa { get; set; }
+        public Int32 Adresa { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Specializare> Specializares { get; set; }
     }
 }

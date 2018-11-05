@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace PreAcademicInfo.Models
 {
+    public enum DisciplineType { OBLIGATORIU, OPTIONAL, FACULTATIV }
     public class Discipline
     {
+        [Required]
+        public DisciplineType Type  { get; set; }
+
+        [Required,Key]
+        public String Cod { get; set; }
+
         [Required]
         public String Nume { get; set; }
 
         [Required]
-        public int Credite { get; set; }
+        public Int32 Credite { get; set; }
 
         [Required]
         public Int32 An { get; set; }

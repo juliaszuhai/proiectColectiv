@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PreAcademicInfo.Models
 {
-    public class Group
+    public class GradesToDiscipline
     {
         [Required]
-        public String NumeGrupa { get; set; }
+        public Discipline Discipline { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Grade> Grades { get; set; }
     }
 }
