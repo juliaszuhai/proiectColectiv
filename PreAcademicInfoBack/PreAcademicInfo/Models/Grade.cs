@@ -9,6 +9,9 @@ namespace PreAcademicInfo.Models
     public enum GradeType { LAB, SEMINAR, EXAMEN, PARTIAL, BONUS}
     public class Grade
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public Discipline Discipline { get; set; }
 
@@ -21,6 +24,6 @@ namespace PreAcademicInfo.Models
         public Int32 PrezenteLab { get; set; }
         public Int32 PrezenteSeminar { get; set; }
 
-        public GradeType type { get; set; }
+        public GradeType Type { get; set; }
     }
 }

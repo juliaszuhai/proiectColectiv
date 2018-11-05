@@ -8,15 +8,12 @@ namespace PreAcademicInfo.Models
 {
     public class Department
     {
-        [Required]
-        public Faculty Faculty { get; set; }
+        [Required,Key]
+        public Int32 Id { get; set; }
 
         [Required]
         public String Name { get; set; }
-
-        [Required]
-        public Teacher ProDecan { get; set; }
-
+        
         public ICollection<Specializare> Specializares { get; set; }
     }
 }

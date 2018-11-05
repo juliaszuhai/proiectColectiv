@@ -8,6 +8,9 @@ namespace PreAcademicInfo.Models
 {
     public class Group
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public String NumeGrupa { get; set; }
 

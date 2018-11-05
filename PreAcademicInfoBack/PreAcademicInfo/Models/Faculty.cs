@@ -8,6 +8,9 @@ namespace PreAcademicInfo.Models
 {
     public class Faculty
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public String NumeUniveristate { get; set; }
 
@@ -16,9 +19,6 @@ namespace PreAcademicInfo.Models
 
         [Required]
         public String Adresa { get; set; }
-
-        [Required]
-        public Teacher Decan { get; set; }
 
         public ICollection<Department> Departments { get; set; }
     }

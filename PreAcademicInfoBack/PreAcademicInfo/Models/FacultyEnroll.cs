@@ -9,6 +9,9 @@ namespace PreAcademicInfo.Models
 {
     public class FacultyEnroll
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public Specializare Specializare { get; set; }
 

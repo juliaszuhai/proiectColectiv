@@ -12,11 +12,14 @@ namespace PreAcademicInfo.Models
 
     public class Specializare
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public String Nume { get; set; }
 
         [Required]
-        public Faculty Faculty { get; set; }
+        public Department Department { get; set; }
 
         [Required]
         public SpecializareType Type { get; set; }

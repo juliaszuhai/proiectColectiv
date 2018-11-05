@@ -8,6 +8,9 @@ namespace PreAcademicInfo.Models
 {
     public class GradesToDiscipline
     {
+        [Required, Key]
+        public Int32 Id { get; set; }
+
         [Required]
         public Discipline Discipline { get; set; }
 
