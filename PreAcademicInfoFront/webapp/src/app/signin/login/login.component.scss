@@ -13,5 +13,58 @@
 .logo{
     display: flex;
     justify-content: flex-start;
-    
+}
+
+.form_style{
+    margin: 0 auto;
+  width: 70%;
+  min-width: 200px;
+  max-width: 700px;
+  text-align: center;
+  border: 3px solid black;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  color: black;
+  background: white;
+}
+
+.title_style{
+    margin-top: 40px;
+  margin-bottom: 70px;
+  font-size: 3em;
+  color: black;
+  background-color: #F5F5F5;
+}
+
+.display{
+  margin: auto;
+  width: 60%;
+  align: center;
+  display: flex;
+  flex-direction:column;
+  width: 250px;
+  height: 250px;
+}
+
+.input_style{
+  font-size: 1.45em;
+  border: 1px solid #ddd;    
+}
+
+.input_password_style{
+    font-size: 1.45em;
+    border: 1px solid #ddd;
+}
+
+.button_style{
+  font-size: 2em;
+  background-color: black;
+  color: white;
+}
+
+.error_message{
+    background: #6cb4b8;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin: 10px 0;
 }

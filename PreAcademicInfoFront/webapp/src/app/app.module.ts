@@ -9,6 +9,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material";
 import { LoginComponent } from './signin/login/login.component';
 import { SigninModule } from './signin/signin.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
@@ -24,7 +26,9 @@ const routes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    SigninModule
+    SigninModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
