@@ -11,9 +11,10 @@ using System;
 namespace PreAcademicInfo.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20181111132416_FacultyEnrollmentChange")]
+    partial class FacultyEnrollmentChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,8 +36,6 @@ namespace PreAcademicInfo.Migrations
 
                     b.Property<string>("Nume")
                         .IsRequired();
-
-                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();
@@ -237,9 +236,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("An")
                         .IsRequired();
 
-                    b.Property<string>("CNP")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .IsRequired();
 
@@ -249,15 +245,11 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("InitialaParinte")
                         .IsRequired();
 
-                    b.Property<int>("NumarMatricol");
-
                     b.Property<int>("NumarTelefon")
                         .HasMaxLength(14);
 
                     b.Property<string>("Nume")
                         .IsRequired();
-
-                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();
@@ -282,8 +274,6 @@ namespace PreAcademicInfo.Migrations
 
                     b.Property<string>("Nume")
                         .IsRequired();
-
-                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();

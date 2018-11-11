@@ -14,6 +14,9 @@ namespace PreAcademicInfo.Models
         [Required]
         public String Name { get; set; }
         
+        [Required]
+        public Faculty Faculty { get; set; }
+
         public ICollection<Specializare> Specializares { get; set; }
     }
 }

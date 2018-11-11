@@ -16,16 +16,16 @@ namespace PreAcademicInfo.Models
         [Required,Key]
         public String Username { get; set; }
         
-        [NotMapped]
+       
         public string Password
         {
-            get;
+            get; set;
             //get { return Decrypt(Password); }
             //set { Password = Encrypt(value); }
         }
 
         [Required]
-        public Int32 Email { get; set; }
+        public String Email { get; set; }
 
         [Required]
         public String Nume { get; set; }

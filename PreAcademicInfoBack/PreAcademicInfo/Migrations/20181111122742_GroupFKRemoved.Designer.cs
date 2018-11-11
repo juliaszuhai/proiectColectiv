@@ -11,9 +11,10 @@ using System;
 namespace PreAcademicInfo.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20181111122742_GroupFKRemoved")]
+    partial class GroupFKRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +37,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password");
-
                     b.Property<string>("Prenume")
                         .IsRequired();
 
@@ -53,14 +52,10 @@ namespace PreAcademicInfo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("FacultyId");
-
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("Department");
                 });
@@ -89,37 +84,16 @@ namespace PreAcademicInfo.Migrations
                     b.ToTable("Discipline");
                 });
 
-            modelBuilder.Entity("PreAcademicInfo.Models.Faculty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Adresa")
-                        .IsRequired();
-
-                    b.Property<string>("Nume")
-                        .IsRequired();
-
-                    b.Property<string>("NumeUniveristate")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Faculty");
-                });
-
             modelBuilder.Entity("PreAcademicInfo.Models.FacultyEnroll", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("GroupId")
-                        .IsRequired();
+                    b.Property<int>("GroupId");
 
                     b.Property<int>("SpecializareId");
 
-                    b.Property<string>("StudentId")
-                        .IsRequired();
+                    b.Property<string>("StudentUsername");
 
                     b.HasKey("Id");
 
@@ -127,7 +101,7 @@ namespace PreAcademicInfo.Migrations
 
                     b.HasIndex("SpecializareId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentUsername");
 
                     b.ToTable("FacultyEnroll");
                 });
@@ -188,7 +162,7 @@ namespace PreAcademicInfo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("GroupName")
+                    b.Property<string>("NumeGrupa")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -237,19 +211,16 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("An")
                         .IsRequired();
 
-                    b.Property<string>("CNP")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .IsRequired();
 
                     b.Property<string>("Generatie")
                         .IsRequired();
 
+                    b.Property<int?>("GroupId");
+
                     b.Property<string>("InitialaParinte")
                         .IsRequired();
-
-                    b.Property<int>("NumarMatricol");
 
                     b.Property<int>("NumarTelefon")
                         .HasMaxLength(14);
@@ -257,14 +228,14 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password");
-
                     b.Property<string>("Prenume")
                         .IsRequired();
 
                     b.Property<int>("UserType");
 
                     b.HasKey("Username");
+
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Student");
                 });
@@ -283,8 +254,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password");
-
                     b.Property<string>("Prenume")
                         .IsRequired();
 
@@ -293,14 +262,6 @@ namespace PreAcademicInfo.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("Teacher");
-                });
-
-            modelBuilder.Entity("PreAcademicInfo.Models.Department", b =>
-                {
-                    b.HasOne("PreAcademicInfo.Models.Faculty", "Faculty")
-                        .WithMany("Departments")
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PreAcademicInfo.Models.Discipline", b =>
@@ -314,7 +275,7 @@ namespace PreAcademicInfo.Migrations
             modelBuilder.Entity("PreAcademicInfo.Models.FacultyEnroll", b =>
                 {
                     b.HasOne("PreAcademicInfo.Models.Group", "Group")
-                        .WithMany("FacultiesEnrolments")
+                        .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -323,10 +284,9 @@ namespace PreAcademicInfo.Migrations
                         .HasForeignKey("SpecializareId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PreAcademicInfo.Models.Student", "Student")
+                    b.HasOne("PreAcademicInfo.Models.Student")
                         .WithMany("FacultiesEnrolled")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StudentUsername");
                 });
 
             modelBuilder.Entity("PreAcademicInfo.Models.Grade", b =>
@@ -368,6 +328,13 @@ namespace PreAcademicInfo.Migrations
                         .WithMany("Specializares")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PreAcademicInfo.Models.Student", b =>
+                {
+                    b.HasOne("PreAcademicInfo.Models.Group")
+                        .WithMany("Students")
+                        .HasForeignKey("GroupId");
                 });
 #pragma warning restore 612, 618
         }

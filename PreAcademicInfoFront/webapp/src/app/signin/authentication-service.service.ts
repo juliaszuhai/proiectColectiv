@@ -11,7 +11,7 @@ export interface UserLoginData {
 @Injectable()
 export class AuthenticationServiceService {
 
-  baseURL = 'http://localhost:8080';
+  baseURL = 'http://localhost:53087/api/Login';
   isLoggedIn=false;
 
   constructor(private http: HttpClient,
@@ -24,13 +24,11 @@ export class AuthenticationServiceService {
   }
 
   loginUser(username: string, password: string){
-    let body = new URLSearchParams();
-    body.set('username', username);
-    body.set('password', password);
+    let body = JSON.stringify({username,password});
     console.log(username, password);
 
     return this.http.post<UserLoginData>(this.baseURL,
-      body.toString(),
+      body,
       {
       headers: new HttpHeaders(
         {'Content-Type' : 'application/json'}

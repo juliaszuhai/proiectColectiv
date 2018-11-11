@@ -10,57 +10,57 @@ using PreAcademicInfo.Models;
 namespace PreAcademicInfo.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Users")]
-    public class UsersController : Controller
+    [Route("api/Admins")]
+    public class AdminsController : Controller
     {
-        private readonly UsersContext _context;
+        private readonly AdminsContext _context;
 
-        public UsersController(UsersContext context)
+        public AdminsController(AdminsContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Admins
         [HttpGet]
-        public IEnumerable<User> GetUser()
+        public IEnumerable<Admin> GetAdmin()
         {
-            return _context.Users;
+            return _context.Admin;
         }
 
-        // GET: api/Users/5
+        // GET: api/Admins/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser([FromRoute] string id)
+        public async Task<IActionResult> GetAdmin([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.Username == id);
+            var admin = await _context.Admin.SingleOrDefaultAsync(m => m.Username == id);
 
-            if (user == null)
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(admin);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Admins/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromRoute] string id, [FromBody] User user)
+        public async Task<IActionResult> PutAdmin([FromRoute] string id, [FromBody] Admin admin)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.Username)
+            if (id != admin.Username)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(admin).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace PreAcademicInfo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!AdminExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace PreAcademicInfo.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Admins
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostAdmin([FromBody] Admin admin)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Users.Add(user);
+            _context.Admin.Add(admin);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Username }, user);
+            return CreatedAtAction("GetAdmin", new { id = admin.Username }, admin);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Admins/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        public async Task<IActionResult> DeleteAdmin([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.Username == id);
-            if (user == null)
+            var admin = await _context.Admin.SingleOrDefaultAsync(m => m.Username == id);
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Admin.Remove(admin);
             await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(admin);
         }
 
-        private bool UserExists(string id)
+        private bool AdminExists(string id)
         {
-            return _context.Users.Any(e => e.Username == id);
+            return _context.Admin.Any(e => e.Username == id);
         }
     }
 }

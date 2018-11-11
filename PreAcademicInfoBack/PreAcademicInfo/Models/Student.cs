@@ -9,10 +9,10 @@ namespace PreAcademicInfo.Models
     public class Student : User
     {
         [Required]
-        public Int32 NumarMatricol { get; }
+        public Int32 NumarMatricol { get; set; }
 
         [Required]
-        public String CNP { get; }
+        public String CNP { get; set; }
 
         [Required]
         public String InitialaParinte { get; set; }

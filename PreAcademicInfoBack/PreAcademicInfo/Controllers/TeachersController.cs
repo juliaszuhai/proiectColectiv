@@ -10,57 +10,57 @@ using PreAcademicInfo.Models;
 namespace PreAcademicInfo.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Users")]
-    public class UsersController : Controller
+    [Route("api/Teachers")]
+    public class TeachersController : Controller
     {
-        private readonly UsersContext _context;
+        private readonly TeachersContext _context;
 
-        public UsersController(UsersContext context)
+        public TeachersController(TeachersContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Teachers
         [HttpGet]
-        public IEnumerable<User> GetUser()
+        public IEnumerable<Teacher> GetTeacher()
         {
-            return _context.Users;
+            return _context.Teacher;
         }
 
-        // GET: api/Users/5
+        // GET: api/Teachers/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser([FromRoute] string id)
+        public async Task<IActionResult> GetTeacher([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.Username == id);
+            var teacher = await _context.Teacher.SingleOrDefaultAsync(m => m.Username == id);
 
-            if (user == null)
+            if (teacher == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(teacher);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Teachers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromRoute] string id, [FromBody] User user)
+        public async Task<IActionResult> PutTeacher([FromRoute] string id, [FromBody] Teacher teacher)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.Username)
+            if (id != teacher.Username)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(teacher).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace PreAcademicInfo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!TeacherExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace PreAcademicInfo.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Teachers
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostTeacher([FromBody] Teacher teacher)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Users.Add(user);
+            _context.Teacher.Add(teacher);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Username }, user);
+            return CreatedAtAction("GetTeacher", new { id = teacher.Username }, teacher);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Teachers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        public async Task<IActionResult> DeleteTeacher([FromRoute] string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.Username == id);
-            if (user == null)
+            var teacher = await _context.Teacher.SingleOrDefaultAsync(m => m.Username == id);
+            if (teacher == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Teacher.Remove(teacher);
             await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(teacher);
         }
 
-        private bool UserExists(string id)
+        private bool TeacherExists(string id)
         {
-            return _context.Users.Any(e => e.Username == id);
+            return _context.Teacher.Any(e => e.Username == id);
         }
     }
 }
