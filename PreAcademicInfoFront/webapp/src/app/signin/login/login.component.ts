@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [AuthenticationServiceService]
 })
 export class LoginComponent implements OnInit {
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   error: boolean;
   errorMessage: string;
 
-  constructor(private authenticationService: AuthenticationServiceService, private router: Router) { 
+  constructor(private authenticationService: AuthenticationServiceService, private router: Router) {
     this.userLoginData = {
       username: '',
       password: '',

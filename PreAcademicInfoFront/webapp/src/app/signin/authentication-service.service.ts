@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {tap} from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 export interface UserLoginData {
   username: string;
   password: string;
 }
-
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthenticationServiceService {
 
   baseURL = 'http://localhost:8080';
+  isLoggedIn=false;
 
   constructor(private http: HttpClient,
               private router: Router) {
   }
 
-  public getToken(): string {
-    return localStorage.getItem('token');
+  public isLogged()
+  {
+    return this.isLoggedIn;
   }
 
   loginUser(username: string, password: string){
@@ -30,7 +29,7 @@ export class AuthenticationServiceService {
     body.set('password', password);
     console.log(username, password);
 
-    return this.http.post<UserLoginData>(this.baseURL, 
+    return this.http.post<UserLoginData>(this.baseURL,
       body.toString(),
       {
       headers: new HttpHeaders(
@@ -42,7 +41,9 @@ export class AuthenticationServiceService {
   }
 
   private setSession(res){
-    // to be implemented
+
+    this.isLoggedIn=true;
+
   }
 
 }
