@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import {LoginGuardGuard} from "./signin/login-guard.guard";
 
+
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
 ];
