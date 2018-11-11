@@ -37,6 +37,9 @@ namespace PreAcademicInfo
 
             services.AddDbContext<StudentContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StudentContext")));
+
+            services.AddDbContext<UsersContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UsersContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
