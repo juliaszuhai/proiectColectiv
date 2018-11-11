@@ -12,8 +12,8 @@ namespace PreAcademicInfo.Models
         public Int32 Id { get; set; }
 
         [Required]
-        public String NumeGrupa { get; set; }
-
-        public ICollection<Student> Students { get; set; }
+        public String GroupName { get; set; }
+        
+        public ICollection<FacultyEnroll> FacultiesEnrolments { get; set; }
     }
 }

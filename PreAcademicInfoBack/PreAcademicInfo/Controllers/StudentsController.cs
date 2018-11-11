@@ -18,6 +18,26 @@ namespace PreAcademicInfo.Controllers
         public StudentsController(StudentContext context)
         {
             _context = context;
+
+            //_context.Student.Add(new Student()
+            //{
+            //    Username = "stefan",
+            //    NumarMatricol=2103,
+            //    Password = "secreta",
+            //    Email = "delibas.stefan@gmail.com",
+            //    Nume = "Delibas",
+            //    Prenume = "Stefan",
+            //    NumarTelefon = 123456789,
+            //    CNP = "1980706080031",
+            //    InitialaParinte = "I",
+            //    Active = true,
+            //    Generatie= "2016",
+            //    An="1",
+            //    UserType = UserType.STUDENT
+
+            //});
+            
+            //_context.SaveChanges();
         }
 
         // GET: api/Students
@@ -48,7 +68,7 @@ namespace PreAcademicInfo.Controllers
 
         // PUT: api/Students/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudent([FromRoute] string id, [FromBody] Student student)
+        public async Task<IActionResult> PutStudent([FromBody] string id, [FromBody] Student student)
         {
             if (!ModelState.IsValid)
             {

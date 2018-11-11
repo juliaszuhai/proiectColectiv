@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [AuthenticationServiceService]
 })
 export class LoginComponent implements OnInit {
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   error: boolean;
   errorMessage: string;
 
-  constructor(private authenticationService: AuthenticationServiceService, private router: Router) { 
+  constructor(private authenticationService: AuthenticationServiceService, private router: Router) {
     this.userLoginData = {
       username: '',
       password: '',
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.loginUser(this.userLoginData.username,this.userLoginData.password)
     .subscribe(
       data => {
+        console.log(data);
         this.error = false;
         this.router.navigate([`/home`]);
       },

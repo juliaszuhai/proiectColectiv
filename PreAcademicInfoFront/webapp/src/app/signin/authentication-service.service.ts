@@ -7,31 +7,29 @@ export interface UserLoginData {
   username: string;
   password: string;
 }
-
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthenticationServiceService {
 
-  baseURL = 'http://localhost:8080';
+  baseURL = 'http://localhost:53087/api/Login';
+  isLoggedIn=false;
+
 
   constructor(private http: HttpClient,
               private router: Router) {
   }
 
-  public getToken(): string {
-    return localStorage.getItem('token');
+  public isLogged()
+  {
+    return this.isLoggedIn;
   }
 
   loginUser(username: string, password: string){
-    let body = new URLSearchParams();
-    body.set('username', username);
-    body.set('password', password);
+    let body = JSON.stringify({username,password});
     console.log(username, password);
 
-    return this.http.post<UserLoginData>(this.baseURL, 
-      body.toString(),
+    return this.http.post<UserLoginData>(this.baseURL,
+      body,
+
       {
       headers: new HttpHeaders(
         {'Content-Type' : 'application/json'}
@@ -42,7 +40,8 @@ export class AuthenticationServiceService {
   }
 
   private setSession(res){
-    // to be implemented
+  this.isLoggedIn=true;
+
   }
 
 }
