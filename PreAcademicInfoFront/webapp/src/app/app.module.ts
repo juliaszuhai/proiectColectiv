@@ -11,6 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import {LoginGuardGuard} from "./signin/login-guard.guard";
+import { NavigationComponent } from './navigation/navigation.component';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 
 
 const routes: Routes = [
@@ -21,7 +30,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +42,12 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [LoginGuardGuard],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
+  exports:[MatButtonModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatSnackBarModule]
 })
 export class AppModule { }

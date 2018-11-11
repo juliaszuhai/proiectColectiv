@@ -1,22 +1,23 @@
+
 <div class="background_class">
   <!-- <div class="logo">
       <img src="https://academicinfo.ubbcluj.ro/Info/Images/ubb.png" />
-  </div> -->
+  </div>-->
   <form (ngSubmit)="submitForm()" class="form_style" >
       <h2>AcademicInfo - UBB</h2>
       <div class="display">
-          <input class="input_style" 
+          <input class="input_style"
                  type="text"
-                 placeholder="Enter Username" 
+                 placeholder="Enter Username"
                  name="email"
-                 [(ngModel)] = "userLoginData.username" 
+                 [(ngModel)] = "userLoginData.username"
                  required />
 
           <input class="input_password_style"
                  type="password"
-                 placeholder="Enter Password" 
-                 name="pass" 
-                 [(ngModel)] = "userLoginData.password" 
+                 placeholder="Enter Password"
+                 name="pass"
+                 [(ngModel)] = "userLoginData.password"
                  required />
 
           <button class="button_style"> LOGIN </button>
@@ -25,6 +26,6 @@
             {{getMessage()}}
           </div>
 
-      </div> 
+      </div>
   </form>
 </div>
