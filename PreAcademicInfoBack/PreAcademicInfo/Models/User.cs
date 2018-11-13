@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-
+using BCrypt.Net;
 
 namespace PreAcademicInfo.Models
 {
@@ -16,12 +16,18 @@ namespace PreAcademicInfo.Models
         [Required,Key]
         public String Username { get; set; }
         
-       
-        public string Password
+        [Required]
+        public String Password
         {
             get; set;
             //get { return Decrypt(Password); }
             //set { Password = Encrypt(value); }
+        }
+
+        [Required]
+        public String Salt
+        {
+            get; set;
         }
 
         [Required]

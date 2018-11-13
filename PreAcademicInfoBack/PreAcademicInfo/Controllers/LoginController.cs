@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PreAcademicInfo.Models;
-
+using BCrypt.Net;
 namespace PreAcademicInfo.Controllers
 {
     [ProducesResponseType(200, Type = typeof(UserNoPassword))]
@@ -36,8 +36,9 @@ namespace PreAcademicInfo.Controllers
             //User admin = _admin_context.Admin.FirstOrDefault< Admin>(e => e.Username == Username);
             if (student != null)
             {
-                if (student.Password != user.password)
-                {
+                
+                if (!BCrypt.Net.BCrypt.Verify(student.Salt + user.password, student.Password))
+                {   
                     return NotFound("invalid password");
                 }
                 else
