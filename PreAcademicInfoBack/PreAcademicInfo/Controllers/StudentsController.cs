@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PreAcademicInfo.Models;
-
+using System.Security.Cryptography;
+using BCrypt.Net;
 namespace PreAcademicInfo.Controllers
 {
     [Produces("application/json")]
@@ -15,29 +16,39 @@ namespace PreAcademicInfo.Controllers
     {
         private readonly StudentContext _context;
 
+        private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
+        
+
         public StudentsController(StudentContext context)
         {
+            byte[] saltNumber = new byte[10];
+            rngCsp.GetBytes(saltNumber);
+            String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+            String password = BCrypt.Net.BCrypt.HashPassword( saltString + "secreta");
             _context = context;
 
-            //_context.Student.Add(new Student()
-            //{
-            //    Username = "stefan",
-            //    NumarMatricol=2103,
-            //    Password = "secreta",
-            //    Email = "delibas.stefan@gmail.com",
-            //    Nume = "Delibas",
-            //    Prenume = "Stefan",
-            //    NumarTelefon = 123456789,
-            //    CNP = "1980706080031",
-            //    InitialaParinte = "I",
-            //    Active = true,
-            //    Generatie= "2016",
-            //    An="1",
-            //    UserType = UserType.STUDENT
-
-            //});
             
-            //_context.SaveChanges();
+
+            _context.Student.Add(new Student()
+            {
+                Username = "stefan",
+                NumarMatricol = 2103,
+                Password = password,
+                Salt = saltString,
+                Email = "delibas.stefan@gmail.com",
+                Nume = "Delibas",
+                Prenume = "Stefan",
+                NumarTelefon = 123456789,
+                CNP = "1980706080031",
+                InitialaParinte = "I",
+                Active = true,
+                Generatie = "2016",
+                An = "1",
+                UserType = UserType.STUDENT
+
+            });
+
+            _context.SaveChanges();
         }
 
         // GET: api/Students

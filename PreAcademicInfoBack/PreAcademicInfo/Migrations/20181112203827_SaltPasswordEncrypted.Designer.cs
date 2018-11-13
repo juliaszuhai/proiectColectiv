@@ -11,9 +11,10 @@ using System;
 namespace PreAcademicInfo.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20181112203827_SaltPasswordEncrypted")]
+    partial class SaltPasswordEncrypted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,14 +37,12 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();
 
-                    b.Property<string>("Salt")
-                        .IsRequired();
+                    b.Property<string>("Salt");
 
                     b.Property<int>("UserType");
 
@@ -261,14 +260,12 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();
 
-                    b.Property<string>("Salt")
-                        .IsRequired();
+                    b.Property<string>("Salt");
 
                     b.Property<int>("UserType");
 
@@ -291,14 +288,12 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Nume")
                         .IsRequired();
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
                     b.Property<string>("Prenume")
                         .IsRequired();
 
-                    b.Property<string>("Salt")
-                        .IsRequired();
+                    b.Property<string>("Salt");
 
                     b.Property<int>("UserType");
 
