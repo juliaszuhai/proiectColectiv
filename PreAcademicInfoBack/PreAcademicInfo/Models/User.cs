@@ -15,13 +15,12 @@ namespace PreAcademicInfo.Models
     {
         [Required,Key]
         public String Username { get; set; }
+
         
         [Required]
         public String Password
         {
             get; set;
-            //get { return Decrypt(Password); }
-            //set { Password = Encrypt(value); }
         }
 
         [Required]
