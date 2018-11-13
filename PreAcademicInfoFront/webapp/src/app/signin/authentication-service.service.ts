@@ -10,7 +10,7 @@ export interface UserLoginData {
 @Injectable()
 export class AuthenticationServiceService {
 
-  baseURL = 'http://localhost:53087/api/Login';
+  baseURL = 'http://localhost:61565/api/Login';
   isLoggedIn=false;
 
 
@@ -44,4 +44,7 @@ export class AuthenticationServiceService {
 
   }
 
+  userHasPermission(perm: any) {
+
+  }
 }

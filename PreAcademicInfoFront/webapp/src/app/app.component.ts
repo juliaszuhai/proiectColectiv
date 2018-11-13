@@ -7,11 +7,11 @@ import {Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'home';
+  title = 'main';
 
   constructor(private router: Router) {}
-  
+
   ngOnInit(){
-    this.router.navigate(['/login'])
+    //this.router.navigate(['/login'])
   }
 }
