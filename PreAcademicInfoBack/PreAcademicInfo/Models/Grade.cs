@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PreAcademicInfo.Models
 {
-    public enum GradeType { LAB, SEMINAR, EXAMEN, PARTIAL, BONUS}
+    public enum GradeType { LAB, SEMINAR, EXAMEN, PARTIAL, BONUS, FINAL}
     public class Grade
     {
         [Required, Key]
@@ -19,11 +19,11 @@ namespace PreAcademicInfo.Models
         public Student Student { get; set; }
 
         [Required]
-        public Double FinalGrade { get; set; }
+        public Double GradeValue { get; set; }
+        public GradeType Type { get; set; }
 
         public Int32 PrezenteLab { get; set; }
         public Int32 PrezenteSeminar { get; set; }
 
-        public GradeType Type { get; set; }
     }
 }

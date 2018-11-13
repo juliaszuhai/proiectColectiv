@@ -21,14 +21,16 @@ namespace PreAcademicInfo.Controllers
 
         public StudentsController(StudentContext context)
         {
+            _context = context;
+            
+        }
+
+        public void PopulateDatabase()
+        {
             byte[] saltNumber = new byte[10];
             rngCsp.GetBytes(saltNumber);
             String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-            String password = BCrypt.Net.BCrypt.HashPassword( saltString + "secreta");
-            _context = context;
-
-            
-
+            String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
             _context.Student.Add(new Student()
             {
                 Username = "stefan",
@@ -45,9 +47,7 @@ namespace PreAcademicInfo.Controllers
                 Generatie = "2016",
                 An = "1",
                 UserType = UserType.STUDENT
-
             });
-
             _context.SaveChanges();
         }
 
