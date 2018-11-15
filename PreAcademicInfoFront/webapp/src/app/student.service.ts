@@ -29,6 +29,19 @@ export interface GradeData {
   nota:string;
   descriere:string;
 }
+
+export interface DisciplineData{
+  An:string;
+  semestru:string;
+  nume:string;
+  obligatoriu:boolean;
+  optional:boolean;
+  facultativ:boolean;
+  codMaterie:string;
+  nrCredite:string;
+  locuriDisponibile:number;
+  locuriOcupate:number;
+}
 @Injectable()
 export class StudentService {
 
