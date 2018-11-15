@@ -20,6 +20,8 @@ namespace PreAcademicInfo.Models
 
         [Required]
         public Double GradeValue { get; set; }
+
+        [Required]
         public GradeType Type { get; set; }
 
         public Int32 PrezenteLab { get; set; }
