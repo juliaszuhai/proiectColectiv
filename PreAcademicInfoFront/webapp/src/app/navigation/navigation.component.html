@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
@@ -5,11 +6,11 @@
 
   <button mat-button [matMenuTriggerFor]="menu">Note</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Note finale</button>
+    <button mat-menu-item routerLink="../home">Note finale</button>
     <button mat-menu-item>Note provizorii</button>
     <button mat-menu-item>Note lab/sem</button>
   </mat-menu>
-  <button mat-button>Contracte studii</button>
+  <button mat-button routerLink="../contracte">Contracte studii</button>
   <button mat-button >Profesori</button>
   <button mat-button >Cereri</button>
   <button mat-button >Taxe</button>
@@ -26,3 +27,4 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
+

@@ -41,10 +41,14 @@ export class AuthenticationServiceService {
 
   private setSession(res){
   this.isLoggedIn=true;
+  localStorage.setItem('type',res.userType);
+  localStorage.setItem('username',res.username);
+  localStorage.setItem('isLogged',this.isLoggedIn.toString());
+  //console.log(this.isLogged());
 
   }
 
-  userHasPermission(perm: any) {
+  userHasPermission(res) {
 
   }
 }
