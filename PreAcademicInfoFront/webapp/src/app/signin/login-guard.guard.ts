@@ -12,7 +12,7 @@ export class LoginGuardGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.authService.isLogged()) {
+    if (localStorage.getItem('isLogged')== "false") {
       this.router.navigate(['/login']);
       return false;
     }

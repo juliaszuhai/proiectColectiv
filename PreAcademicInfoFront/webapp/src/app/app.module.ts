@@ -18,8 +18,12 @@ import {
   MatMenuModule,
   MatSnackBarModule,
   MatTableModule,
-  MatToolbarModule
-} from '@angular/material';
+  MatToolbarModule,
+  MatDividerModule
+  } from '@angular/material';
+import {StudentService} from "./student.service";
+import {AuthenticationServiceService} from "./signin/authentication-service.service";
+import { DisciplinesComponent } from './disciplines/disciplines.component';
 
 
 const routes: Routes = [
@@ -31,7 +35,9 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    DisciplinesComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,14 +46,25 @@ const routes: Routes = [
     MaterialModule,
     SigninModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatDividerModule
+
   ],
-  providers: [],
+  providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
   exports:[MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatSnackBarModule,
+    MatTableModule,
     MatToolbarModule,
-    MatSnackBarModule]
+    MatDividerModule
+   ]
 })
 export class AppModule { }

@@ -1,26 +1,18 @@
 
 <div class="background_class">
-  <!-- <div class="logo">
-      <img src="https://academicinfo.ubbcluj.ro/Info/Images/ubb.png" />
-  </div>-->
+
   <form (ngSubmit)="submitForm()" class="form_style" >
       <h2>AcademicInfo - UBB</h2>
       <div class="display">
-          <input class="input_style"
-                 type="text"
-                 placeholder="Enter Username"
-                 name="email"
-                 [(ngModel)] = "userLoginData.username"
-                 required />
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" name="username" [(ngModel)]="userLoginData.username" required >
+        </mat-form-field>
+        <mat-divider [vertical]="true"></mat-divider>
+        <mat-form-field class="example-full-width">
+          <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="userLoginData.password" required>
+        </mat-form-field>
 
-          <input class="input_password_style"
-                 type="password"
-                 placeholder="Enter Password"
-                 name="pass"
-                 [(ngModel)] = "userLoginData.password"
-                 required />
-
-          <button class="button_style"> LOGIN </button>
+        <button mat-raised-button color="primary">Login</button>
 
           <div class="error_message" *ngIf="displayError()" >
             {{getMessage()}}
