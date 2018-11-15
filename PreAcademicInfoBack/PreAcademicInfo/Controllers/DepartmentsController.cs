@@ -24,7 +24,7 @@ namespace PreAcademicInfo.Controllers
         [HttpGet]
         public IEnumerable<Department> GetDepartment()
         {
-            return _context.Department;
+            return _context.Departments;
         }
 
         // GET: api/Departments/5
@@ -36,7 +36,7 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var department = await _context.Department.SingleOrDefaultAsync(m => m.Id == id);
+            var department = await _context.Departments.SingleOrDefaultAsync(m => m.Id == id);
 
             if (department == null)
             {
@@ -90,7 +90,7 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Department.Add(department);
+            _context.Departments.Add(department);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDepartment", new { id = department.Id }, department);
@@ -105,13 +105,13 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var department = await _context.Department.SingleOrDefaultAsync(m => m.Id == id);
+            var department = await _context.Departments.SingleOrDefaultAsync(m => m.Id == id);
             if (department == null)
             {
                 return NotFound();
             }
 
-            _context.Department.Remove(department);
+            _context.Departments.Remove(department);
             await _context.SaveChangesAsync();
 
             return Ok(department);
@@ -119,7 +119,7 @@ namespace PreAcademicInfo.Controllers
 
         private bool DepartmentExists(int id)
         {
-            return _context.Department.Any(e => e.Id == id);
+            return _context.Departments.Any(e => e.Id == id);
         }
     }
 }
