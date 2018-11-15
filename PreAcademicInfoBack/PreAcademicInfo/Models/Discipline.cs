@@ -12,6 +12,9 @@ namespace PreAcademicInfo.Models
         [Required]
         public DisciplineType Type  { get; set; }
 
+        [Required]
+        public Specializare Specializare { get; set; }
+
         [Required,Key]
         public String Cod { get; set; }
 
@@ -23,6 +26,9 @@ namespace PreAcademicInfo.Models
 
         [Required]
         public Int32 An { get; set; }
+
+        [Required]
+        public Int32 Semestru { get; set; }
 
         [Required]
         public Teacher Teacher { get; set; }

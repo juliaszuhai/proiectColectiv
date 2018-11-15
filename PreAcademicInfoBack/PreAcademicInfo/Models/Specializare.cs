@@ -38,5 +38,7 @@ namespace PreAcademicInfo.Models
         [DefaultValue("true")]
         public Boolean CuFrecventa { get; set; }
 
+        public List<Discipline> Disciplines { get; set; }
+
     }
 }
