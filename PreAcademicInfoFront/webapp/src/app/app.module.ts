@@ -12,6 +12,7 @@ import {LoginGuardGuard} from "./signin/login-guard.guard";
 import {StudentService} from "./student/student.service";
 import {AuthenticationServiceService} from "./signin/authentication-service.service";
 import {StudentModule} from "./student/student.module";
+
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
 ];
@@ -29,11 +30,11 @@ const routes: Routes = [
     StudentModule,
     HttpClientModule,
     FormsModule
-
   ],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
   exports:[
+
    ]
 })
 export class AppModule { }

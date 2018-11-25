@@ -25,11 +25,10 @@ export class AuthenticationServiceService {
 
   loginUser(username: string, password: string){
     let body = JSON.stringify({username,password});
-    console.log(username, password);
+    //console.log(username, password);
 
     return this.http.post<UserLoginData>(this.baseURL,
       body,
-
       {
       headers: new HttpHeaders(
         {'Content-Type' : 'application/json'}

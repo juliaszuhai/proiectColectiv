@@ -9,6 +9,7 @@ import {DisciplinesComponent} from "./student/disciplines/disciplines.component"
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
+
 ];
 
 @NgModule({
