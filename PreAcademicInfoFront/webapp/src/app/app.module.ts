@@ -29,7 +29,7 @@ import {AuthenticationServiceService} from "./signin/authentication-service.serv
 import { DisciplinesComponent } from './disciplines/disciplines.component';
 import { CrudstudentComponent } from './admin/crudstudent/crudstudent.component';
 import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
@@ -44,7 +44,6 @@ const routes: Routes = [
     DisciplinesComponent,
     CrudstudentComponent,
     NavAdminComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -62,6 +61,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatDividerModule,
     MatGridListModule,
+    MatRadioModule
     MatOptionModule,
     MatSelectModule
 
@@ -76,6 +76,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatDividerModule,
     MatGridListModule,
+    MatRadioModule,
     MatOptionModule,
     MatSelectModule
    ]

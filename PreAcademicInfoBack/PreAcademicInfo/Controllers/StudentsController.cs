@@ -114,13 +114,13 @@ namespace PreAcademicInfo.Controllers
 
         // POST: api/Students
         [HttpPost]
-        public async Task<IActionResult> PostStudent([FromBody] Student student)
+        public async Task<IActionResult> PostStudent([FromBody] JStudent student_)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            Student student = student_.GetStudent();
             _context.Student.Add(student);
             await _context.SaveChangesAsync();
 
@@ -151,6 +151,35 @@ namespace PreAcademicInfo.Controllers
         private bool StudentExists(string id)
         {
             return _context.Student.Any(e => e.Username == id);
+        }
+
+        public class JStudent
+        {
+            public string nume { get; set; }
+            public string prenume { get; set; }
+            public string email { get; set; }
+            public string cnp { get; set; }
+            public string nrMatricol { get; set; }
+            public string username { get; set; }
+            public string telefon { get; set; }
+            public string initiale { get; set; }
+
+            internal Student GetStudent() => new Student
+            {
+                NumarMatricol = int.Parse(nrMatricol),
+                CNP = cnp,
+                InitialaParinte = initiale,
+                Active = true,
+                Generatie = DateTime.Now.Year.ToString(),
+                An = "1",
+                Password = cnp,
+                Username =username,
+                NumarTelefon=int.Parse(telefon),
+                UserType = UserType.STUDENT,
+                Email = email,
+                Nume = nume,
+                Prenume = prenume
+        };
         }
     }
 }
