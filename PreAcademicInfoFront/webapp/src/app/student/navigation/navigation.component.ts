@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationServiceService} from "../signin/authentication-service.service";
 import {Router} from "@angular/router";
+import {AuthenticationServiceService} from "../../signin/authentication-service.service";
 
 @Component({
   selector: 'app-navigation',

@@ -34,10 +34,11 @@ export class DisciplinesComponent implements OnInit {
     {value: '0', viewValue: 'Anul 1'},
     {value: '1', viewValue: 'Anul 2'},
     {value: '2', viewValue: 'Anul 3'},
-
   ];
-
-
+  departamente=[
+    {value: '0', viewValue: 'Facultatea de Matematica si Informatica'},
+    {value:'1', viewValue: 'Facultatea de Litere'}
+  ];
 
   isDisabled(element)
   {
@@ -51,9 +52,17 @@ export class DisciplinesComponent implements OnInit {
 
 
   ngOnInit() {
+
   }
 
   submitContract() {
 
+  }
+
+  isMoreThanOne() {
+    if( this.departamente.length>1)
+      return true;
+    else
+      return false;
   }
 }

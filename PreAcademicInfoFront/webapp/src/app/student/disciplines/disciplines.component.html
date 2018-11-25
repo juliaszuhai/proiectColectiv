@@ -2,15 +2,24 @@
 <div class="afis">
 
   <div class="selectors">
-  <mat-form-field>
-    <mat-select placeholder="An">
+    <mat-form-field class="select" *ngIf="isMoreThanOne()">
+      <mat-select class = "white" placeholder="Departament">
+        <mat-option *ngFor="let food of departamente" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select">
+    <mat-select class = "white" placeholder="An">
       <mat-option *ngFor="let food of ani" [value]="food.value">
         {{food.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Semestru">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select">
+    <mat-select class = "white" placeholder="Semestru">
       <mat-option *ngFor="let food of semestre" [value]="food.value">
         {{food.viewValue}}
       </mat-option>
@@ -18,9 +27,6 @@
   </mat-form-field>
   </div>
       <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
-
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
 
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> Check </th>

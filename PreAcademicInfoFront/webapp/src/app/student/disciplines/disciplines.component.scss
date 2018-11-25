@@ -7,17 +7,29 @@ mat-grid-tile {
   width:98.9%;
   height: 100%;
   position: absolute;
+  text-align: center;
 }
 
 table {
   width: 70%;
+  display:table;
   margin-left: auto;
   margin-right: auto;
 }
+
 button {
-  align: center;
+  margin: auto;
+  display:block;
 }
 .selectors {
-  margin-left: auto;
-  position: relative;
+  display: table;
+  margin: 0 auto;
 }
+.white{
+  background: white;
+}
+.select{
+  margin-right: 10px;
+}
+
+
