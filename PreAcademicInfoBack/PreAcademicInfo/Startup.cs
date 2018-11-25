@@ -46,6 +46,15 @@ namespace PreAcademicInfo
 
             services.AddDbContext<TeachersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TeachersContext")));
+
+            services.AddDbContext<DepartmentsContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DepartmentsContext")));
+
+            services.AddDbContext<SpecializariContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SpecializariContext")));
+
+            services.AddDbContext<DisciplineContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DisciplineContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
