@@ -5,13 +5,14 @@ import {HomeComponent} from "./home/home.component";
 import {LoginGuardGuard} from "./signin/login-guard.guard";
 import {NavigationComponent} from "./navigation/navigation.component";
 import {DisciplinesComponent} from "./disciplines/disciplines.component";
+import { CrudstudentComponent } from './admin/crudstudent/crudstudent.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
-  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]}
-
+  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
+  {path: 'crud', component: CrudstudentComponent, canActivate:[LoginGuardGuard]}
 ];
 
 @NgModule({

@@ -27,6 +27,8 @@ import {
 import {StudentService} from "./student.service";
 import {AuthenticationServiceService} from "./signin/authentication-service.service";
 import { DisciplinesComponent } from './disciplines/disciplines.component';
+import { CrudstudentComponent } from './admin/crudstudent/crudstudent.component';
+import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
 
 
 const routes: Routes = [
@@ -40,6 +42,8 @@ const routes: Routes = [
     HomeComponent,
     NavigationComponent,
     DisciplinesComponent,
+    CrudstudentComponent,
+    NavAdminComponent,
 
   ],
   imports: [
