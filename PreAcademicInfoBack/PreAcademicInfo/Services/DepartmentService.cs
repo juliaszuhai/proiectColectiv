@@ -20,6 +20,12 @@ namespace PreAcademicInfo.Services
             return context.Departments.Where(d => d.Name == departmentName)
                                      .Select(d => d.Specializares).First().ToList();
         }
+
+        public List<Specializare> GetSpecializariByDepartmentId(int id)
+        {
+            return context.Departments.Where(d => d.Id == id)
+                                     .Select(d => d.Specializares).First().ToList();
+        }
         
         
     }
