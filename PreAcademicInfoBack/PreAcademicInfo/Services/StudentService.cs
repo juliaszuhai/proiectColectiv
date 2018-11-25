@@ -30,7 +30,7 @@ namespace PreAcademicInfo.Services
                                         .Where(g => g.Type == gradeType).ToList();
         }
 
-      
+
         public List<Grade> FilterGradesByYear(List<Grade> grades, int an)
         {
             return grades.Where(g => g.Discipline.An == an).ToList();

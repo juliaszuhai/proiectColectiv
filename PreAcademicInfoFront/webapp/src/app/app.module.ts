@@ -20,7 +20,9 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatDividerModule,
-  MatGridListModule
+  MatGridListModule,
+  MatOptionModule,
+  MatSelectModule
   } from '@angular/material';
 import {StudentService} from "./student.service";
 import {AuthenticationServiceService} from "./signin/authentication-service.service";
@@ -55,7 +57,9 @@ const routes: Routes = [
     MatTableModule,
     MatToolbarModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatOptionModule,
+    MatSelectModule
 
   ],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
@@ -67,7 +71,9 @@ const routes: Routes = [
     MatTableModule,
     MatToolbarModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatOptionModule,
+    MatSelectModule
    ]
 })
 export class AppModule { }
