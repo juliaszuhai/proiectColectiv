@@ -22,7 +22,7 @@ namespace PreAcademicInfo.Controllers
         public StudentsController(StudentContext context)
         {
             _context = context;
-            
+            //PopulateDatabase();
         }
 
         public void PopulateDatabase()

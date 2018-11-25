@@ -5,30 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material";
-import { LoginComponent } from './signin/login/login.component';
 import { SigninModule } from './signin/signin.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
 import {LoginGuardGuard} from "./signin/login-guard.guard";
-import { NavigationComponent } from './navigation/navigation.component';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatMenuModule,
-  MatSnackBarModule,
-  MatTableModule,
-  MatToolbarModule,
-  MatDividerModule,
-  MatGridListModule,
-  MatOptionModule,
-  MatSelectModule
-  } from '@angular/material';
-import {StudentService} from "./student.service";
+import {StudentService} from "./student/student.service";
 import {AuthenticationServiceService} from "./signin/authentication-service.service";
-import { DisciplinesComponent } from './disciplines/disciplines.component';
-
-
+import {StudentModule} from "./student/student.module";
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
 ];
@@ -36,11 +19,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HomeComponent,
-    NavigationComponent,
-    DisciplinesComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -48,32 +26,14 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     SigninModule,
+    StudentModule,
     HttpClientModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatOptionModule,
-    MatSelectModule
+    FormsModule
 
   ],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
-  exports:[MatButtonModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatOptionModule,
-    MatSelectModule
+  exports:[
    ]
 })
 export class AppModule { }
