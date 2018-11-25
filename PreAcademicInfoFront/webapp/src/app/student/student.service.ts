@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {tap} from "rxjs/operators";
-import {UserLoginData} from "./signin/authentication-service.service";
 
 
 export interface StudentData {
@@ -41,6 +40,14 @@ export interface DisciplineData{
   nrCredite:string;
   locuriDisponibile:number;
   locuriOcupate:number;
+}
+
+export interface SpecializareData{
+  facultatea:string,
+  nume:string,
+  semestre:string,
+  discipline: DisciplineData[]
+
 }
 @Injectable()
 export class StudentService {
@@ -83,5 +90,14 @@ export class StudentService {
 
   private setStudent(res: any) {
 
+  }
+
+  getContracteStudii() {
+    let username = localStorage.getItem('username');
+    let params = new HttpParams();
+    params.append("username",username);
+    console.log(username);
+
+    return this.http.get<SpecializareData>(this.baseURL,{params: params});
   }
 }
