@@ -37,4 +37,7 @@ export class DisciplinesComponent implements OnInit {
   ngOnInit() {
   }
 
+  submitContract() {
+
+  }
 }
