@@ -28,7 +28,8 @@ import { NgModule } from '@angular/core';
         MatDividerModule,
         MatGridListModule,
         MatOptionModule,
-        MatSelectModule
+        MatSelectModule,
+
     ],
     exports: [
         MatButtonModule,
