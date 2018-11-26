@@ -10,8 +10,8 @@ using PreAcademicInfo.Models;
 using BCrypt.Net;
 namespace PreAcademicInfo.Controllers
 {
-    [ProducesResponseType(200, Type = typeof(UserNoPassword))]
-    [ProducesResponseType(404, Type = typeof(string))]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
     [Produces("application/json")]
     [Consumes("application/json")]
     [Route("api/Login")]
