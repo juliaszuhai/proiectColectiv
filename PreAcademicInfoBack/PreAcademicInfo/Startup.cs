@@ -26,7 +26,14 @@ namespace PreAcademicInfo
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             services.AddMvc();
 
             services.AddDbContext<StudentContext>(options =>
@@ -59,7 +66,7 @@ namespace PreAcademicInfo
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors();
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }
