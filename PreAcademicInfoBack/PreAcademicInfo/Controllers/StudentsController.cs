@@ -46,7 +46,7 @@ namespace PreAcademicInfo.Controllers
                 Email = "delibas.stefan@gmail.com",
                 Nume = "Delibas",
                 Prenume = "Stefan",
-                NumarTelefon = 123456789,
+                NumarTelefon = "123456789",
                 CNP = "1980706080031",
                 InitialaParinte = "I",
                 Active = true,
@@ -129,22 +129,24 @@ namespace PreAcademicInfo.Controllers
             byte[] saltNumber = new byte[10];
             rngCsp.GetBytes(saltNumber);
             String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-            String password = BCrypt.Net.BCrypt.HashPassword(saltString + student_.cnp);
-            Student student = new Student();
-            student.Nume = student_.nume;
-            student.InitialaParinte = student_.initiale;
-            student.NumarMatricol = int.Parse(student_.nrMatricol);
-            student.NumarTelefon = int.Parse(student_.telefon);
-            student.Active = true;
-            student.An = "1";
-            student.Email = student_.email;
-            student.Generatie = DateTime.Now.Year.ToString();
-            student.UserType = UserType.STUDENT;
-            student.Username = student_.username;
-            student.Password = password;
-            student.Salt = saltString;
-            student.CNP = student_.cnp;
-            student.Prenume = student_.prenume;
+            String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+            Student student = new Student()
+            {
+                Nume = student_.nume,
+                InitialaParinte = student_.initiale,
+                NumarMatricol = int.Parse(student_.nrMatricol),
+                NumarTelefon = student_.telefon,
+                Active = true,
+                An = "1",
+                Email = student_.email,
+                Generatie = DateTime.Now.Year.ToString(),
+                UserType = UserType.STUDENT,
+                Username = student_.username,
+                Password = password,
+                Salt = saltString,
+                CNP = student_.cnp,
+                Prenume = student_.prenume
+            };
              _context.Student.Add(student);
             await _context.SaveChangesAsync();
 
@@ -198,7 +200,7 @@ namespace PreAcademicInfo.Controllers
                 An = "1",
                 Password = cnp,
                 Username =username,
-                NumarTelefon=int.Parse(telefon),
+                NumarTelefon=telefon,
                 UserType = UserType.STUDENT,
                 Email = email,
                 Nume = nume,
