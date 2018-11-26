@@ -10,12 +10,12 @@ namespace PreAcademicInfo.Models
     public class Discipline
     {
         [Required]
-        public DisciplineType Type  { get; set; }
+        public DisciplineType Type { get; set; }
 
         [Required]
         public Specializare Specializare { get; set; }
 
-        [Required,Key]
+        [Required, Key]
         public String Cod { get; set; }
 
         [Required]
@@ -33,5 +33,6 @@ namespace PreAcademicInfo.Models
         [Required]
         public Teacher Teacher { get; set; }
 
+        public Int32 NumarLaboratoare{ get; set; }
     }
 }
