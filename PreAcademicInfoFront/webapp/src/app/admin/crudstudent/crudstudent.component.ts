@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import { User } from '../admin-service.service.spec';
+
 import { MatRadioChange } from '@angular/material/radio';
-import { AdminService } from '../admin.service';
+import {AdminService, User} from '../admin.service';
 
 /** @title Form field with label */
 @Component({
@@ -32,15 +32,14 @@ export class CrudstudentComponent {
     {
       this.isStudent = false;
     }
-    this.user.type = event.value;
-    console.log(this.user.nume);
   }
 
   submitForm(){
+    console.log(this.user);
     this.adminService.addUser(this.user)
     .subscribe(
       data => {
-        
+          console.log("Added!");
       },
       err => {
         console.log(err);
@@ -55,14 +54,14 @@ export class CrudstudentComponent {
       prenume: '',
       type: '',
       cnp:'',
-      nrMatricol:'',
+      numarMatricol:'',
       telefon:'',
       email:'',
       initiale:'',
       adresa:''
     }
 
-    
-    
+
+
   }
 }
