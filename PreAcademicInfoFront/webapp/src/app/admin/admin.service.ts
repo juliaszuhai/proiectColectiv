@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from './admin-service.service.spec';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface User{
+  username: string;
+  nume: string;
+  prenume: string;
+  type: string;
+  cnp: string;
+  telefon: string;
+  email: string;
+  initiale: string;
+  numarMatricol: string;
+  adresa: string;
+}
+@Injectable()
 export class AdminService {
 
-  
+
   baseURL = 'http://localhost:53087/api/';
 
   constructor(private http: HttpClient,
@@ -24,15 +33,15 @@ export class AdminService {
               prenume: user.prenume,
               email: user.email,
               cnp: user.cnp,
-              numarMatricol: user.nrMatricol,
+              nrMatricol: user.numarMatricol,
               username: user.username,
-              numartelefon: user.telefon,
-              InitialaParinte: user.initiale,
-              
+              telefon: user.telefon,
+              initiale: user.initiale,
+
             });
           console.log(bodyStudent);
-      
-          return this.http.post<User>(this.baseURL+user.type+"s",
+
+          return this.http.post<User>(this.baseURL+"Students",
             bodyStudent,
             {
             headers: new HttpHeaders(
@@ -48,10 +57,10 @@ export class AdminService {
               prenume: user.prenume,
               email: user.email,
               username: user.username,
-              numartelefon: user.telefon              
+              numartelefon: user.telefon
             });
           console.log(body);
-      
+
           return this.http.post<User>(this.baseURL+user.type+"s",
             body,
             {

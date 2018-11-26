@@ -8,10 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using PreAcademicInfo.Models;
 using System.Security.Cryptography;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Cors;
+
 namespace PreAcademicInfo.Controllers
 {
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
     [Produces("application/json")]
+    [Consumes("application/json")]
     [Route("api/Students")]
+    
     public class StudentsController : Controller
     {
         private readonly StudentContext _context;
@@ -48,7 +54,7 @@ namespace PreAcademicInfo.Controllers
                 An = "1",
                 UserType = UserType.STUDENT
             });
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         // GET: api/Students
@@ -114,14 +120,32 @@ namespace PreAcademicInfo.Controllers
 
         // POST: api/Students
         [HttpPost]
-        public async Task<IActionResult> PostStudent([FromBody] JStudent student_)
+        public async Task<IActionResult> Post([FromBody] JStudent student_)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Student student = student_.GetStudent();
-            _context.Student.Add(student);
+            byte[] saltNumber = new byte[10];
+            rngCsp.GetBytes(saltNumber);
+            String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+            String password = BCrypt.Net.BCrypt.HashPassword(saltString + student_.cnp);
+            Student student = new Student();
+            student.Nume = student_.nume;
+            student.InitialaParinte = student_.initiale;
+            student.NumarMatricol = int.Parse(student_.nrMatricol);
+            student.NumarTelefon = int.Parse(student_.telefon);
+            student.Active = true;
+            student.An = "1";
+            student.Email = student_.email;
+            student.Generatie = DateTime.Now.Year.ToString();
+            student.UserType = UserType.STUDENT;
+            student.Username = student_.username;
+            student.Password = password;
+            student.Salt = saltString;
+            student.CNP = student_.cnp;
+            student.Prenume = student_.prenume;
+             _context.Student.Add(student);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.Username }, student);
