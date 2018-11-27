@@ -1,0 +1,70 @@
+<app-navigation-admin></app-navigation-admin>
+<div class="example-container">
+    <form (ngSubmit)="submitForm()" class="ex-container">
+      <br><br>
+      <div >
+        <label>Tip user</label><br>
+        <mat-radio-group  name ="type" [(ngModel)]="user.type">
+          <mat-radio-button *ngFor="let a of usertypes" [value]="a"
+                      (change)="radioChange($event)">
+              {{a}} &nbsp; &nbsp;
+          </mat-radio-button>
+
+        </mat-radio-group>
+      </div>
+      <mat-grid-list cols="2" rowHeight="5em">
+      <mat-grid-tile>
+        <mat-form-field class="column">
+          <input matInput placeholder="Nume" name="nume" [(ngModel)]="user.nume" required>
+        </mat-form-field>
+        <mat-form-field *ngIf="isStudent" class="column">
+            <input matInput placeholder="Initiala tatalui" name="initialaT" [(ngModel)]="user.initiale"  required>
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="column">
+          <input matInput placeholder="Prenume" name="prenume" [(ngModel)]="user.prenume" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="column">
+          <input matInput placeholder="Numar telefon" name="nrTelefon" [(ngModel)]="user.telefon" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="column">
+          <input matInput placeholder="email" name="email" [(ngModel)]="user.email"  required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-form-field class="column">
+            <input matInput placeholder="username" name="username" [(ngModel)]="user.username" required>
+          </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+          <mat-form-field class="column">
+            <input matInput placeholder="adresa" name="adresa" [(ngModel)]="user.adresa">
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile *ngIf="isStudent">
+          <mat-form-field class="column">
+            <input matInput placeholder="cnp" name="cnp" [(ngModel)]="user.cnp" required >
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile *ngIf="isStudent">
+          <mat-form-field class="column">
+            <input matInput placeholder="numar matricol" name="nrMatricol" [(ngModel)]="user.numarMatricol" required >
+          </mat-form-field>
+      </mat-grid-tile>
+  </mat-grid-list>
+  <button  mat-raised-button style="float: right;" color="primary">Submit</button>
+    </form>
+   </div>

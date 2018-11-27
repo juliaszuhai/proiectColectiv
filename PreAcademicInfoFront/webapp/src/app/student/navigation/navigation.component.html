@@ -1,0 +1,34 @@
+
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+  <span style="margin-right: 20px">AcademicInfo</span>
+
+  <button mat-button [matMenuTriggerFor]="menu">Note</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="../home">Note finale</button>
+    <button mat-menu-item>Note provizorii</button>
+    <button mat-menu-item>Note lab/sem</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="contracte" >Contracte studii</button>
+    <mat-menu #contracte="matMenu">
+      <button mat-menu-item routerLink="../contracte">Trimite Cerere</button>
+      <button mat-menu-item>Vizualizare cereri trimise</button>
+    </mat-menu>
+  <button mat-button >Profesori</button>
+  <button mat-button >Cereri</button>
+  <button mat-button >Taxe</button>
+
+
+    <span class="fill-space"></span>
+    <div>
+  <button class="profile">
+    <i class="material-icons">
+      account_circle
+    </i>
+  </button>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
