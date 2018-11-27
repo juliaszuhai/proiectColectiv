@@ -1,0 +1,30 @@
+<app-nav-teacher></app-nav-teacher>
+<div class="show">
+
+  <div class="selectors">
+    <mat-form-field class="select" *ngIf="isMoreThanOneMaterii()">
+      <mat-select class = "white" placeholder="Materie">
+        <mat-option *ngFor="let food of materii" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select" *ngIf="isMoreThanOneGrupe()">
+    <mat-select class = "white" placeholder="Grupa">
+      <mat-option *ngFor="let food of grupe" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  <!-- <mat-form-field class="select">
+    <mat-select class = "white" placeholder="Semestru">
+      <mat-option *ngFor="let food of semestre" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  </div>
+
+</div>
