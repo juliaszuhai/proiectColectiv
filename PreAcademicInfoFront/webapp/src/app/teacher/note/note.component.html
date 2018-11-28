@@ -42,19 +42,20 @@
     <!-- <p>Your option is: {{choosedOption}}</p> -->
   </div>
   
-  <div *ngIf="isExamenFinal">
-    Here will be displayed the layout for Final Exam
-  </div>
-
-  <div *ngIf="isLaborator">
-    Here will be displayed the layout for Laborator
-  </div>
-
-  <div *ngIf="isSeminar">
-    Here will be displayed the layout for Seminar
-  </div>
-
-  <div *ngIf="isBonus">
-    Here will be displayed the layout for Bonus
+  <div [ngSwitch] = "choosedOption">
+    
+    <div *ngSwitchCase="'Examen final'">
+       Display layout for Examen Final
+    </div>
+    <div *ngSwitchCase="'Laborator'">
+        Display layout for Laborator
+    </div>
+    <div *ngSwitchCase="'Seminar'">
+        Display layout for Seminar
+    </div>
+    <div *ngSwitchCase="'Bonus'">
+        Display layout for Bonus
+    </div>
+  
   </div>
 </div>
