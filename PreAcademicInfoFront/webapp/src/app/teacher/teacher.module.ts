@@ -8,6 +8,9 @@ import {MaterialModule} from "../material";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 const routes: Routes = [
   {path: 'teacher', component: NoteComponent},
@@ -25,6 +28,9 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
     HttpClientModule,
   ],
   //providers: [TeacherService],

@@ -1,13 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Moment } from 'moment';
+import * as moment from 'moment';
+import { MatDatepicker } from '@angular/material';
+import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent implements OnInit {
+export class NoteComponent implements  OnInit, AfterViewInit {
+
 
   constructor() { }
+  @ViewChild(MatDatepicker) myDatepicker: MatDatepicker<Moment>;
+  isValidMoment: boolean = false;
+  selectedMaterie: string;
+  selectedGrupa: string;
+  isExamenFinal: boolean = false;
+  isLaborator: boolean = false;
+  isSeminar: boolean = false;
+  isBonus: boolean = false;
+  choosedOption: string;
 
   materii = [
     {value: '0', viewValue: 'LFTC'},
@@ -26,17 +40,29 @@ export class NoteComponent implements OnInit {
     {value: '5', viewValue: '936'},
   ];
   
-  isDisabled(element)
-  {
-    if( element==true)
-      return true;
-    else
-      return false;
-
-  }
+  optiuniNote=['Examen final', 'Laborator', 'Seminar', 'Bonus'];
 
   ngOnInit() {
   }
+
+  radioChange(event: MatRadioChange) {
+    if(event.value == 'Examen final'){this.isExamenFinal = true;}
+    if(event.value == 'Laborator'){this.isLaborator = true; }
+    if(event.value == 'Seminar'){this.isSeminar = true;}
+    if(event.value == 'Bonus') {this.isBonus = true;}
+  }
+
+  ngAfterViewInit(){
+    this.myDatepicker._selectedChanged.subscribe(
+      (newDate: Moment) => {
+        this.isValidMoment = moment.isMoment(newDate);
+      },
+      (error) => {
+        throw Error(error);
+      }
+    );
+  }
+
 
   isMoreThanOneMaterii() {
     if( this.materii.length>1)
@@ -50,6 +76,12 @@ export class NoteComponent implements OnInit {
       return true;
     else
       return false;
+  }
+
+  showRadioButtons(){
+    if(this.isValidMoment==true && this.selectedMaterie!=null && this.selectedGrupa!=null)
+      return true;
+    return false;
   }
 
 }
