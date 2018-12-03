@@ -6,6 +6,7 @@ import {
   MatSelectModule, MatSnackBarModule,
   MatTableModule
 } from "@angular/material";
+import {MatSortModule} from '@angular/material/sort';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
@@ -29,6 +30,7 @@ import { NgModule } from '@angular/core';
         MatGridListModule,
         MatOptionModule,
         MatSelectModule,
+      MatSortModule
 
     ],
     exports: [
@@ -44,7 +46,8 @@ import { NgModule } from '@angular/core';
       MatDividerModule,
       MatGridListModule,
       MatOptionModule,
-      MatSelectModule
+      MatSelectModule,
+      MatSortModule
     ],
 })
 

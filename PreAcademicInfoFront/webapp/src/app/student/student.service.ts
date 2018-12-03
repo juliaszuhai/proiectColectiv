@@ -111,7 +111,7 @@ export class StudentService {
   }
 
   getSpecializari() {
-    return this.http.get<SpecializareData>(this.baseURLSpecializari,
+    return this.http.get<SpecializareData[]>(this.baseURLSpecializari,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}

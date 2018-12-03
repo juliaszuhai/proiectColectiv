@@ -47,14 +47,21 @@ export class DisciplinesComponent implements OnInit {
       return true;
     else
       return false;
-
   }
 
-
-
   ngOnInit() {
-    this.specializariList=this.studentService.getSpecializari();
-    console.log(this.specializariList);
+    this.studentService.getSpecializari().subscribe(
+      (data) => {
+        this.specializariList = data;
+
+    console.log(data)},
+      error => {
+
+        console.log(error); //gives the object object
+
+      });
+
+
 
   }
 
