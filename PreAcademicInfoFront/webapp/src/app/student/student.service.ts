@@ -41,18 +41,27 @@ export interface DisciplineData{
   locuriDisponibile:number;
   locuriOcupate:number;
 }
+export interface Departament{
+  name:string;
+  faculty:string;
+}
 
 export interface SpecializareData{
-  facultatea:string,
-  nume:string,
-  semestre:string,
-  discipline: DisciplineData[]
-
+  nume:string;
+  departament:Departament;
+  specializareType:string;
+  limba:string;
+  numarSemestre:string;
+  taxaPerCredit:string;
+  cuFrecventa:string;
+  discipline:DisciplineData[];
 }
 @Injectable()
 export class StudentService {
 
   baseURL = 'http://localhost:53087/api/Students';
+  baseURLDisciplines='http://localhost:53087/api/Discipline';
+  baseURLSpecializari='http://localhost:53087/api/Specializari';
 
   constructor(private http: HttpClient,
               private router: Router)
@@ -99,5 +108,13 @@ export class StudentService {
     console.log(username);
 
     return this.http.get<SpecializareData>(this.baseURL,{params: params});
+  }
+
+  getSpecializari() {
+    return this.http.get<SpecializareData>(this.baseURLSpecializari,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )});
   }
 }
