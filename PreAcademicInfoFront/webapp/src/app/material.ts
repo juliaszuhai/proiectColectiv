@@ -13,6 +13,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import { NgModule } from '@angular/core';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgModule } from '@angular/core';
         MatGridListModule,
         MatOptionModule,
         MatSelectModule,
-      MatSortModule
+      MatSortModule,
+      MatProgressSpinnerModule
 
     ],
     exports: [
@@ -47,7 +49,8 @@ import { NgModule } from '@angular/core';
       MatGridListModule,
       MatOptionModule,
       MatSelectModule,
-      MatSortModule
+      MatSortModule,
+      MatProgressSpinnerModule
     ],
 })
 

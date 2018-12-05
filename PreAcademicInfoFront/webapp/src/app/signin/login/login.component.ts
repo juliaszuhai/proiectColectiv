@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   userLoginData: UserLoginData;
   error: boolean;
+  clickedLogin:boolean;
   errorMessage: string;
 
   constructor(private authenticationService: AuthenticationServiceService, private router: Router) {
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     };
     this.error = false;
     this.errorMessage = '';
+    this.clickedLogin=false;
   }
 
   displayError(){
@@ -35,7 +37,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  clickedButton(){
+    return this.clickedLogin;
+  }
+
   submitForm(){
+    this.clickedLogin=true;
     this.authenticationService.loginUser(this.userLoginData.username,this.userLoginData.password)
     .subscribe(
       data => {

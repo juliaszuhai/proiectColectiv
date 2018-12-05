@@ -20,6 +20,19 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
 export class HomeComponent {
 
+  semestre=[{value: '1', viewValue: 'Semsetrul 1'},
+    {value: '2', viewValue: 'Semestrul 2'},
+    {value: '3', viewValue: 'Semestrul 3'},
+    {value:'4', viewValue:'Semestrul 4'},
+    {value:'5', viewValue:'Semestrul 5'},
+    {value:'6', viewValue:'Semestrul 6'}
+  ];
+  ani = [
+    {value: '1', viewValue: 'Anul 1'},
+    {value: '2', viewValue: 'Anul 2'},
+    {value: '3', viewValue: 'Anul 3'},
+  ];
+
   datalist: GradeData[] = [
     {
       an:'3',
@@ -82,7 +95,27 @@ export class HomeComponent {
           return 0;
       }
     });
-  }}
+  }
+
+  onChangeAn(event:any) {
+    //console.log(event.value);
+    let an=event.value;
+
+
+    this.dataSource=this.datalist.filter(grade=> grade.an == an);
+    //console.log(this.dataSource);
+
+  }
+
+  onChangeSemestru(event:any) {
+
+    let semestru=event.value;
+
+
+    this.dataSource=this.datalist.filter(grade=> grade.semestru == semestru);
+    //console.log(this.dataSource);
+  }
+}
 
   function compare(a: number | string, b: number | string, isAsc: boolean) {
       return (a < b ? -1 : 1) * (isAsc ? 1 : -1);

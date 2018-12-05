@@ -2,22 +2,25 @@
 <div >
   <mat-divider></mat-divider>
 </div>
-<div>
-  <mat-form-field>
-    <mat-select [(value)]="selectedAn">
-      <mat-option *ngFor="let  of " [value]="animal">
-        {{animal.name}}
+<div class="afis">
+<div class="selectors">
+  <mat-form-field class="select">
+    <mat-select class = "white" (selectionChange)="onChangeAn($event)"  placeholder="An" >
+      <mat-option   *ngFor="let an  of ani"  [value]="an.value" >
+        {{an.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-
-  <mat-form-field>
-    <mat-select [(value)]="selectedSemestru">
-
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select">
+    <mat-select class = "white" (selectionChange)="onChangeSemestru($event)"  placeholder="Semestru">
+      <mat-option *ngFor="let semestru  of semestre" [value]="semestru.value">
+        {{semestru.viewValue}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
-<div class="afis">
   <table mat-table
          matSort (matSortChange)="sortList($event)"
          [dataSource]="dataSource" multiTemplateDataRows
