@@ -47,7 +47,6 @@ export interface SpecializareData{
   nume:string,
   semestre:string,
   discipline: DisciplineData[]
-
 }
 @Injectable()
 export class StudentService {

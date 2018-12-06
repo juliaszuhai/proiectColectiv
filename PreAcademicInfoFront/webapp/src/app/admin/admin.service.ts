@@ -14,6 +14,31 @@ export interface User{
   numarMatricol: string;
   adresa: string;
 }
+export interface Mail{
+  titlu: string;
+  mesaj: string;
+}
+
+export interface DisciplineData{
+  An:string;
+  semestru:string;
+  nume:string;
+  obligatoriu:boolean;
+  optional:boolean;
+  facultativ:boolean;
+  codMaterie:string;
+  nrCredite:string;
+  locuriDisponibile:number;
+  locuriOcupate:number;
+}
+
+export interface SpecializareData{
+  facultatea:string,
+  nume:string,
+  semestre:string,
+  discipline: DisciplineData[]
+}
+
 @Injectable()
 export class AdminService {
 

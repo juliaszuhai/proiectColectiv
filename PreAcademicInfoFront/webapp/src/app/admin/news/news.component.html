@@ -1,0 +1,44 @@
+<app-navigation-admin></app-navigation-admin>
+
+<div class="selectors">
+  <mat-form-field class="select">
+    <mat-select class = "white"  placeholder="Departament">
+      <mat-option *ngFor="let d of departamente" [value]="d.value">
+        {{d.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select">
+    <mat-select class = "white" placeholder="Specializare">
+      <mat-option *ngFor="let s of specializari" [value]="s.value">
+        {{s.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+ &nbsp;&nbsp;&nbsp;&nbsp;
+<mat-form-field class="select">
+  <mat-select class = "white" placeholder="An">
+    <mat-option *ngFor="let a of ani" [value]="a.value">
+      {{a.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<mat-form-field class="select">
+  <mat-select class = "white" (selectionChange)="onChange($event)" placeholder="Grupa">
+    <mat-option *ngFor="let g of grupe" [value]="g.value">
+      {{g.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+  <div *ngIf="selected">
+      <label>Titlu</label>
+      <input matInput placeholder="Titlu" name="title" [(ngModel)]="mail.titlu"  required>
+      <label>Mesaj</label>
+      <input matInput placeholder="Mesaj" name="mesaj" [(ngModel)]="mail.mesaj"  required>
+
+  </div>
+</div>
