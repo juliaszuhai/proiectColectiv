@@ -3,12 +3,30 @@
   <mat-divider></mat-divider>
 </div>
 <div class="afis">
+<div class="selectors">
+  <mat-form-field class="select">
+    <mat-select class = "white" (selectionChange)="onChangeAn($event)"  placeholder="An" >
+      <mat-option   *ngFor="let an  of ani"  [value]="an.value" >
+        {{an.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select">
+    <mat-select class = "white" (selectionChange)="onChangeSemestru($event)"  placeholder="Semestru">
+      <mat-option *ngFor="let semestru  of semestre" [value]="semestru.value">
+        {{semestru.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+</div>
   <table mat-table
-         matSort (matSortChange)="sortData($event)"
+         matSort (matSortChange)="sortList($event)"
          [dataSource]="dataSource" multiTemplateDataRows
          class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <th mat-sort-header="{{column}}" *matHeaderCellDef> {{column}} </th>
       <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
     </ng-container>
 
