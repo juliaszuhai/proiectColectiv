@@ -6,22 +6,25 @@ using System.Threading.Tasks;
 
 namespace PreAcademicInfo.Models
 {
-    public enum GradeType { LAB, SEMINAR, EXAMEN, PARTIAL, BONUS, FINAL}
-    public class Grade
+    public enum CerereType { BURSA }
+    public class Cerere
     {
         [Required, Key]
         public Int32 Id { get; set; }
 
         [Required]
-        public Discipline Discipline { get; set; }
+        public String NumeStudent { get; set; }
 
         [Required]
-        public Student Student { get; set; }
+        public String PrenumeStudent { get; set; }
 
         [Required]
-        public Double GradeValue { get; set; }
+        public CerereType Type { get; set; }
 
         [Required]
-        public GradeType Type { get; set; }
+        public Int32 An { get; set; }
+
+        [Required]
+        public byte[] Cerere_bytes { get; set; }
     }
 }
