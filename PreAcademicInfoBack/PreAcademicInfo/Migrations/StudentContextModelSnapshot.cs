@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using PreAcademicInfo.Models;
 using System;
 
@@ -25,8 +23,7 @@ namespace PreAcademicInfo.Migrations
                     b.Property<string>("Username")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adresa")
-                        .IsRequired();
+                    b.Property<int>("Adresa");
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -78,8 +75,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<int>("An");
 
                     b.Property<int>("Credite");
-
-                    b.Property<int>("NumarLaboratoare");
 
                     b.Property<string>("Nume")
                         .IsRequired();
@@ -150,8 +145,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DataNotei");
-
                     b.Property<string>("DisciplineCod")
                         .IsRequired();
 
@@ -159,9 +152,9 @@ namespace PreAcademicInfo.Migrations
 
                     b.Property<int?>("GradesToDisciplineId");
 
-                    b.Property<double>("ProcentInnerType");
+                    b.Property<int>("PrezenteLab");
 
-                    b.Property<double>("ProcentOuter");
+                    b.Property<int>("PrezenteSeminar");
 
                     b.Property<string>("StudentUsername")
                         .IsRequired();
