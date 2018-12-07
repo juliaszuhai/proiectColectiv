@@ -42,9 +42,5 @@ namespace PreAcademicInfo.Models
         //daca e nota de lab se va pune Date.Now ca yyyy.mm.dd
         //nota finala va avea data data din aplicatie
         public String DataNotei { get; set; }
-
-        public Int32 PrezenteLab { get; set; }
-        public Int32 PrezenteSeminar { get; set; }
-
     }
 }
