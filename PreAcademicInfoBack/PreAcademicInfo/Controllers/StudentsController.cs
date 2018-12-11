@@ -9,6 +9,7 @@ using PreAcademicInfo.Models;
 using System.Security.Cryptography;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Cors;
+using System.IO;
 
 namespace PreAcademicInfo.Controllers
 {
@@ -27,35 +28,72 @@ namespace PreAcademicInfo.Controllers
 
         public StudentsController(StudentContext context)
         {
+            String fileName = "C:\\ASDFASDFK\\Uni\\Proiect Colectiv\\Students.txt";
             _context = context;
-            //PopulateDatabase();
+            ReadAndPopulateDB(fileName);
         }
 
-        public void PopulateDatabase()
+        string ReadAndPopulateDB(string fileName)
         {
-            byte[] saltNumber = new byte[10];
-            rngCsp.GetBytes(saltNumber);
-            String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-            String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
-            _context.Student.Add(new Student()
+            string program = "";
+            string line;
+            
+            try
             {
-                Username = "stefan",
-                NumarMatricol = 2103,
-                Password = password,
-                Salt = saltString,
-                Email = "delibas.stefan@gmail.com",
-                Nume = "Delibas",
-                Prenume = "Stefan",
-                NumarTelefon = "123456789",
-                CNP = "1980706080031",
-                InitialaParinte = "I",
-                Active = true,
-                Generatie = "2016",
-                An = "1",
-                UserType = UserType.STUDENT
-            });
-            //_context.SaveChanges();
+                //Pass the file path and file name to the StreamReader constructor
+                StreamReader sr = new StreamReader(fileName);
+
+                //Read the first line of text
+                line = sr.ReadLine();
+
+                //Continue to read until you reach end of file
+                while (line != null)
+                {
+                    program = program + line;
+                    Student studentSample = new Student();
+                    List<String> s;
+                    s = line.Split(' ').ToList();
+
+                    byte[] saltNumber = new byte[10];
+                    rngCsp.GetBytes(saltNumber);
+                    String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+                    String password = BCrypt.Net.BCrypt.HashPassword(saltString + s[2]);
+                    studentSample.Username = s[0];
+                    studentSample.NumarMatricol = int.Parse(s[1]);
+                    studentSample.Password = password;
+                    studentSample.Salt = saltString;
+                    studentSample.Email = s[3];
+                    studentSample.Nume = s[4];
+                    studentSample.Prenume = s[5];
+                    studentSample.NumarTelefon = s[6];
+                    studentSample.CNP = s[7];
+                    studentSample.InitialaParinte = s[8];
+                    studentSample.Active = bool.Parse(s[9]);
+                    studentSample.Generatie = s[10];
+                    studentSample.An = s[11];
+                    studentSample.UserType = UserType.STUDENT;
+                    
+                    //close the file
+                    line = sr.ReadLine();
+                }
+                
+                sr.Close();
+                return program;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+                return "";
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+
         }
+
+
+        
 
         // GET: api/Students
         [HttpGet]

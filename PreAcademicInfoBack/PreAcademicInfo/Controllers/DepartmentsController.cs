@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,12 +15,56 @@ namespace PreAcademicInfo.Controllers
     public class DepartmentsController : Controller
     {
         private readonly DepartmentsContext _context;
-
         public DepartmentsController(DepartmentsContext context)
         {
+            String fileName = "C:\\ASDFASDFK\\Uni\\Proiect Colectiv\\Departments.txt";
             _context = context;
+            ReadAndPopulateDB(fileName);
         }
 
+        string ReadAndPopulateDB(string fileName)
+        {
+            string program = "";
+            string line;
+
+            try
+            {
+                //Pass the file path and file name to the StreamReader constructor
+                StreamReader sr = new StreamReader(fileName);
+
+                //Read the first line of text
+                line = sr.ReadLine();
+
+                //Continue to read until you reach end of file
+                while (line != null)
+                {
+                    program = program + line;
+                    Department departmentSample = new Department();
+                    List<String> s;
+                    s = line.Split(' ').ToList();
+                    departmentSample.Id = int.Parse(s[0]);
+                    //departmentSample.Name = int.Parse(s[1]);
+                    //if (faculties.)
+                    //departmentSample.Faculty = s[3];
+
+                    //close the file
+                    line = sr.ReadLine();
+                }
+
+                sr.Close();
+                return program;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+                return "";
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+
+        }
         // GET: api/Departments
         [HttpGet]
         public IEnumerable<Department> GetDepartment()
