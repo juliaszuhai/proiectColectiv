@@ -19,14 +19,6 @@
     </mat-select>
   </mat-form-field>
   <!-- <p> Selected grupa: {{selectedGrupa}} </p> -->
-    &nbsp;&nbsp;&nbsp;&nbsp;
-  <mat-form-field color="primay">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="myDatepicker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #myDatepicker color="primay"></mat-datepicker>
-  </mat-form-field>
-  <!-- <p>Is valid moment object: {{isValidMoment}}</p> -->
   </div>
 
   <br>
@@ -45,10 +37,17 @@
   <div [ngSwitch] = "choosedOption">
     
     <div *ngSwitchCase="'Examen final'">
-       Display layout for Examen Final
+        <br>
+        <mat-slide-toggle [(ngModel)] = "myModel">Alege o data comuna</mat-slide-toggle>
+        <div *ngIf="!myModel">
+            <app-note-finale></app-note-finale>
+        </div>
+        <div *ngIf="myModel">
+            <app-note-finale-date-picker></app-note-finale-date-picker>
+        </div>
     </div>
     <div *ngSwitchCase="'Laborator'">
-        Display layout for Laborator
+        Display layout for Laborator 
     </div>
     <div *ngSwitchCase="'Seminar'">
         Display layout for Seminar

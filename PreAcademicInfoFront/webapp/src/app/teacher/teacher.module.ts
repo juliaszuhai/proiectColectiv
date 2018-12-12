@@ -11,6 +11,10 @@ import {BrowserModule} from "@angular/platform-browser";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { NoteFinaleComponent } from './note-finale/note-finale.component';
+import { NoteFinaleDatePickerComponent } from './note-finale-date-picker/note-finale-date-picker.component';
+import { TeacherService } from './teacher.service';
+import { MatSlideToggleModule } from '@angular/material';
 
 const routes: Routes = [
   {path: 'teacher', component: NoteComponent},
@@ -19,7 +23,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     NoteComponent, 
-    NavTeacherComponent
+    NavTeacherComponent, NoteFinaleComponent, NoteFinaleDatePickerComponent
   ],
   imports: [
     CommonModule,
@@ -31,9 +35,10 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    MatSlideToggleModule,
     HttpClientModule,
   ],
-  //providers: [TeacherService],
+  providers: [TeacherService],
   exports: [RouterModule,
     FormsModule,
     BrowserModule,

@@ -1,7 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Moment } from 'moment';
-import * as moment from 'moment';
-import { MatDatepicker } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
@@ -9,12 +6,10 @@ import { MatRadioChange } from '@angular/material/radio';
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent implements  OnInit, AfterViewInit {
+export class NoteComponent implements  OnInit {
 
 
   constructor() { }
-  @ViewChild(MatDatepicker) myDatepicker: MatDatepicker<Moment>;
-  isValidMoment: boolean = false;
   selectedMaterie: string;
   selectedGrupa: string;
   isExamenFinal: boolean = false;
@@ -22,6 +17,7 @@ export class NoteComponent implements  OnInit, AfterViewInit {
   isSeminar: boolean = false;
   isBonus: boolean = false;
   choosedOption: string;
+  myModel: boolean = false;
 
   materii = [
     {value: '0', viewValue: 'LFTC'},
@@ -52,18 +48,6 @@ export class NoteComponent implements  OnInit, AfterViewInit {
     if(event.value == 'Bonus') {this.isBonus = true;}
   }
 
-  ngAfterViewInit(){
-    this.myDatepicker._selectedChanged.subscribe(
-      (newDate: Moment) => {
-        this.isValidMoment = moment.isMoment(newDate);
-      },
-      (error) => {
-        throw Error(error);
-      }
-    );
-  }
-
-
   isMoreThanOneMaterii() {
     if( this.materii.length>1)
       return true;
@@ -79,7 +63,7 @@ export class NoteComponent implements  OnInit, AfterViewInit {
   }
 
   showRadioButtons(){
-    if(this.isValidMoment==true && this.selectedMaterie!=null && this.selectedGrupa!=null)
+    if(this.selectedMaterie!=null && this.selectedGrupa!=null)
       return true;
     return false;
   }
