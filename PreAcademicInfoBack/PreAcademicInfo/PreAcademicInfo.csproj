@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="3.1.0" />
+    <PackageReference Include="IronPdf" Version="4.4.9" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />

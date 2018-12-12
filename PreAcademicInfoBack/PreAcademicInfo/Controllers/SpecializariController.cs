@@ -9,13 +9,16 @@ using PreAcademicInfo.Models;
 
 namespace PreAcademicInfo.Controllers
 {
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [Consumes("application/json")]
     [Produces("application/json")]
     [Route("api/Specializari")]
     public class SpecializariController : Controller
     {
-        private readonly SpecializariContext _context;
+        private readonly StudentContext _context;
 
-        public SpecializariController(SpecializariContext context)
+        public SpecializariController(StudentContext context)
         {
             _context = context;
         }
@@ -24,7 +27,7 @@ namespace PreAcademicInfo.Controllers
         [HttpGet]
         public IEnumerable<Specializare> GetSpecializare()
         {
-            return _context.Specializare;
+            return _context.Specializare.ToArray();
         }
 
         // GET: api/Specializari/5
