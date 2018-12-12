@@ -22,7 +22,6 @@ namespace PreAcademicInfo.Controllers
         public LoginController(StudentContext student_context)
         {
             _student_context = student_context;
-            
         }
 
         [HttpPost]

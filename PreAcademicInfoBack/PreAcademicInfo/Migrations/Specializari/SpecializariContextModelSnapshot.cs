@@ -10,7 +10,7 @@ using System;
 
 namespace PreAcademicInfo.Migrations.Specializari
 {
-    [DbContext(typeof(SpecializariContext))]
+    //[DbContext(typeof(SpecializariContext))]
     partial class SpecializariContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

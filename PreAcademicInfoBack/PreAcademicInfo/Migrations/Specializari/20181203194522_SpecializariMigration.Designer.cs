@@ -10,7 +10,7 @@ using System;
 
 namespace PreAcademicInfo.Migrations.Specializari
 {
-    [DbContext(typeof(SpecializariContext))]
+    //[DbContext(typeof(SpecializariContext))]
     [Migration("20181203194522_SpecializariMigration")]
     partial class SpecializariMigration
     {

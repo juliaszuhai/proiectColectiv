@@ -8,22 +8,22 @@ namespace PreAcademicInfo.Services
 {
     public class DepartmentService
     {
-        DepartmentsContext context;
+        StudentContext context;
 
-        public DepartmentService(DepartmentsContext context)
+        public DepartmentService(StudentContext context)
         {
             this.context = context;
         }
 
         public List<Specializare> GetSpecializariByDepartment(string departmentName)
         {
-            return context.Departments.Where(d => d.Name == departmentName)
+            return context.Department.Where(d => d.Name == departmentName)
                                      .Select(d => d.Specializares).First().ToList();
         }
 
         public List<Specializare> GetSpecializariByDepartmentId(int id)
         {
-            return context.Departments.Where(d => d.Id == id)
+            return context.Department.Where(d => d.Id == id)
                                      .Select(d => d.Specializares).First().ToList();
         }
         
