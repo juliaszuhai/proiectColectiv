@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,63 +13,20 @@ namespace PreAcademicInfo.Controllers
     [Route("api/Departments")]
     public class DepartmentsController : Controller
     {
-        private readonly DepartmentsContext _context;
-        public DepartmentsController(DepartmentsContext context)
+        private readonly StudentContext _context;
+
+        public DepartmentsController(StudentContext context)
         {
-            String fileName = "C:\\ASDFASDFK\\Uni\\Proiect Colectiv\\Departments.txt";
             _context = context;
-            ReadAndPopulateDB(fileName);
         }
 
-        string ReadAndPopulateDB(string fileName)
-        {
-            string program = "";
-            string line;
-
-            try
-            {
-                //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader(fileName);
-
-                //Read the first line of text
-                line = sr.ReadLine();
-
-                //Continue to read until you reach end of file
-                while (line != null)
-                {
-                    program = program + line;
-                    Department departmentSample = new Department();
-                    List<String> s;
-                    s = line.Split(' ').ToList();
-                    departmentSample.Id = int.Parse(s[0]);
-                    //departmentSample.Name = int.Parse(s[1]);
-                    //if (faculties.)
-                    //departmentSample.Faculty = s[3];
-
-                    //close the file
-                    line = sr.ReadLine();
-                }
-
-                sr.Close();
-                return program;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-                return "";
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-
-        }
         // GET: api/Departments
         [HttpGet]
         public IEnumerable<Department> GetDepartment()
         {
-            return _context.Departments;
+            return _context.Department;
         }
+
 
         // GET: api/Departments/5
         [HttpGet("{id}")]
@@ -81,7 +37,7 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var department = await _context.Departments.SingleOrDefaultAsync(m => m.Id == id);
+            var department = await _context.Department.SingleOrDefaultAsync(m => m.Id == id);
 
             if (department == null)
             {
@@ -135,7 +91,7 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Departments.Add(department);
+            _context.Department.Add(department);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDepartment", new { id = department.Id }, department);
@@ -150,13 +106,13 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var department = await _context.Departments.SingleOrDefaultAsync(m => m.Id == id);
+            var department = await _context.Department.SingleOrDefaultAsync(m => m.Id == id);
             if (department == null)
             {
                 return NotFound();
             }
 
-            _context.Departments.Remove(department);
+            _context.Department.Remove(department);
             await _context.SaveChangesAsync();
 
             return Ok(department);
@@ -164,7 +120,7 @@ namespace PreAcademicInfo.Controllers
 
         private bool DepartmentExists(int id)
         {
-            return _context.Departments.Any(e => e.Id == id);
+            return _context.Department.Any(e => e.Id == id);
         }
     }
 }

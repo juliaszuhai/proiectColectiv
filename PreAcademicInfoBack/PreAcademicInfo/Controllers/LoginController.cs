@@ -18,14 +18,10 @@ namespace PreAcademicInfo.Controllers
     public class LoginController : Controller
     {
         private readonly StudentContext _student_context;
-        private readonly TeachersContext _teacher_context;
-        private readonly AdminsContext _admin_context;
 
-        public LoginController(StudentContext student_context, TeachersContext teacher_context, AdminsContext admin_context)
+        public LoginController(StudentContext student_context)
         {
             _student_context = student_context;
-            _teacher_context = teacher_context;
-            _admin_context = admin_context;
         }
 
         [HttpPost]
