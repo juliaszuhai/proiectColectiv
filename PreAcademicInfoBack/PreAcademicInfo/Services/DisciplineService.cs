@@ -8,9 +8,9 @@ namespace PreAcademicInfo.Services
 {
     public class DisciplineService
     {
-        DisciplineContext context;
+        StudentContext context;
 
-        public DisciplineService(DisciplineContext context)
+        public DisciplineService(StudentContext context)
         {
             this.context = context;
         }
