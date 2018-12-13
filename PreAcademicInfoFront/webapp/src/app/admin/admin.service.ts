@@ -14,15 +14,47 @@ export interface User{
   numarMatricol: string;
   adresa: string;
 }
+export interface Mail{
+  titlu: string;
+  mesaj: string;
+  departament: string;
+  an:string;
+  grupa:string;
+}
+
+export interface DisciplineData{
+  An:string;
+  semestru:string;
+  nume:string;
+  obligatoriu:boolean;
+  optional:boolean;
+  facultativ:boolean;
+  codMaterie:string;
+  nrCredite:string;
+  locuriDisponibile:number;
+  locuriOcupate:number;
+}
+
+export interface SpecializareData{
+  facultatea:string,
+  nume:string,
+  semestre:string,
+  discipline: DisciplineData[]
+}
+
 @Injectable()
 export class AdminService {
+  
 
 
   baseURL = 'http://localhost:53087/api/';
 
   constructor(private http: HttpClient,
     private router: Router) { }
-
+   
+    sendMail(mail: Mail): any {
+      throw new Error("Method not implemented.");
+    }
     addUser( user:User)
       {
         if(user.type == "Student")

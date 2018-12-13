@@ -8,16 +8,19 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CrudstudentComponent} from "./crudstudent/crudstudent.component";
 import {NavAdminComponent} from "./nav-admin/nav-admin.component";
 import {AdminService} from "./admin.service";
+import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
   {path: 'crud', component: CrudstudentComponent},
+  {path: 'news', component: NewsComponent},
 
 ];
 
 @NgModule({
   declarations:[
     CrudstudentComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    NewsComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
