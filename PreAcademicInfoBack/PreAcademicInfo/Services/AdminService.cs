@@ -9,18 +9,16 @@ namespace PreAcademicInfo.Services
     public class AdminService
     {
         StudentContext studentContext;
-        TeachersContext teacherContext;
 
-        public AdminService(StudentContext contextStudent, TeachersContext contextTeacher )
+        public AdminService(StudentContext contextStudent)
         {
             this.studentContext = contextStudent;
-            this.teacherContext = contextTeacher;
         }
 
         public List<Teacher> getTeachers()
         {
 
-            return teacherContext.Teacher.ToList();
+            return studentContext.Teacher.ToList();
         }
 
 
