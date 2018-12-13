@@ -34,5 +34,7 @@ namespace PreAcademicInfo.Models
         public DbSet<PreAcademicInfo.Models.Teacher> Teacher { get; set; }
 
         public DbSet<PreAcademicInfo.Models.Student> Student { get; set; }
+
+        public DbSet<PreAcademicInfo.Models.Teacher> Teacher { get; set; }
     }
 }
