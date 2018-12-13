@@ -13,12 +13,30 @@ export class StudentsListComponent implements OnInit {
 
   columnsToDisplay=['Numar matricol', 'Nume', 'Prenume', 'Email', 'Telefon', 'DeleteButton', 'UpdateButton']
   public studentsList = []
+  ani = [
+    {value: '1', viewValue: 'Anul 1'},
+    {value: '2', viewValue: 'Anul 2'},
+    {value: '3', viewValue: 'Anul 3'},
+  ];
+
   ngOnInit() {
     this.adminService.getStudents()
         .subscribe(data =>{
           this.studentsList = data;
         })
         console.log(this.studentsList)
+  }
+
+  onChangeAn(event:any) {
+    //console.log(event.value);
+    let an=event.value;
+    this.adminService.getStudentsByYear(an)
+    .subscribe(data =>{
+      this.studentsList = data;
+    })
+    console.log(this.studentsList)
+    //console.log(this.dataSource);
+
   }
 
   deleteStudent (username: string){

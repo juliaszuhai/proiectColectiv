@@ -84,6 +84,13 @@ namespace PreAcademicInfo.Controllers
             return Ok(student);
         }
 
+        [HttpGet("{an}")]
+        public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
+        {
+            return _context.Student.Where(student => student.An == an);
+        }
+
+
         // PUT: api/Students/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent([FromRoute] string id, [FromBody] Student student)

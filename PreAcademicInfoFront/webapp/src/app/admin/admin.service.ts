@@ -61,7 +61,10 @@ export class AdminService {
 
     getStudents(): Observable<Student[]>{ return this.http.get<Student[]>(this.baseUrlStudents); }
 
-    
+    getStudentsByYear(an:string): Observable<Student[]>{
+        console.log(an)
+        return this.http.get<Student[]>(this.baseUrlStudents + "/" + an); 
+      }    
 
     addUser( user:User)
       {

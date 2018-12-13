@@ -1,5 +1,15 @@
 <app-navigation-admin></app-navigation-admin>
 <div class="afis">
+    <div class="selectors">
+        <mat-form-field class="select">
+          <mat-select class = "white" (selectionChange)="onChangeAn($event)"  placeholder="An" >
+            <mat-option   *ngFor="let an  of ani"  [value]="an.value" >
+              {{an.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
   <table mat-table [dataSource]="studentsList" class="lessons-table mat-elevation-z8" >
 
     <ng-container matColumnDef="Numar matricol">
