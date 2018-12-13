@@ -10,13 +10,13 @@
     <button mat-menu-item>Note provizorii</button>
     <button mat-menu-item>Note lab/sem</button>
   </mat-menu>
-  <button mat-button [matMenuTriggerFor]="contracte" >Contracte studii</button>
-    <mat-menu #contracte="matMenu">
-      <button mat-menu-item routerLink="../contracte">Trimite Cerere</button>
+  <button mat-button routerLink="../contracte" >Contracte studii</button>
+  <button mat-button >Profesori</button>
+  <button mat-button [matMenuTriggerFor]="cereri">Cereri</button>
+    <mat-menu #cereri="matMenu">
+      <button mat-menu-item >Trimite Cerere</button>
       <button mat-menu-item>Vizualizare cereri trimise</button>
     </mat-menu>
-  <button mat-button >Profesori</button>
-  <button mat-button >Cereri</button>
   <button mat-button >Taxe</button>
 
 

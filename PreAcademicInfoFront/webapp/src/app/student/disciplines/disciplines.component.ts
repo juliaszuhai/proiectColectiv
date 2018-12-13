@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DisciplineData, StudentService} from "../student.service";
+import {DisciplineData, SpecializareData, StudentService} from "../student.service";
 import {Router} from "@angular/router";
 
 
@@ -21,6 +21,7 @@ export class DisciplinesComponent implements OnInit {
 
   columnsToDisplay1=['Check','An', 'semestru', 'nume', 'nrCredite', 'locuri'];
   dataSource1 = DISCIPLINE_DATA;
+  specializariList:SpecializareData[];
 
   semestre = [
     {value: '0', viewValue: 'Semsetrul 1'},
@@ -46,12 +47,21 @@ export class DisciplinesComponent implements OnInit {
       return true;
     else
       return false;
-
   }
 
-
-
   ngOnInit() {
+    this.studentService.getSpecializari().subscribe(
+      (data) => {
+        this.specializariList = data;
+
+    console.log(data)},
+      error => {
+
+        console.log(error); //gives the object object
+
+      });
+
+
 
   }
 

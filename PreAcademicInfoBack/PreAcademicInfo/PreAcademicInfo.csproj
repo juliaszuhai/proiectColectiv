@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20181105222247_SecondMigration.Designer.cs" />
     <Compile Remove="Migrations\20181105223159_ThirdMigration.cs" />
     <Compile Remove="Migrations\20181105223159_ThirdMigration.Designer.cs" />
+    <Compile Remove="Migrations\20181207183842_Cereri.cs" />
+    <Compile Remove="Migrations\20181207183842_Cereri.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +22,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="3.1.0" />
+    <PackageReference Include="EntityFramework" Version="6.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 

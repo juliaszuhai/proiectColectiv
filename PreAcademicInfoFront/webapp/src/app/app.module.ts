@@ -13,6 +13,7 @@ import {StudentService} from "./student/student.service";
 import {AuthenticationServiceService} from "./signin/authentication-service.service";
 import {StudentModule} from "./student/student.module";
 import {AdminModule} from "./admin/admin.module";
+import {TeacherModule} from "./teacher/teacher.module";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
@@ -31,7 +32,8 @@ const routes: Routes = [
     StudentModule,
     HttpClientModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    TeacherModule
   ],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
