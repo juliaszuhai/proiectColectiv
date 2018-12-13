@@ -21,10 +21,13 @@ export class NewsComponent implements OnInit {
     
   }
 
-  constructor(private studentService:AdminService, private router: Router) { 
+  constructor(private adminService:AdminService, private router: Router) { 
     this.mail = {
       titlu : '',
-      mesaj : ''
+      mesaj : '',
+      departament:'',
+      an: '',
+      grupa: ''
     }
   }
 
@@ -34,7 +37,31 @@ export class NewsComponent implements OnInit {
     {
       this.selected = true;
     }
+    this.mail.departament = param
+    console.log("Departament:",this.mail.departament)
 
+  }
+  onAnChange(event:any) {
+    let param = event.value;
+    this.mail.an = param
+    console.log("An:",this.mail.an);
+  }
+  onGrupaChange(event:any) {
+    let param = event.value;
+    this.mail.grupa = param;
+    console.log("Grupa:",this.mail.grupa);
+  }
+  submitForm(){
+    this.adminService.sendMail(this.mail)
+    .subscribe(
+      data => {
+          
+          
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
 
@@ -42,23 +69,23 @@ export class NewsComponent implements OnInit {
   dataSource1 = DISCIPLINE_DATA;
 
   grupe = [
-    {value: '0', viewValue: '931'},
-    {value: '0', viewValue: '932'},
-    {value: '0', viewValue: '933'},
+    {value: '931', viewValue: '931'},
+    {value: '932', viewValue: '932'},
+    {value: '933', viewValue: '933'},
     ];
   ani = [
-    {value: '0', viewValue: 'Anul 1'},
-    {value: '1', viewValue: 'Anul 2'},
-    {value: '2', viewValue: 'Anul 3'},
+    {value: '1', viewValue: 'Anul 1'},
+    {value: '2', viewValue: 'Anul 2'},
+    {value: '3', viewValue: 'Anul 3'},
   ];
   departamente=[
-    {value: '0', viewValue: 'Matematica'},
-    {value:'1', viewValue: 'Informatica'}
+    {value: 'Matematica', viewValue: 'Matematica'},
+    {value:'Informatica', viewValue: 'Informatica'}
   ];
   specializari=[
-    {value: '0', viewValue: 'Informatica engleza'},
-    {value:'1', viewValue: 'Informatica romana'},
-    {value: '2', viewValue: 'Informatica germana'},
-    {value:'3', viewValue: 'Informatica maghiara'}
+    {value: 'Informatica engleza', viewValue: 'Informatica engleza'},
+    {value:'Informatica romana', viewValue: 'Informatica romana'},
+    {value: 'Informatica germana', viewValue: 'Informatica germana'},
+    {value:'Informatica maghiara', viewValue: 'Informatica maghiara'}
   ];
 }

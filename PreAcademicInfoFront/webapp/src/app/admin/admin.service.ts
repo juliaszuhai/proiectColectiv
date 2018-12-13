@@ -17,6 +17,9 @@ export interface User{
 export interface Mail{
   titlu: string;
   mesaj: string;
+  departament: string;
+  an:string;
+  grupa:string;
 }
 
 export interface DisciplineData{
@@ -41,13 +44,17 @@ export interface SpecializareData{
 
 @Injectable()
 export class AdminService {
+  
 
 
   baseURL = 'http://localhost:53087/api/';
 
   constructor(private http: HttpClient,
     private router: Router) { }
-
+   
+    sendMail(mail: Mail): any {
+      throw new Error("Method not implemented.");
+    }
     addUser( user:User)
       {
         if(user.type == "Student")
