@@ -1,0 +1,31 @@
+.big{
+  width:98.9%;
+  height: 100%;
+  position: absolute;
+  background: #6cb4b8;
+}
+.example-container {
+    margin-left: 10%;
+    margin-right: 10%;
+    background: white;
+
+  }
+.ex-container {
+    display: flex;
+    flex-direction: column;
+    padding-top:20px;
+  }
+
+  .column {
+    margin-top: 1px;
+    float: left;
+    width: 100%;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+

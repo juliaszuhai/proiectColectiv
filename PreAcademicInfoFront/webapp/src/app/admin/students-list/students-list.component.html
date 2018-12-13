@@ -1,0 +1,53 @@
+<app-navigation-admin></app-navigation-admin>
+<div class="afis">
+    <div class="selectors">
+        <mat-form-field class="select">
+          <mat-select class = "white" (selectionChange)="onChangeAn($event)"  placeholder="An" >
+            <mat-option   *ngFor="let an  of ani"  [value]="an.value" >
+              {{an.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+  <table mat-table [dataSource]="studentsList" class="lessons-table mat-elevation-z8" >
+
+    <ng-container matColumnDef="Numar matricol">
+      <th mat-header-cell *matHeaderCellDef> Nr Matricol </th>
+      <td mat-cell *matCellDef="let element"> <div #el contenteditable (blur)="element.email=el.numarMatricol"> {{element.numarMatricol}} </div> </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Nume">
+      <th mat-header-cell *matHeaderCellDef> Nume </th>
+      <td mat-cell *matCellDef="let element"> <div #el contenteditable (blur)="element.nume=el.innerText"> {{element.nume}} </div> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Prenume">
+      <th mat-header-cell *matHeaderCellDef> Prenume </th>
+      <td mat-cell *matCellDef="let element"><div #el contenteditable (blur)="element.prenume=el.innerText"> {{element.prenume}} </div> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> <div #el contenteditable (blur)="element.email=el.innerText"> {{element.email}} </div></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Telefon">
+      <th mat-header-cell *matHeaderCellDef> Telefon </th>
+      <td mat-cell *matCellDef="let element" ><div #el contenteditable (blur)="element.numarTelefon=el.innerText"> {{element.numarTelefon}} </div> </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="DeleteButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> <button  mat-raised-button style="float: left;" color="primary" 
+        (click)="deleteStudent(element.username)"> Delete </button> </td>
+    </ng-container>
+    <ng-container matColumnDef="UpdateButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> <button  mat-raised-button style="float: left;" color="primary" 
+        (click)="updateStudent(element)"> Update </button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>

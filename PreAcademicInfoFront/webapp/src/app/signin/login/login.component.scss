@@ -1,0 +1,76 @@
+
+.background_class{
+    margin:0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-color: #6cb4b8;
+    background-size: 100%;
+}
+
+.logo{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form_style{
+
+  margin-left: 25%;
+  margin-right:25%;
+  width: 50%;
+  text-align: center;
+  border: 2px solid #0000be;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  color: black;
+  background: white;
+}
+
+.title_style{
+  margin-top: 40px;
+  margin-bottom: 70px;
+  font-size: 3em;
+  color: black;
+  background-color: #F5F5F5;
+}
+
+.display{
+  margin: auto;
+  width: 60%;
+  align: center;
+  display: flex;
+  flex-direction:column;
+  width: 250px;
+  height: 250px;
+}
+
+.input_style{
+  font-size: 1.45em;
+  border: 1px solid #ddd;
+}
+
+.input_password_style{
+    font-size: 1.45em;
+    border: 1px solid #ddd;
+}
+
+
+.error_message{
+    background: #6cb4b8;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.spinner{
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+
+.example-full-width {
+  width: 100%;
+}
