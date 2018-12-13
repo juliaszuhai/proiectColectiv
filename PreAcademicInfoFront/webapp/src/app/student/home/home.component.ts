@@ -18,7 +18,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   ],
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   semestre=[{value: '1', viewValue: 'Semsetrul 1'},
     {value: '2', viewValue: 'Semestrul 2'},
@@ -70,6 +70,20 @@ export class HomeComponent {
   columnsToDisplay = ['an', 'semestru', 'numeMaterie', 'nota', 'nrCredite'];
   expandedElement: GradeData;
 
+  constructor(private studentService:StudentService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.getStudent();
+  }
+
+  getStudent()
+  {var username=localStorage.getItem("username");
+    this.studentService.getStudent(username).subscribe(
+      data => {
+        console.log(data);
+      });
+  }
+
 
   sortList(sort: Sort) {
     const data = this.dataSource.slice();
@@ -100,21 +114,18 @@ export class HomeComponent {
   onChangeAn(event:any) {
     //console.log(event.value);
     let an=event.value;
-
-
     this.dataSource=this.datalist.filter(grade=> grade.an == an);
     //console.log(this.dataSource);
 
   }
 
   onChangeSemestru(event:any) {
-
     let semestru=event.value;
-
-
     this.dataSource=this.datalist.filter(grade=> grade.semestru == semestru);
     //console.log(this.dataSource);
   }
+
+
 }
 
   function compare(a: number | string, b: number | string, isAsc: boolean) {

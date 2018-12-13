@@ -42,20 +42,7 @@ namespace PreAcademicInfo
             services.AddDbContext<UsersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("UsersContext")));
 
-            services.AddDbContext<AdminsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AdminsContext")));
-
-            services.AddDbContext<TeachersContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TeachersContext")));
-
-            services.AddDbContext<DepartmentsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DepartmentsContext")));
-
-            services.AddDbContext<SpecializariContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SpecializariContext")));
-
-            services.AddDbContext<DisciplineContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DisciplineContext")));
+           
         }
 
        

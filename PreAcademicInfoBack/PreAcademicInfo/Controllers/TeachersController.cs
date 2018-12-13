@@ -20,7 +20,7 @@ namespace PreAcademicInfo.Controllers
         private readonly StudentContext _context;
 
         private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
-
+        
         public TeachersController(StudentContext context)
         {
             _context = context;
@@ -163,4 +163,5 @@ namespace PreAcademicInfo.Controllers
             };
         }
     }
+    
 }

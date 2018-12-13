@@ -13,9 +13,9 @@ namespace PreAcademicInfo.Controllers
     [Route("api/Admins")]
     public class AdminsController : Controller
     {
-        private readonly AdminsContext _context;
+        private readonly StudentContext _context;
 
-        public AdminsController(AdminsContext context)
+        public AdminsController(StudentContext context)
         {
             _context = context;
         }

@@ -20,8 +20,11 @@ export class DisciplinesComponent implements OnInit {
 
 
   columnsToDisplay1=['Check','An', 'semestru', 'nume', 'nrCredite', 'locuri'];
+  columnsToDisplay=['An', 'semestru', 'nume', 'nrCredite'];
   dataSource1 = DISCIPLINE_DATA;
   specializariList:SpecializareData[];
+  materiiSelectate:DisciplineData[]=[];
+  showTable:boolean;
 
   semestre = [
     {value: '0', viewValue: 'Semsetrul 1'},
@@ -40,11 +43,17 @@ export class DisciplinesComponent implements OnInit {
     {value: '0', viewValue: 'Facultatea de Matematica si Informatica'},
     {value:'1', viewValue: 'Facultatea de Litere'}
   ];
+  displayedColumnsFooter=['Total numar credite:', 'Suma'];
 
   isDisabled(element)
   {
-    if( element==true)
-      return true;
+    if(element.obligatoriu==true)
+    {
+      var alreadyInArray= this.materiiSelectate.find(x => x.nume == element.nume);
+      if(alreadyInArray == undefined) {
+        this.materiiSelectate.push(element);
+      }
+      return true;}
     else
       return false;
   }
@@ -57,15 +66,15 @@ export class DisciplinesComponent implements OnInit {
     console.log(data)},
       error => {
 
-        console.log(error); //gives the object object
+        console.log(error);
 
       });
-
-
-
   }
 
   submitContract() {
+
+    this.showTable=true;
+    console.log(this.materiiSelectate);
 
   }
 
@@ -74,5 +83,21 @@ export class DisciplinesComponent implements OnInit {
       return true;
     else
       return false;
+  }
+
+  AddSelected(e, x) {
+    if(e.checked){
+      this.materiiSelectate.push(x);
+    }
+  }
+
+  getTotalCredite() {
+
+      return this.materiiSelectate.map(t => parseInt(t.nrCredite, 10)).reduce((acc, value) => acc + value, 0);
+
+  }
+
+  btnClick() {
+    this.router.navigate(['/contracte']);
   }
 }

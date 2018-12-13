@@ -39,19 +39,19 @@ namespace PreAcademicInfo.Controllers
             String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
             _context.Student.Add(new Student()
             {
-                Username = "stefan",
-                NumarMatricol = 2103,
+                Username = "andi",
+                NumarMatricol = 2000,
                 Password = password,
                 Salt = saltString,
-                Email = "delibas.stefan@gmail.com",
-                Nume = "Delibas",
-                Prenume = "Stefan",
-                NumarTelefon = "123456789",
-                CNP = "1980706080031",
-                InitialaParinte = "I",
+                Email = "aaie2000@scs.ubbcluj.ro",
+                Nume = "Abrudean",
+                Prenume = "Andrei",
+                NumarTelefon = "0711111110",
+                CNP = "1960000000000",
+                InitialaParinte = "A",
                 Active = true,
                 Generatie = "2016",
-                An = "1",
+                An = "3",
                 UserType = UserType.STUDENT
             });
             _context.SaveChanges();

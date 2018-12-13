@@ -44,8 +44,36 @@ export interface Teacher{
   password:string;
   disciplinesHolded: string[]
 }
+export interface Mail{
+  titlu: string;
+  mesaj: string;
+  departament: string;
+  an:string;
+  grupa:string;
+}
+
+export interface DisciplineData{
+  An:string;
+  semestru:string;
+  nume:string;
+  obligatoriu:boolean;
+  optional:boolean;
+  facultativ:boolean;
+  codMaterie:string;
+  nrCredite:string;
+  locuriDisponibile:number;
+  locuriOcupate:number;
+}
+
+export interface SpecializareData{
+  facultatea:string,
+  nume:string,
+  semestre:string,
+  discipline: DisciplineData[]
+}
 @Injectable()
 export class AdminService {
+  
 
 
   baseURL = 'http://localhost:6603/api/';
@@ -66,6 +94,10 @@ export class AdminService {
         return this.http.get<Student[]>(this.baseUrlStudents + "/" + an); 
       }    
 
+   
+    sendMail(mail: Mail): any {
+      throw new Error("Method not implemented.");
+    }
     addUser( user:User)
       {
         if(user.type == "Student")

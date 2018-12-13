@@ -9,61 +9,58 @@ using PreAcademicInfo.Models;
 
 namespace PreAcademicInfo.Controllers
 {
-    [ProducesResponseType(201)]
-    [ProducesResponseType(400)]
-    [Consumes("application/json")]
     [Produces("application/json")]
-    [Route("api/Specializari")]
-    public class SpecializariController : Controller
+    [Route("api/Grades")]
+    public class GradesController : Controller
     {
         private readonly StudentContext _context;
 
-        public SpecializariController(StudentContext context)
+        public GradesController(StudentContext context)
         {
             _context = context;
         }
 
-        // GET: api/Specializari
+        // GET: api/Grades
         [HttpGet]
-        public IEnumerable<Specializare> GetSpecializare()
+        public IEnumerable<Grade> GetGrade()
         {
-            return _context.Specializare.ToArray();
+            return _context.Grade;
         }
 
-        // GET: api/Specializari/5
+        // GET: api/Grades/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSpecializare([FromRoute] int id)
+        public async Task<IActionResult> GetGrade([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var specializare = await _context.Specializare.SingleOrDefaultAsync(m => m.Id == id);
+            var grade = await _context.Grade.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (specializare == null)
+            if (grade == null)
             {
                 return NotFound();
             }
 
-            return Ok(specializare);
+            return Ok(grade);
         }
 
-        // PUT: api/Specializari/5
+        // PUT: api/Grades/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSpecializare([FromRoute] int id, [FromBody] Specializare specializare)
+        public async Task<IActionResult> PutGrade([FromRoute] int id, [FromBody] Grade grade)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != specializare.Id)
+            if (id != grade.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(specializare).State = EntityState.Modified;
+            _context.Entry(grade).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +68,7 @@ namespace PreAcademicInfo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SpecializareExists(id))
+                if (!GradeExists(id))
                 {
                     return NotFound();
                 }
@@ -84,45 +81,45 @@ namespace PreAcademicInfo.Controllers
             return NoContent();
         }
 
-        // POST: api/Specializari
+        // POST: api/Grades
         [HttpPost]
-        public async Task<IActionResult> PostSpecializare([FromBody] Specializare specializare)
+        public async Task<IActionResult> PostGrade([FromBody] Grade grade)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Specializare.Add(specializare);
+            _context.Grade.Add(grade);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSpecializare", new { id = specializare.Id }, specializare);
+            return CreatedAtAction("GetGrade", new { id = grade.Id }, grade);
         }
 
-        // DELETE: api/Specializari/5
+        // DELETE: api/Grades/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSpecializare([FromRoute] int id)
+        public async Task<IActionResult> DeleteGrade([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var specializare = await _context.Specializare.SingleOrDefaultAsync(m => m.Id == id);
-            if (specializare == null)
+            var grade = await _context.Grade.SingleOrDefaultAsync(m => m.Id == id);
+            if (grade == null)
             {
                 return NotFound();
             }
 
-            _context.Specializare.Remove(specializare);
+            _context.Grade.Remove(grade);
             await _context.SaveChangesAsync();
 
-            return Ok(specializare);
+            return Ok(grade);
         }
 
-        private bool SpecializareExists(int id)
+        private bool GradeExists(int id)
         {
-            return _context.Specializare.Any(e => e.Id == id);
+            return _context.Grade.Any(e => e.Id == id);
         }
     }
 }
