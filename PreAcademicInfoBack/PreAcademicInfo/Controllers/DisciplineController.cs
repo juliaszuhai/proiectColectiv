@@ -13,9 +13,9 @@ namespace PreAcademicInfo.Controllers
     [Route("api/Discipline")]
     public class DisciplineController : Controller
     {
-        private readonly DisciplineContext _context;
+        private readonly StudentContext _context;
 
-        public DisciplineController(DisciplineContext context)
+        public DisciplineController(StudentContext context)
         {
             _context = context;
         }

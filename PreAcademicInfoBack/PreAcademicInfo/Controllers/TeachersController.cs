@@ -13,9 +13,9 @@ namespace PreAcademicInfo.Controllers
     [Route("api/Teachers")]
     public class TeachersController : Controller
     {
-        private readonly TeachersContext _context;
+        private readonly StudentContext _context;
 
-        public TeachersController(TeachersContext context)
+        public TeachersController(StudentContext context)
         {
             _context = context;
         }
@@ -122,4 +122,5 @@ namespace PreAcademicInfo.Controllers
             return _context.Teacher.Any(e => e.Username == id);
         }
     }
+    
 }

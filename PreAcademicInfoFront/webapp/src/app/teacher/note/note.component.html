@@ -1,0 +1,60 @@
+<app-nav-teacher></app-nav-teacher>
+<div class="show">
+
+  <div class="selectors">
+    <mat-form-field class="select" *ngIf="isMoreThanOneMaterii()">
+      <mat-select class = "white" placeholder="Materie" [(ngModel)]="selectedMaterie" name="materie">
+        <mat-option *ngFor="let materie of materii" [value]="materie.viewValue">
+          {{materie.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <p> Selected materie: {{selectedMaterie}} </p> -->
+   &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-form-field class="select" *ngIf="isMoreThanOneGrupe()">
+    <mat-select class = "white" placeholder="Grupa" [(ngModel)]="selectedGrupa" name="grupa">
+      <mat-option *ngFor="let grupa of grupe" [value]="grupa.viewValue">
+        {{grupa.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <p> Selected grupa: {{selectedGrupa}} </p> -->
+  </div>
+
+  <br>
+
+  <div class="radio_buttons" *ngIf="showRadioButtons()">
+    <label>Tip nota: </label>
+    <mat-radio-group   [(ngModel)]="choosedOption">
+      <mat-radio-button *ngFor="let a of optiuniNote" [value]="a"
+                  (change)="radioChange($event)">
+          {{a}} &nbsp; &nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+    <!-- <p>Your option is: {{choosedOption}}</p> -->
+  </div>
+  
+  <div [ngSwitch] = "choosedOption">
+    
+    <div *ngSwitchCase="'Examen final'">
+        <br>
+        <mat-slide-toggle [(ngModel)] = "myModel">Alege o data comuna</mat-slide-toggle>
+        <div *ngIf="!myModel">
+            <app-note-finale></app-note-finale>
+        </div>
+        <div *ngIf="myModel">
+            <app-note-finale-date-picker></app-note-finale-date-picker>
+        </div>
+    </div>
+    <div *ngSwitchCase="'Laborator'">
+        Display layout for Laborator 
+    </div>
+    <div *ngSwitchCase="'Seminar'">
+        Display layout for Seminar
+    </div>
+    <div *ngSwitchCase="'Bonus'">
+        Display layout for Bonus
+    </div>
+  
+  </div>
+</div>
