@@ -54,13 +54,14 @@ namespace PreAcademicInfo.Controllers
                 An = "1",
                 UserType = UserType.STUDENT
             });
-            //_context.SaveChanges();
+            _context.SaveChanges();
         }
 
         // GET: api/Students
         [HttpGet]
         public IEnumerable<Student> GetStudent()
         {
+            //PopulateDatabase();
             return _context.Student;
         }
 

@@ -1,0 +1,40 @@
+<app-navigation-admin></app-navigation-admin>
+<div class="afis">
+  <table mat-table [dataSource]="teachersList" class="lessons-table mat-elevation-z8" >
+  
+    <ng-container matColumnDef="Nume">
+      <th mat-header-cell *matHeaderCellDef> Nume </th>
+      <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Prenume">
+      <th mat-header-cell *matHeaderCellDef> Prenume </th>
+      <td mat-cell *matCellDef="let element">{{element.prenume}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Telefon">
+      <th mat-header-cell *matHeaderCellDef> Telefon </th>
+      <td mat-cell *matCellDef="let element"> {{element.numarTelefon}} </td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="Discipline">
+        <th mat-header-cell *matHeaderCellDef> Discipline </th>
+        <td mat-cell *matCellDef="let element"> {{element.diciplinesHolded}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="DeleteButton">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> <button  mat-raised-button style="float: left;" color="primary" 
+          (click)="deleteTeacher(element.username)"> Delete </button> </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>

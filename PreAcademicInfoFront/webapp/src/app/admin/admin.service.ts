@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface User{
   username: string;
@@ -14,14 +15,31 @@ export interface User{
   numarMatricol: string;
   adresa: string;
 }
+export interface Teacher{
+  username: string;
+  nume: string;
+  prenume: string;
+  type: string;
+  telefon: string;
+  email: string;
+  dicipline: string[]
+}
 @Injectable()
 export class AdminService {
 
 
-  baseURL = 'http://localhost:53087/api/';
+  baseURL = 'http://localhost:6603/api/';
+  baseURLTeachers='http://localhost:6603/api/Teachers';
+  baseUrlStudents='http://localhost:6603/api/Students';
 
   constructor(private http: HttpClient,
     private router: Router) { }
+
+    getTeachers(): Observable<Teacher[]>{
+       return this.http.get<Teacher[]>(this.baseURLTeachers); 
+      }
+
+    getStudents(): Observable<User[]>{ return this.http.get<User[]>(this.baseUrlStudents); }
 
     addUser( user:User)
       {
@@ -70,4 +88,26 @@ export class AdminService {
           });
         }
     }
+
+    deleteStudent( username: string)
+      {
+
+          return this.http.delete(this.baseURL+"Students/" + username )
+            {
+            headers: new HttpHeaders(
+              {'Content-Type' : 'application/json'}
+            )
+          };
+        }
+
+        deleteTeacher( username: string)
+      {
+
+          return this.http.delete(this.baseURL+"Teachers/" + username )
+            {
+            headers: new HttpHeaders(
+              {'Content-Type' : 'application/json'}
+            )
+          };
+        }
 }
