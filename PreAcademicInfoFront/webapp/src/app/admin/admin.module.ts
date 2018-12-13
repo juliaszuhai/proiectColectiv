@@ -25,7 +25,7 @@ const routes: Routes = [
     CrudstudentComponent,
     NavAdminComponent,
     TeachersListComponent,
-    StudentsListComponent
+    StudentsListComponent,
     NewsComponent
 
   ],

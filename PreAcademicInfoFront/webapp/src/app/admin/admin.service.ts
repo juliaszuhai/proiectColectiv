@@ -76,9 +76,9 @@ export class AdminService {
   
 
 
-  baseURL = 'http://localhost:6603/api/';
-  baseURLTeachers='http://localhost:6603/api/Teachers';
-  baseUrlStudents='http://localhost:6603/api/Students';
+  baseURL = 'http://localhost:53087/api/';
+  baseURLTeachers='http://localhost:53087/api/Teachers';
+  baseUrlStudents='http://localhost:53087/api/Students';
 
   constructor(private http: HttpClient,
     private router: Router) { }
