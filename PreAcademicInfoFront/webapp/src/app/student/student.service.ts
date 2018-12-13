@@ -16,7 +16,11 @@ export interface StudentData {
   initialaParinte: string;
   generatie: string;
   anCurent: string;
-  note:GradeData[];
+  note:GradeToDiscipline[];
+}
+export interface GradeToDiscipline{
+  discipline:string;
+  grades:GradeData[];
 }
 
 export interface GradeData {
@@ -77,20 +81,6 @@ export class StudentService {
       });
   }
 
-  /*getFinalGradesForStudent(username:string){
-    let body = JSON.stringify({username});
-    console.log(username);
-
-    return this.http.post<GradeData>(this.baseURL,
-      body,
-      {
-        headers: new HttpHeaders(
-          {'Content-Type' : 'application/json'}
-        )
-      }).pipe(
-      tap(res => this.setStudent(res))
-    );
-  }*/
 
   private setStudent(res: any) {
 

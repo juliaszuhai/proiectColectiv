@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 <div class="afis">
-
+  <div *ngIf="!showTable">
   <div class="selectors">
     <mat-form-field class="select" *ngIf="isMoreThanOne()">
       <mat-select class = "white" placeholder="Departament">
@@ -26,13 +26,15 @@
     </mat-select>
   </mat-form-field>
   </div>
+
+  <form (ngSubmit)="submitContract()" class="form_style">
       <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
 
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> Check </th>
           <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="isDisabled(element.obligatoriu)"
-          [checked]="isDisabled(element.obligatoriu)"></mat-checkbox>
+          <mat-checkbox [disabled]="isDisabled(element) || showTable"
+          [checked]="isDisabled(element)" (change)="AddSelected($event,element)"></mat-checkbox>
           </td>
         </ng-container>
         <!-- Position Column -->
@@ -68,6 +70,45 @@
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay1;"></tr>
       </table>
 
-  <button mat-raised-button (onClick)="submitContract()"  color="primary" >Trimite contract</button>
+    &nbsp;&nbsp;
+  <button mat-raised-button color="primary" >Previzualizare contract</button>
+  </form>
+</div>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <div *ngIf="showTable">
+    <p>Previzualizare contract</p>
+    <table mat-table [dataSource]="materiiSelectate" class="mat-elevation-z8">
 
+      <ng-container matColumnDef="An">
+        <th mat-header-cell *matHeaderCellDef> An </th>
+        <td mat-cell *matCellDef="let element"> {{element.An}} </td>
+        <td mat-footer-cell *matFooterCellDef> Total numar credite: </td>
+      </ng-container>
+
+      <ng-container matColumnDef="semestru">
+        <th mat-header-cell *matHeaderCellDef> Semestru </th>
+        <td mat-cell *matCellDef="let element"> {{element.semestru}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="nume">
+        <th mat-header-cell *matHeaderCellDef> Nume </th>
+        <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nrCredite">
+        <th mat-header-cell *matHeaderCellDef> Numar Credite </th>
+        <td mat-cell *matCellDef="let element"> {{element.nrCredite}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalCredite()}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+    </table>
+    &nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="btnClick();">Inapoi</button>
+    <button mat-raised-button color="primary" >Trimite contract</button>
+  </div>
 </div>
