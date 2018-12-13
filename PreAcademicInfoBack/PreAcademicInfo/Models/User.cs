@@ -38,8 +38,8 @@ namespace PreAcademicInfo.Models
         [Required]
         public String Prenume { get; set; }
 
-        [Required, MaxLength(14, ErrorMessage = "Numar de telefon prea lung"), MinLength(10)]
-        public Int32 NumarTelefon { get; set; }
+        [Required, MaxLength(20, ErrorMessage = "Numar de telefon prea lung"), MinLength(6)]
+        public string NumarTelefon { get; set; }
 
         [Required]
         public UserType UserType { get; set; }

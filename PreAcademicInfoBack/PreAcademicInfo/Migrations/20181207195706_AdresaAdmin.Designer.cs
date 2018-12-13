@@ -11,9 +11,10 @@ using System;
 namespace PreAcademicInfo.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20181207195706_AdresaAdmin")]
+    partial class AdresaAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,8 +150,6 @@ namespace PreAcademicInfo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DataNotei");
-
                     b.Property<string>("DisciplineCod")
                         .IsRequired();
 
@@ -158,9 +157,9 @@ namespace PreAcademicInfo.Migrations
 
                     b.Property<int?>("GradesToDisciplineId");
 
-                    b.Property<double>("ProcentInnerType");
+                    b.Property<int>("PrezenteLab");
 
-                    b.Property<double>("ProcentOuter");
+                    b.Property<int>("PrezenteSeminar");
 
                     b.Property<string>("StudentUsername")
                         .IsRequired();
