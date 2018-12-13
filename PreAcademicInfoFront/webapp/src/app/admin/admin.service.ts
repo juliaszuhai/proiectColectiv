@@ -15,14 +15,34 @@ export interface User{
   numarMatricol: string;
   adresa: string;
 }
-export interface Teacher{
+
+export interface Student{
   username: string;
   nume: string;
   prenume: string;
   type: string;
-  telefon: string;
+  cnp: string;
+  numarTelefon: string;
   email: string;
-  dicipline: string[]
+  initialaParinte: string;
+  numarMatricol: string;
+  adresa: string;
+  salt: string;
+  password:string;
+  generatie: string;
+  an:string;
+
+}
+export interface Teacher{
+  username: string;
+  nume: string;
+  prenume: string;
+  numarTelefon: string;
+  email: string;
+  type: string;
+  salt: string;
+  password:string;
+  disciplinesHolded: string[]
 }
 @Injectable()
 export class AdminService {
@@ -39,7 +59,9 @@ export class AdminService {
        return this.http.get<Teacher[]>(this.baseURLTeachers); 
       }
 
-    getStudents(): Observable<User[]>{ return this.http.get<User[]>(this.baseUrlStudents); }
+    getStudents(): Observable<Student[]>{ return this.http.get<Student[]>(this.baseUrlStudents); }
+
+    
 
     addUser( user:User)
       {
@@ -55,7 +77,7 @@ export class AdminService {
               username: user.username,
               telefon: user.telefon,
               initiale: user.initiale,
-
+              
             });
           console.log(bodyStudent);
 
@@ -89,25 +111,76 @@ export class AdminService {
         }
     }
 
-    deleteStudent( username: string)
+    deleteStudent( username: string){
+      return this.http.delete(this.baseURL+"Students/" + username )
       {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      };
+    }
 
-          return this.http.delete(this.baseURL+"Students/" + username )
-            {
-            headers: new HttpHeaders(
-              {'Content-Type' : 'application/json'}
-            )
-          };
-        }
-
-        deleteTeacher( username: string)
+    deleteTeacher( username: string){
+      return this.http.delete(this.baseURL+"Teachers/" + username )
       {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      };
+    }
 
-          return this.http.delete(this.baseURL+"Teachers/" + username )
-            {
-            headers: new HttpHeaders(
-              {'Content-Type' : 'application/json'}
-            )
-          };
+    updateStudent( student: Student){
+      console.log(student.initialaParinte + " " + student.numarTelefon + " ")
+      let bodyStudent = JSON.stringify(
+        {
+          username: student.username,
+          nume: student.nume,
+          prenume: student.prenume,
+          InitialaParinte: student.initialaParinte,
+          type: student.type,
+          NumarTelefon: student.numarTelefon,
+          cnp: student.cnp,
+          Generatie: student.generatie,
+          An: student.an,
+          email: student.email,
+          numarMatricol: student.numarMatricol,
+          salt: student.salt,
+          password: student.password
         }
+        );
+      console.log(bodyStudent);
+
+      return this.http.put<Student>(this.baseURL+"Students/" + student.username,
+        bodyStudent,
+        {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      });
+    }
+
+    updateTeacher( teacher: Teacher){
+      let bodyStudent = JSON.stringify(
+        {
+          username: teacher.username,
+          nume: teacher.nume,
+          prenume: teacher.prenume,
+          type: teacher.type,
+          NumarTelefon: teacher.numarTelefon,
+          email: teacher.email,
+          salt: teacher.salt,
+          password: teacher.password
+        }
+        );
+      console.log(bodyStudent);
+
+      return this.http.put<Teacher>(this.baseURL+"Teachers/" + teacher.username,
+        bodyStudent,
+        {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      });
+    }
+
 }

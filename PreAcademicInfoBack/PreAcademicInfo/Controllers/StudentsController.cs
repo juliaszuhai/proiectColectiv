@@ -86,15 +86,18 @@ namespace PreAcademicInfo.Controllers
 
         // PUT: api/Students/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudent([FromBody] string id, [FromBody] Student student)
+        public async Task<IActionResult> PutStudent([FromRoute] string id, [FromBody] Student student)
         {
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("nu-i bine model");
                 return BadRequest(ModelState);
             }
 
             if (id != student.Username)
             {
+                Console.WriteLine("nu-i bine username");
+
                 return BadRequest();
             }
 

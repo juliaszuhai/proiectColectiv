@@ -11,7 +11,7 @@ export class TeachersListComponent implements OnInit {
 
   constructor(private adminService:AdminService) { }
 
-  columnsToDisplay=['Nume', 'Prenume', 'Email', 'Telefon', 'Discipline', 'DeleteButton'];
+  columnsToDisplay=['Nume', 'Prenume', 'Email', 'Telefon', 'Discipline', 'DeleteButton', 'UpdateButton'];
 
   public teachersList = []
 
@@ -31,6 +31,20 @@ export class TeachersListComponent implements OnInit {
       data => {
           console.log("Deleted!");
           this.ngOnInit();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  updateTeacher (teacher: Teacher){
+    console.log("student details component")
+    console.log(teacher)
+    this.adminService.updateTeacher(teacher)
+    .subscribe(
+      data => {
+          console.log("Updated!");
       },
       err => {
         console.log(err);
