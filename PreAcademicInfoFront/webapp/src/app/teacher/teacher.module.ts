@@ -15,15 +15,21 @@ import { NoteFinaleComponent } from './note-finale/note-finale.component';
 import { NoteFinaleDatePickerComponent } from './note-finale-date-picker/note-finale-date-picker.component';
 import { TeacherService } from './teacher.service';
 import { MatSlideToggleModule } from '@angular/material';
+import { FormulaComponent } from './formula/formula.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes: Routes = [
   {path: 'teacher', component: NoteComponent},
+  {path: 'formula', component: FormulaComponent}
 ];
 
 @NgModule({
   declarations: [
     NoteComponent, 
-    NavTeacherComponent, NoteFinaleComponent, NoteFinaleDatePickerComponent
+    NavTeacherComponent, NoteFinaleComponent, NoteFinaleDatePickerComponent, FormulaComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +42,10 @@ const routes: Routes = [
     MatNativeDateModule,
     MatMomentDateModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatButtonModule,
     HttpClientModule,
   ],
   providers: [TeacherService],

@@ -4,7 +4,10 @@
   <mat-toolbar-row>
   <span style="margin-right: 20px">AcademicInfo</span>
 
-  <button mat-button >Note</button>
+  <button mat-button [matMenuTriggerFor]="note">Note</button>
+  <mat-menu #note="matMenu">
+    <button mat-menu-item routerLink="../formula">Formula</button>
+  </mat-menu>
 
     <span class="fill-space"></span>
     <div>

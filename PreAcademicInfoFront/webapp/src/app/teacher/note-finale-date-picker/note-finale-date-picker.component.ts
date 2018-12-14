@@ -31,6 +31,7 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
   ngOnInit() {
     this.teacherService.getStudents()
         .subscribe(data => this.students = data)
+    console.log(this.students);
   }
 
   ngAfterViewInit(){
