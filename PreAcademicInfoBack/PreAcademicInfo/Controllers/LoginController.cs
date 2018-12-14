@@ -17,19 +17,19 @@ namespace PreAcademicInfo.Controllers
     [Route("api/Login")]
     public class LoginController : Controller
     {
-        private readonly StudentContext _student_context;
+        private readonly StudentContext _context;
 
         public LoginController(StudentContext student_context)
         {
-            _student_context = student_context;
+            _context = student_context;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] JUser user)
         {
-            User student  = _student_context.Student.FirstOrDefault< Student>(e => e.Username == user.username);
-            //User teacher = _teacher_context.Teacher.FirstOrDefault< Teacher>(e => e.Username == Username);
-            //User admin = _admin_context.Admin.FirstOrDefault< Admin>(e => e.Username == Username);
+            User student  = _context.Student.FirstOrDefault< Student>(e => e.Username == user.username);
+            User teacher = _context.Teacher.FirstOrDefault< Teacher>(e => e.Username == user.username);
+            User admin = _context.Admin.FirstOrDefault< Admin>(e => e.Username == user.username);
             if (student != null)
             {
                 
@@ -42,28 +42,28 @@ namespace PreAcademicInfo.Controllers
                     return Ok(new UserNoPassword(student));
                 }
             }
-            //if (teacher != null)
-            //{
-            //    if (student.Password != Password)
-            //    {
-            //        return NotFound("invalid password");
-            //    }
-            //    else
-            //    {
-            //        return Ok(new UserNoPassword(student));
-            //    }
-            //}
-            //if (admin != null)
-            //{
-            //    if (student.Password != Password)
-            //    {
-            //        return NotFound("invalid password");
-            //    }
-            //    else
-            //    {
-            //        return Ok(new UserNoPassword(student));
-            //    }
-            //}
+            if (teacher != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(teacher.Salt + user.password, teacher.Password))
+                {
+                    return NotFound("invalid password");
+                }
+                else
+                {
+                    return Ok(new UserNoPassword(teacher));
+                }
+            }
+            if (admin != null)
+            {
+                if (!BCrypt.Net.BCrypt.Verify(admin.Salt + user.password, admin.Password))
+                {
+                    return NotFound("invalid password");
+                }
+                else
+                {
+                    return Ok(new UserNoPassword(admin));
+                }
+            }
             else
             {
                 return NotFound("inexistend user");
