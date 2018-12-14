@@ -102,7 +102,7 @@ namespace PreAcademicInfo.Controllers
             Teacher teacher1 = new Teacher()
             {
                 Nume = teacher.nume,
-                NumarTelefon = teacher.telefon,
+                NumarTelefon = teacher.numartelefon,
                 Email = teacher.email,
                 UserType = UserType.TEACHER,
                 Username = teacher.username,
@@ -148,14 +148,14 @@ namespace PreAcademicInfo.Controllers
             public string prenume { get; set; }
             public string email { get; set; }
             public string username { get; set; }
-            public string telefon { get; set; }
+            public string numartelefon { get; set; }
       
 
             internal Teacher GetTeacher() => new Teacher
             {
                 Password = "pass",
                 Username = username,
-                NumarTelefon = telefon,
+                NumarTelefon = numartelefon,
                 UserType = UserType.TEACHER,
                 Email = email,
                 Nume = nume,
