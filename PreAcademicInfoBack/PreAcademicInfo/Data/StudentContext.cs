@@ -24,7 +24,7 @@ namespace PreAcademicInfo.Models
 
         public DbSet<PreAcademicInfo.Models.Grade> Grade { get; set; }
 
-        public DbSet<PreAcademicInfo.Models.GradesToDiscipline> GradeToDiscipline { get; set; }
+        public DbSet<PreAcademicInfo.Models.GradesToDiscipline> GradesToDiscipline { get; set; }
 
         public DbSet<PreAcademicInfo.Models.Group> Group { get; set; }
 
