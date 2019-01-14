@@ -47,7 +47,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    MatSlideToggleModule],
+    MatSlideToggleModule,],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   exports: [RouterModule,
     FormsModule,
