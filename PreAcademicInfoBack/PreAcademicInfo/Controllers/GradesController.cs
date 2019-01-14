@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PreAcademicInfo.Models;
-
 namespace PreAcademicInfo.Controllers
 {
     [Produces("application/json")]
@@ -28,23 +25,90 @@ namespace PreAcademicInfo.Controllers
         }
 
         // GET: api/Grades/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetGrade([FromRoute] int id)
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetGrade([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var grade = await _context.Grade.SingleOrDefaultAsync(m => m.Id == id);
+
+        //    if (grade == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(grade);
+        //}
+
+        // GET: api/Grades/username
+        [HttpGet("{username}")]
+        public IActionResult GetGradesOfStudent([FromRoute] string username)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var grade = await _context.Grade.SingleOrDefaultAsync(m => m.Id == id);
+            List<Grade> grades = _context.Grade.Where(g => g.Student.Username.Equals(username)).ToList();
+            List<GradeJSON> gradesJSON = new List<GradeJSON>();
+            foreach(var g in grades)
+            {
 
-            if (grade == null)
+                //GradeJSON gJSON = new GradeJSON(g.Discipline.Nume, g.Discipline.An.ToString(), g.Discipline.Semestru.ToString(),
+                //              g.DataNotei, g.Discipline.Cod, g.GradeValue.ToString(), g.Discipline.Specializare.ToString());
+
+                //until we fix binding object problem:
+                ////////////////////////////////////////////////////
+                Discipline d = new Discipline()
+                {
+                    Type = DisciplineType.OBLIGATORIU,
+                    Cod = "MLE5555",
+                    Nume = "Baze de date distrb.",
+                    Credite = 6,
+                    An = 2,
+                    Semestru = 2,
+                    
+                };
+                Specializare sp = _context.Specializare.FirstOrDefault();
+                d.Specializare = sp;
+                Teacher t = _context.Teacher.FirstOrDefault();
+                d.Teacher = t;
+                GradeJSON gJSON = new GradeJSON(d.Nume, d.An.ToString(), d.Semestru.ToString(),
+                                "2018-05-06", d.Cod, g.GradeValue.ToString(), d.Specializare.ToString());
+                ////////////////////////////////////////////////////
+
+                gradesJSON.Add(gJSON);
+            }
+
+            if (gradesJSON.Count == 0)
             {
                 return NotFound();
             }
 
-            return Ok(grade);
+            //var serializer = new JavaScriptSerializer();
+            //var serializedResult = serializer.Serialize(gradesJSON);
+            return Ok(gradesJSON);
         }
+
+        public class GradeJSON
+        {
+            string numeMaterie, an, semestru, dataPromovarii, codMaterie, nota, specializare;
+
+            public GradeJSON(string numeMaterie, string an, string semestru, string dataPromovarii, string codMaterie, string nota,string specializare)
+            {
+                this.numeMaterie = numeMaterie;
+                this.an = an;
+                this.semestru = semestru;
+                this.dataPromovarii = dataPromovarii;
+                this.codMaterie = codMaterie;
+                this.nota = nota;
+                this.specializare = specializare;
+            }
+        }
+
 
         // PUT: api/Grades/5
         [HttpPut("{id}")]

@@ -13,17 +13,19 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {NavigationComponent} from "./navigation/navigation.component";
+import { GuideComponent } from './guide/guide.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
-  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]}
-
+  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
+  {path: 'guide', component: GuideComponent, canActivate:[LoginGuardGuard]}
 ];
 
 @NgModule({
   declarations:[
     HomeComponent,
     DisciplinesComponent,
-    NavigationComponent
+    NavigationComponent,
+    GuideComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
