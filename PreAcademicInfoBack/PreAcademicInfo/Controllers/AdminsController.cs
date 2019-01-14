@@ -125,5 +125,6 @@ namespace PreAcademicInfo.Controllers
         {
             return _context.Admin.Any(e => e.Username == id);
         }
+
     }
 }

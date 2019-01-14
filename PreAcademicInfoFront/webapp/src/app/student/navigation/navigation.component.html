@@ -7,8 +7,9 @@
   <button mat-button [matMenuTriggerFor]="menu">Note</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="../home">Note finale</button>
-    <button mat-menu-item>Note provizorii</button>
-    <button mat-menu-item>Note lab/sem</button>
+    <button mat-menu-item routerLink="../note-provizorii">Note provizorii</button>
+    <button mat-menu-item routerLink="../note-lab">Note lab/sem</button>
+    <button mat-menu-item routerLink="../statistics">Statistica note</button>
   </mat-menu>
   <button mat-button routerLink="../contracte" >Contracte studii</button>
   <button mat-button >Profesori</button>
