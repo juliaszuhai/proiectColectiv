@@ -1,28 +1,32 @@
 <app-navigation></app-navigation>
 
-<div class="blog-card spring-fever">
-  <div class="title-content">
-    <h3>CLUJ NAPOCA</h3>
-    <hr />
-    <div class="intro">Descopera Clujul, orasul tuturor posibilitatilor!</div>
-  </div><!-- /.title-content -->
-  <div class="card-info">
-    Acest site te poate ajuta in orientarea ta in oras. Nu ezita sa explorezi!
-  </div><!-- /.card-info -->
-  <div class="utility-info">
-    <ul class="utility-list">
-      <li class="date">03.12.2015</li>
-    </ul>
-  </div><!-- /.utility-info -->
-  <!-- overlays -->
-  <div class="gradient-overlay"></div>
-  <div class="color-overlay"></div>
-</div><!-- /.blog-card -->
-
-
 <mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
+  <a href="https://cluj.com/">
+    <mat-grid-tile class="cluj fade">
+      <div id="title">
+        Cluj-Napoca
+      </div>
+    </mat-grid-tile>
+  </a>
+  <a href="https://www.ubbcluj.ro/">
+  <mat-grid-tile class="ubb fade">
+    <div id="title">
+      Universitatea Babes Bolyai 
+    </div>
+  </mat-grid-tile>
+</a>
+<a href="https://cluj.com/articole/ghidul-studentului-ubb-cluj-locuri-camin-campus/">
+  <mat-grid-tile class="ghid fade">
+      <div id="title">
+        Ghidul studentului  
+      </div>
+    </mat-grid-tile>
+  </a>
+  <a href="https://news.ubbcluj.ro/">
+    <mat-grid-tile class="ubb fade">
+        <div id="title">
+          News 
+        </div>
+      </mat-grid-tile>
+    </a>
 </mat-grid-list>
