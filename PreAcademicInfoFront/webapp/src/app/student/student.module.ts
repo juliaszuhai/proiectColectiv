@@ -18,6 +18,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { NoteProvizoriiComponent } from './note-provizorii/note-provizorii.component';
 import { NoteLabComponent } from './note-lab/note-lab.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { MatSlideToggleModule } from '@angular/material';
+
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
   {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
@@ -44,7 +46,8 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule,],
+    HttpClientModule,
+    MatSlideToggleModule],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   exports: [RouterModule,
     FormsModule,

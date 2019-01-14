@@ -13,12 +13,13 @@ export class PaymentsComponent implements OnInit {
 
   numeTransactie: string;
   tipTranzactie: string;
-
+  myModel : boolean;
   constructor() { }
 
   ngOnInit() {
     this.numeTransactie = "Plata semestrul 1";
-    this.tipTranzactie = "Plata integrala"
+    this.tipTranzactie = "Plata integrala";
+    this.myModel = false;
   }
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
