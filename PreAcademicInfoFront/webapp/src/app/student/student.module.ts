@@ -17,6 +17,7 @@ import { GuideComponent } from './guide/guide.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { NoteProvizoriiComponent } from './note-provizorii/note-provizorii.component';
 import { NoteLabComponent } from './note-lab/note-lab.component';
+import { PaymentsComponent } from './payments/payments.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
   {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
@@ -34,7 +35,8 @@ const routes: Routes = [
     GuideComponent,
     StatisticsComponent,
     NoteProvizoriiComponent,
-    NoteLabComponent
+    NoteLabComponent,
+    PaymentsComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
