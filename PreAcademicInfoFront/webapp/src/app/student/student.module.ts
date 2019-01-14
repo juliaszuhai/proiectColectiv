@@ -24,7 +24,8 @@ const routes: Routes = [
   {path: 'statistics', component: StatisticsComponent, canActivate:[LoginGuardGuard]},
   {path:  'note-provizorii', component:NoteProvizoriiComponent, canActivate:[LoginGuardGuard]},
   {path: 'note-lab',component:NoteLabComponent, canActivate:[LoginGuardGuard]},
-  {path: 'guide', component: GuideComponent, canActivate:[LoginGuardGuard]}
+  {path: 'guide', component: GuideComponent, canActivate:[LoginGuardGuard]},
+  {path: 'taxe', component: PaymentsComponent}
 ];
 
 @NgModule({
