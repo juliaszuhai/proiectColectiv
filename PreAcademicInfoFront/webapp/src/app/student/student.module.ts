@@ -13,9 +13,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {NavigationComponent} from "./navigation/navigation.component";
+import { StatisticsComponent } from './statistics/statistics.component';
+import { NoteProvizoriiComponent } from './note-provizorii/note-provizorii.component';
+import { NoteLabComponent } from './note-lab/note-lab.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
-  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]}
+  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
+  {path: 'statistics', component: StatisticsComponent, canActivate:[LoginGuardGuard]},
+  {path:  'note-provizorii', component:NoteProvizoriiComponent, canActivate:[LoginGuardGuard]},
+  {path: 'note-lab',component:NoteLabComponent, canActivate:[LoginGuardGuard]}
 
 ];
 
@@ -23,7 +29,10 @@ const routes: Routes = [
   declarations:[
     HomeComponent,
     DisciplinesComponent,
-    NavigationComponent
+    NavigationComponent,
+    StatisticsComponent,
+    NoteProvizoriiComponent,
+    NoteLabComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
