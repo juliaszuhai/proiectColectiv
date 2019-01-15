@@ -30,21 +30,36 @@ export class NoteFinaleComponent implements OnInit {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
         .subscribe(data => this.students = data)
 
+    this.nota = "";
+    this.data = "";
     console.log(this.materie);
     console.log(this.grupa);
     console.log(this.tipNota);
   }
 
-  saveGrade(event){
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
     this.nota=event.target.value;
-    console.log(this.nota);
+
+    if(this.data != "")
+    {
+      this.teacherService.PutGrade(elem.username, this.nota, this.data,this.materie,this.tipNota);
+      this.nota = "";
+      this.data = "";
+    }
   }
 
-  saveDate(event){
+  saveDate(event,elem){
     //save date into DB on focusout event
     this.data = event.target.value;
     console.log(this.data);
+    console.log(elem.username);
+    if(this.nota != "")
+    {
+      //this.teacherService.PutGrade(elem.username, this.nota, this.data,this.materie,this.tipNota);
+      this.nota = "";
+      this.data = "";
+    }
   }
 
 }

@@ -50,10 +50,18 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
     );
   }
 
-  saveGrade(event){
+
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
     this.nota=event.target.value;
-    console.log("here"+ this.nota);
+
+    if(this.choosedDate != "")
+    {
+      //this.teacherService.PutGrade(elem.username, this.nota, this.choosedDate,this.materie,this.tipNota);
+      this.nota = "";
+      this.choosedDate = "";
+    }
   }
+
 
 }

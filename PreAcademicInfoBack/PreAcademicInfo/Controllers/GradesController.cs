@@ -54,7 +54,7 @@ namespace PreAcademicInfo.Controllers
 
             List<Grade> grades = _context.Grade.Where(g => g.Student.Username.Equals(username)).ToList();
             List<GradeJSON> gradesJSON = new List<GradeJSON>();
-            foreach(var g in grades)
+            foreach (var g in grades)
             {
 
                 //GradeJSON gJSON = new GradeJSON(g.Discipline.Nume, g.Discipline.An.ToString(), g.Discipline.Semestru.ToString(),
@@ -70,7 +70,7 @@ namespace PreAcademicInfo.Controllers
                     Credite = 6,
                     An = 2,
                     Semestru = 2,
-                    
+
                 };
                 Specializare sp = _context.Specializare.FirstOrDefault();
                 d.Specializare = sp;
@@ -97,7 +97,7 @@ namespace PreAcademicInfo.Controllers
         {
             string numeMaterie, an, semestru, dataPromovarii, codMaterie, nota, specializare;
 
-            public GradeJSON(string numeMaterie, string an, string semestru, string dataPromovarii, string codMaterie, string nota,string specializare)
+            public GradeJSON(string numeMaterie, string an, string semestru, string dataPromovarii, string codMaterie, string nota, string specializare)
             {
                 this.numeMaterie = numeMaterie;
                 this.an = an;
@@ -145,19 +145,19 @@ namespace PreAcademicInfo.Controllers
             return NoContent();
         }
 
-        // POST: api/Grades
         [HttpPost]
-        public async Task<IActionResult> PostGrade([FromBody] Grade grade)
+        public async Task<IActionResult> PostGrade([FromBody] GradeRecived grade)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Grade.Add(grade);
+            Grade savedGrade = grade.GradeFromJSONGrade();
+            _context.Grade.Add(savedGrade);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGrade", new { id = grade.Id }, grade);
+            return Ok(savedGrade);
         }
 
         // DELETE: api/Grades/5
@@ -184,6 +184,51 @@ namespace PreAcademicInfo.Controllers
         private bool GradeExists(int id)
         {
             return _context.Grade.Any(e => e.Id == id);
+        }
+
+        public class GradeRecived
+        {
+            public string username, grade, data, materie, tipNota;
+            private StudentContext _context;
+
+            public GradeRecived(string username, string grade, string data, string materie, string tipNota)
+            {
+                this.username = username;
+                this.grade = grade;
+                this.data = data;
+                this.materie = materie;
+                this.tipNota = tipNota;
+            }
+
+            public void setContext(StudentContext context)
+            {
+                this._context = context;
+            }
+
+            public Grade GradeFromJSONGrade()
+            {
+                GradeType gt = GradeType.EXAMEN;
+                if (tipNota == "Examen final")
+                {
+                    gt = GradeType.EXAMEN;
+                }
+                else if (tipNota == "Laborator")
+                {
+                    gt = GradeType.LAB;
+                }
+                //to be added
+
+                Grade g = new Grade()
+                {
+                    Discipline = _context.Discipline.Where(d => d.Nume == materie).FirstOrDefault(),
+                    Student = _context.Student.Where(s => s.Username == username).FirstOrDefault(),
+                    GradeValue = double.Parse(grade),
+                    Type = gt,
+                    DataNotei = data,
+                    ProcentInnerType = 1
+                };
+                return g;
+            }
         }
     }
 }

@@ -66,6 +66,14 @@ namespace PreAcademicInfo.Controllers
             return _context.Student;
         }
 
+        // GET: api/Students
+        [HttpGet("{materie}/{grupa}/{tipNota}")]
+        public IEnumerable<Student> GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
+        {
+
+            return _context.Student;
+    }
+
         // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudent([FromRoute] string id)
