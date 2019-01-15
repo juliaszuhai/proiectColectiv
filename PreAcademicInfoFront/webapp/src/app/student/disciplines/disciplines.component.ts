@@ -67,8 +67,8 @@ export class DisciplinesComponent implements OnInit {
       error => {
 
         console.log(error);
-
       });
+      
   }
 
   submitContract() {

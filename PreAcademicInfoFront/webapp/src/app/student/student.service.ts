@@ -24,14 +24,14 @@ export interface GradeToDiscipline{
 }
 
 export interface GradeData {
+  numeMaterie:string;
   an:string;
   semestru:string;
-  numeMaterie:string;
   nrCredite:string;
   dataPromovarii:string;
   codMaterie:string;
   nota:string;
-  descriere:string;
+  specializare:string;
 }
 
 export interface DisciplineData{
@@ -65,6 +65,8 @@ export interface SpecializareData{
 export class StudentService {
 
   baseURL = 'http://localhost:53087/api/Students';
+  gradesURL = 'http://localhost:53087/api/Grades';
+
   baseURLDisciplines='http://localhost:53087/api/Discipline';
   baseURLSpecializari='http://localhost:53087/api/Specializari';
 
@@ -79,6 +81,15 @@ export class StudentService {
           {'Content-Type' : 'application/json'}
         )
       });
+  }
+  getGrades(username:string)
+  {
+    return this.http.get(this.gradesURL+"/"+username,
+    {
+      headers: new HttpHeaders(
+        {'Content-Type' : 'application/json'}
+      )
+    });
   }
 
 

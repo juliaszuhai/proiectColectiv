@@ -33,6 +33,7 @@ namespace PreAcademicInfo.Controllers
 
         public void PopulateDatabase()
         {
+
             byte[] saltNumber = new byte[10];
             rngCsp.GetBytes(saltNumber);
             String saltString = System.Text.Encoding.Default.GetString(saltNumber);

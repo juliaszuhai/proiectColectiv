@@ -48,7 +48,18 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         this.error = false;
-        this.router.navigate(['../home']);
+        if(localStorage.getItem("type") == "1")
+        {
+            this.router.navigate(['../home']);
+        }
+        if(localStorage.getItem("type") == "0")
+        {
+            this.router.navigate(['../teacher']);
+        }
+        if(localStorage.getItem("type") == "2")
+        {
+            this.router.navigate(['../crud']);
+        }
       },
       err => {
         this.error = true;

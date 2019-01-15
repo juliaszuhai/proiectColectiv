@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input  } from '@angular/core';
 import { TeacherService, StudentData } from '../teacher.service';
 
 
@@ -14,6 +14,10 @@ const STUDENT_DATA: StudentData[] = [
 })
 export class NoteFinaleComponent implements OnInit {
 
+  @Input() materie: string;
+  @Input() grupa: string;
+  @Input() tipNota: string;
+
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   dataSource = STUDENT_DATA;
   nota: string;
@@ -23,8 +27,12 @@ export class NoteFinaleComponent implements OnInit {
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
-    this.teacherService.getStudents()
+    this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
         .subscribe(data => this.students = data)
+
+    console.log(this.materie);
+    console.log(this.grupa);
+    console.log(this.tipNota);
   }
 
   saveGrade(event){

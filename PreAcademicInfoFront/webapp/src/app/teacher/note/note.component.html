@@ -40,10 +40,10 @@
         <br>
         <mat-slide-toggle [(ngModel)] = "myModel">Alege o data comuna</mat-slide-toggle>
         <div *ngIf="!myModel">
-            <app-note-finale></app-note-finale>
+            <app-note-finale [materie]="selectedMaterie" [grupa]="selectedGrupa" [tipNota]="choosedOption" ></app-note-finale>
         </div>
         <div *ngIf="myModel">
-            <app-note-finale-date-picker></app-note-finale-date-picker>
+            <app-note-finale-date-picker  [materie]="selectedMaterie" [grupa]="selectedGrupa" [tipNota]="choosedOption"></app-note-finale-date-picker>
         </div>
     </div>
     <div *ngSwitchCase="'Laborator'">
