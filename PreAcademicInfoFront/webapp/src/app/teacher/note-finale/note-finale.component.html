@@ -15,7 +15,7 @@
   <ng-container matColumnDef="nota">
     <th mat-header-cell *matHeaderCellDef> Nota </th>
     <td mat-cell *matCellDef="let element">
-            <mat-form-field>
+            <mat-form-field >
                 <input matInput placeholder="Give a grade" #input (focusout)="saveGrade($event)">
             </mat-form-field>
              {{element.nota}} </td>

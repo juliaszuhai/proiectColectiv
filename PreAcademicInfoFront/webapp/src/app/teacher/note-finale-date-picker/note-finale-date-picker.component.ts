@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { TeacherService, StudentData } from '../teacher.service';
 import { Moment } from 'moment';
 import * as moment from 'moment';
@@ -19,6 +19,11 @@ const STUDENT_DATA: StudentData[] = [
 export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
 
   @ViewChild(MatDatepicker) myDatepicker: MatDatepicker<Moment>;
+
+  @Input() materie: string;
+  @Input() grupa: string;
+  @Input() tipNota: string;
+
   isValidMoment: boolean = false;
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   dataSource = STUDENT_DATA;
@@ -29,11 +34,9 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
   constructor(private teacherService: TeacherService){ }
 
   ngOnInit() {
-    this.teacherService.getStudents()
+    this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
         .subscribe(data => this.students = data)
-    console.log(this.students);
   }
-
   ngAfterViewInit(){
     this.myDatepicker._selectedChanged.subscribe(
       (newDate: Moment) => {

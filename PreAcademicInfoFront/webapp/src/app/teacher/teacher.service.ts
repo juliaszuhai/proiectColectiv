@@ -28,7 +28,7 @@ export class TeacherService {
               private router: Router)
   { }
 
-  getStudents(): Observable<StudentData[]>{
+  getStudents(materie:string, grupa: string, tipNota:string): Observable<StudentData[]>{
       return this.http.get<StudentData[]>(this.baseURL);
   }
 
