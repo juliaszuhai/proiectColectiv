@@ -26,7 +26,6 @@
     <PackageReference Include="EntityFramework" Version="6.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
-    <PackageReference Include="System.Web.Mvc.Extensions.Mvc.4" Version="1.0.9" />
   </ItemGroup>
 
   <ItemGroup>
