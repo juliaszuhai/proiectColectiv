@@ -30,8 +30,8 @@ namespace PreAcademicInfo.Models
         [Required]
         public Int32 Semestru { get; set; }
 
-        [Required]
-        public Teacher Teacher { get; set; }
+        //[Required]
+        //public Teacher Teacher { get; set; }
 
     }
 }

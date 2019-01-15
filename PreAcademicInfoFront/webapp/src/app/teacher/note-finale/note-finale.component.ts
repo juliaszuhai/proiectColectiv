@@ -20,7 +20,7 @@ export class NoteFinaleComponent implements OnInit {
 
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   dataSource = STUDENT_DATA;
-  nota: string;
+  grade: string;
   data: string;
   public students = [];
 
@@ -30,7 +30,7 @@ export class NoteFinaleComponent implements OnInit {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
         .subscribe(data => this.students = data)
 
-    this.nota = "";
+    this.grade = "";
     this.data = "";
     console.log(this.materie);
     console.log(this.grupa);
@@ -39,26 +39,31 @@ export class NoteFinaleComponent implements OnInit {
 
   saveGrade(event,elem){
     //save the grade into DB on focusout event
-    this.nota=event.target.value;
-
-    if(this.data != "")
+    this.grade=event.target.value;
+    console.log(this.grade);
+    //if(this.data != "")
     {
-      this.teacherService.PutGrade(elem.username, this.nota, this.data,this.materie,this.tipNota);
-      this.nota = "";
-      this.data = "";
+      //this.teacherService.PutGrade(elem.username, this.nota, this.data,this.materie,this.tipNota);
+      //this.nota = "";
+      //this.data = "";
     }
   }
 
   saveDate(event,elem){
     //save date into DB on focusout event
     this.data = event.target.value;
+    console.log(this.grade);
     console.log(this.data);
     console.log(elem.username);
-    if(this.nota != "")
+    //if(this.nota != "")
     {
-      //this.teacherService.PutGrade(elem.username, this.nota, this.data,this.materie,this.tipNota);
-      this.nota = "";
-      this.data = "";
+      this.teacherService.PutGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
+        data => {
+        console.log(data);
+      })
+
+      //this.grade = "";
+      //this.data = "";
     }
   }
 

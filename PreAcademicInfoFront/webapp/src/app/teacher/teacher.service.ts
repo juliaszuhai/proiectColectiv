@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import { Observable } from 'rxjs';
+import { GradeData } from '../student/student.service';
 
 
 export interface StudentData {
@@ -41,16 +42,18 @@ export class TeacherService {
       return this.http.get<StudentData[]>(this.baseURL+ "/" + materie + "/"+ grupa + "/" + tipNota);
   }
 
-  PutGrade(username:string, nota:string, data: string,materie:string,tipNota:string)
+  PutGrade(username:string, grade:string, data: string,materie:string,tipNota:string)
   {
-    let body = JSON.stringify({username,nota,data,materie,tipNota});
+    let body = JSON.stringify({username,grade,data,materie,tipNota});
     console.log("i got hereeeeeee");
-    return this.http.post(this.gradesURL,
+    console.log(body);
+    return this.http.post<StudentGrade>(this.gradesURL,
             body,
-            {
+            { 
             headers: new HttpHeaders(
               {'Content-Type' : 'application/json'}
             )
           });
+        
   }
 }

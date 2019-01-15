@@ -72,7 +72,7 @@ namespace PreAcademicInfo.Controllers
         {
 
             return _context.Student;
-    }
+        }
 
         // GET: api/Students/5
         [HttpGet("{id}")]

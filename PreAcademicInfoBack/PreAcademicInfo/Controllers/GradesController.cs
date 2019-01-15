@@ -52,7 +52,8 @@ namespace PreAcademicInfo.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<Grade> grades = _context.Grade.Where(g => g.Student.Username.Equals(username)).ToList();
+            
+            List<GradesToDiscipline> grades = _context.Student.Where(s => s.Username.Equals(username)).Select(s => s.Grades).FirstOrDefault().ToList();
             List<GradeJSON> gradesJSON = new List<GradeJSON>();
             foreach (var g in grades)
             {
@@ -62,25 +63,25 @@ namespace PreAcademicInfo.Controllers
 
                 //until we fix binding object problem:
                 ////////////////////////////////////////////////////
-                Discipline d = new Discipline()
-                {
-                    Type = DisciplineType.OBLIGATORIU,
-                    Cod = "MLE5555",
-                    Nume = "Baze de date distrb.",
-                    Credite = 6,
-                    An = 2,
-                    Semestru = 2,
+                //Discipline d = new Discipline()
+                //{
+                //    Type = DisciplineType.OBLIGATORIU,
+                //    Cod = "MLE5555",
+                //    Nume = "Baze de date distrb.",
+                //    Credite = 6,
+                //    An = 2,
+                //    Semestru = 2,
 
-                };
-                Specializare sp = _context.Specializare.FirstOrDefault();
-                d.Specializare = sp;
-                Teacher t = _context.Teacher.FirstOrDefault();
-                d.Teacher = t;
-                GradeJSON gJSON = new GradeJSON(d.Nume, d.An.ToString(), d.Semestru.ToString(),
-                                "2018-05-06", d.Cod, g.GradeValue.ToString(), d.Specializare.ToString());
+                //};
+                //Specializare sp = _context.Specializare.FirstOrDefault();
+                //d.Specializare = sp;
+                //Teacher t = _context.Teacher.FirstOrDefault();
+                //d.Teacher = t;
+                //GradeJSON gJSON = new GradeJSON(d.Nume, d.An.ToString(), d.Semestru.ToString(),
+                //                "2018-05-06", d.Cod, g.GradeValue.ToString(), d.Specializare.ToString());
                 ////////////////////////////////////////////////////
 
-                gradesJSON.Add(gJSON);
+                //gradesJSON.Add(gJSON);
             }
 
             if (gradesJSON.Count == 0)
@@ -152,7 +153,7 @@ namespace PreAcademicInfo.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+                
             Grade savedGrade = grade.GradeFromJSONGrade();
             _context.Grade.Add(savedGrade);
             await _context.SaveChangesAsync();
@@ -220,8 +221,6 @@ namespace PreAcademicInfo.Controllers
 
                 Grade g = new Grade()
                 {
-                    Discipline = _context.Discipline.Where(d => d.Nume == materie).FirstOrDefault(),
-                    Student = _context.Student.Where(s => s.Username == username).FirstOrDefault(),
                     GradeValue = double.Parse(grade),
                     Type = gt,
                     DataNotei = data,

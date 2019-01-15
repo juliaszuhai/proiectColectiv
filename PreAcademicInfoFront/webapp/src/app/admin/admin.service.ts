@@ -147,21 +147,21 @@ export class AdminService {
     }
 
     deleteStudent( username: string){
-      return this.http.delete(this.baseURL+"Students/" + username )
+      return this.http.delete(this.baseURL+"Students/" + username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
         )
-      };
+      });
     }
 
     deleteTeacher( username: string){
-      return this.http.delete(this.baseURL+"Teachers/" + username )
+      return this.http.delete(this.baseURL+"Teachers/" + username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
         )
-      };
+      });
     }
 
     updateStudent( student: Student){

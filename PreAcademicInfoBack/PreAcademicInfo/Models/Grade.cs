@@ -12,11 +12,11 @@ namespace PreAcademicInfo.Models
         [Required, Key]
         public Int32 Id { get; set; }
 
-        [Required]
-        public Discipline Discipline { get; set; }
+        //[Required]
+        //public Discipline Discipline { get; set; }
 
-        [Required]
-        public Student Student { get; set; }
+        //[Required]
+        //public Student Student { get; set; }
 
         [Required]
         public Double GradeValue { get; set; }

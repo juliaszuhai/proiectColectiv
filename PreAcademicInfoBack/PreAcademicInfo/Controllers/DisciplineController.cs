@@ -85,6 +85,7 @@ namespace PreAcademicInfo.Controllers
         [HttpPost]
         public async Task<IActionResult> PostDiscipline([FromBody] Discipline discipline)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

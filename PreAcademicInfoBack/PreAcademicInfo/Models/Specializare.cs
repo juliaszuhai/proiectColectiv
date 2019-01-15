@@ -19,7 +19,7 @@ namespace PreAcademicInfo.Models
         public String Nume { get; set; }
 
         [Required]
-        public Department Department { get; set; }
+        public string DepartmentName { get; set; }
 
         [Required]
         public SpecializareType Type { get; set; }
@@ -33,12 +33,12 @@ namespace PreAcademicInfo.Models
         [Required]
         public Double TaxaPerCredit { get; set; }
 
-        public Admin Admin { get; set; }
+        //public Admin Admin { get; set; }
 
         [DefaultValue("true")]
         public Boolean CuFrecventa { get; set; }
 
-        public List<Discipline> Disciplines { get; set; }
+        //public List<Discipline> Disciplines { get; set; }
 
     }
 }

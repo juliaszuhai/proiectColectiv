@@ -14,6 +14,6 @@ namespace PreAcademicInfo.Models
         [Required]
         public String GroupName { get; set; }
         
-        public ICollection<FacultyEnroll> FacultiesEnrolments { get; set; }
+        //public ICollection<FacultyEnroll> FacultiesEnrolments { get; set; }
     }
 }

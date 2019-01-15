@@ -15,8 +15,8 @@ namespace PreAcademicInfo.Models
         [Required]
         public Specializare Specializare { get; set; }
 
-        [Required, ForeignKey("StudentId")]
-        public Student Student { get; set; }
+        //[Required, ForeignKey("StudentId")]
+        //public Student Student { get; set; }
 
         [Required,ForeignKey("GroupId")]
         public Group Group { get; set; }

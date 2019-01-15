@@ -31,12 +31,12 @@ namespace PreAcademicInfo.Services
         }
 
 
-        public List<Grade> FilterGradesByYear(List<Grade> grades, int an)
+        public List<GradesToDiscipline> FilterGradesByYear(List<GradesToDiscipline> grades, int an)
         {
             return grades.Where(g => g.Discipline.An == an).ToList();
         }
 
-        public List<Grade> FilterGradesByYearAndSemester(List<Grade> grades, int an,int semestru)
+        public List<GradesToDiscipline> FilterGradesByYearAndSemester(List<GradesToDiscipline> grades, int an,int semestru)
         {
             return grades.Where(g => g.Discipline.An == an && g.Discipline.Semestru == semestru).ToList();
         }
@@ -60,13 +60,17 @@ namespace PreAcademicInfo.Services
 
         public HashSet<Student> FilterStudentsByDepartmentName(string departmentName)
         {
-            List<ICollection<Specializare>> specializares = context.Department.Where(d => d.Name == departmentName)
-                .Select(d => d.Specializares).ToList();
+            List<Specializare> specializares = context.Specializare.Where(s => s.DepartmentName == departmentName).ToList();
 
             HashSet<Student> allStudents = new HashSet<Student>();
+            List<FacultyEnroll> facultyEnrolls = new List<FacultyEnroll>();
+
             foreach (var s in specializares){
-                allStudents.Concat(context.FacultyEnroll.Where(fe => s.Contains(fe.Specializare))
-                                .Select(fe => fe.Student).ToList());
+                facultyEnrolls = context.FacultyEnroll.Where(fe => fe.Specializare.Equals(s)).ToList();
+            }
+            foreach (var fe in facultyEnrolls)
+            {
+                allStudents.Add(context.Student.Where(s => s.FacultiesEnrolled.Contains(fe)).FirstOrDefault());
             }
             return allStudents;
         }
@@ -78,8 +82,13 @@ namespace PreAcademicInfo.Services
 
         public List<Student> FilterStudentsByGroup(string groupName)
         {
-            return context.FacultyEnroll.Where(fe => fe.Group.GroupName == groupName)
-                .Select(fe => fe.Student).ToList();
+            List<Student> students = new List<Student>();
+            List<FacultyEnroll> facultyEnrolls = context.FacultyEnroll.Where(fe => fe.Group.GroupName == groupName).ToList();
+            foreach (var fe in facultyEnrolls)
+            {
+                students.Add(context.Student.Where(s => s.FacultiesEnrolled.Contains(fe)).FirstOrDefault());
+            }
+            return students;
         }
     }
 }
