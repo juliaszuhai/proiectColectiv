@@ -146,16 +146,18 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
                 if (gtd == null)
                 {
-                    gtd = new GradesToDiscipline() {
-                        Discipline = _context.Discipline.Where(d => d.Nume.Equals(this.materie)).FirstOrDefault(),
-                        Grades = new List<Grade>()
-                    };
-                    gtd.Grades.Add(grade);
+                    //gtd = new GradesToDiscipline()
+                    //{
+                    //    Discipline = _context.Discipline.Where(d => d.Nume.Equals(this.materie)).FirstOrDefault(),
+                    //    Grades = new List<Grade>()
+                    //};
+                    //gtd.Grades.Add(grade);
                 }
                 else
                 {
-                    gtd.Grades.Add(grade);
+                    gtd.Grades.Where(g => g.Type == gt).FirstOrDefault();
                 }
+
             }
         }
 

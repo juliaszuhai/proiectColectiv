@@ -98,16 +98,92 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Ok(student);
         }
 
-        // GET: api/Students
+        // GET: api/Students/{materie}/{grupa}/{tipNota}
         [HttpGet("{materie}/{grupa}/{tipNota}")]
-        public IEnumerable<Student> GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
+        public IActionResult GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
         {
-            List<Student> students = _context.Student.Where(s => s.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault() != null)
-                                                    .Where(s => s.FacultiesEnrolled.Where(fe => fe.Group.GroupName.Equals(grupa)).FirstOrDefault() != null).ToList();
+            // Convert the grade type received from FrontEnd to the one in the DB
+            string gradeType = "";
+            switch (tipNota)
+            {
+                case "Examen final":
+                    gradeType = "FINAL";
+                    break;
+                case "Laborator":
+                    gradeType = "LAB";
+                    break;
+                case "Seminar":
+                    gradeType = "SEMINAR";
+                    break;
+                case "Bonus":
+                    gradeType = "BONUS";
+                    break;
+            }
 
-            return students;
+            // Get a list of students that have the provided discipline and that are also from the given group
+            List<Student> students = _context.Student.Where(
+                s => s.Grades.Where(
+                    gtd => gtd.Discipline.Nume.Equals(materie)
+                ).FirstOrDefault() != null
+            ).Where(
+                s => s.FacultiesEnrolled.Where(
+                    fe => fe.Group.GroupName.Equals(grupa)
+                ).FirstOrDefault() != null
+            ).ToList();
+
+            // Create a list of dictionaries that will store the student informations
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+
+            // For each student that we get
+            foreach (var s in students)
+            {
+                // Create the inner dictionary for the student's info
+                var studentDict = new Dictionary<string, object>();
+
+                // Add his info to the inner dictionary
+                studentDict["username"] = s.Username;
+                studentDict["numarMatricol"] = s.NumarMatricol;
+                studentDict["nume"] = s.Nume;
+                studentDict["prenume"] = s.Prenume;
+
+                // Get all his grades from the respective discipline with the provided grade type
+                List<Grade> grades = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().Grades.Where(
+                    g => g.Type.ToString().Equals(gradeType)
+                ).ToList();
+
+                // Create a list in which we store all the grades that we get for the students
+                List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
+
+                // For each grade that we get
+                foreach (var g in grades)
+                {
+                    // Create an inner inner dictionary for his grades
+                    var gradeDict = new Dictionary<string, string>();
+
+                    // Add the hrade info to the inner inner dictionary
+                    gradeDict["id"] = g.Id.ToString();
+                    gradeDict["value"] = g.GradeValue.ToString();
+                    gradeDict["data"] = g.DataNotei;
+
+                    // Append the inner inner dictionary to the list of grades
+                    gradesList.Add(gradeDict);
+                }
+
+                // Append the list of grades to the dictionary of students
+                studentDict["grades"] = gradesList;
+
+                // Append the dictionary with the students info to the response
+                response.Add(studentDict);
+            }
+
+            // Return the response
+            return Json(response);
         }
-        
+
         [HttpGet("{an}")]
         public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
         {
