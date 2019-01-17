@@ -47,9 +47,11 @@ export class TeacherService {
     grade: string,
     data: string,
     materie: string,
-    tipNota: string
+    tipNota: string,
+    idNota: string
   ) {
-    let body = JSON.stringify({ username, grade, data, materie, tipNota });
+    console.log("we got right before the call");
+    let body = JSON.stringify({ username, grade, data, materie, tipNota, idNota });
     console.log(body);
     return this.http.post<StudentGrade>(this.gradesURL, body, {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
