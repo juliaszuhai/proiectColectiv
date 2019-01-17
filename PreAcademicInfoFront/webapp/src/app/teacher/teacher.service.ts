@@ -22,7 +22,7 @@ export interface StudentData {
 @Injectable()
 export class TeacherService {
 
-  baseURL = 'http://localhost:53087/api/Students';
+  baseURL = 'https://localhost:44354/api/Students';
 
   constructor(private http: HttpClient,
               private router: Router)
