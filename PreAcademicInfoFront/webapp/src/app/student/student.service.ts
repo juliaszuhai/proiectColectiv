@@ -64,11 +64,11 @@ export interface SpecializareData{
 @Injectable()
 export class StudentService {
 
-  baseURL = 'http://localhost:53087/api/Students';
-  gradesURL = 'http://localhost:53087/api/Grades';
+  baseURL = 'https://localhost:44354/api/Students';
+  gradesURL = 'https://localhost:44354/api/Grades';
 
-  baseURLDisciplines='http://localhost:53087/api/Discipline';
-  baseURLSpecializari='http://localhost:53087/api/Specializari';
+  baseURLDisciplines='https://localhost:44354/api/Discipline';
+  baseURLSpecializari='https://localhost:44354/api/Specializari';
 
   constructor(private http: HttpClient,
               private router: Router)
