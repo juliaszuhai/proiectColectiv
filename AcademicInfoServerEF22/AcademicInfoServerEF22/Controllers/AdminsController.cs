@@ -21,7 +21,67 @@ namespace AcademicInfoServerEF22EF22.Controllers
         {
 
             _context = context;
-        
+            PopulateDatabase();
+        }
+
+        public void PopulateDatabase()
+        {
+            //Try to retrieve the Admins with the Username 'a1' and 'a2'
+            Admin a1 = _context.Admin.Where(a => a.Username.Equals("a1")).FirstOrDefault();
+            Admin a2 = _context.Admin.Where(a => a.Username.Equals("a2")).FirstOrDefault();
+
+            //If the first admin is not present into the DB, then we must add him
+            if (a1 == null)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+
+                //Add the admin 'a1'
+                _context.Admin.Add(new Admin() {
+                    Username = "a1",
+                    Adresa = "Str. Fericirii, Nr. 10, Ap. 10",
+                    Email = "admin1@yahoo.com",
+                    NumarTelefon = "0711111111",
+                    Nume = "Admin",
+                    Prenume = "1",
+                    UserType = UserType.ADMIN,
+                    Password = password,
+                    Salt = saltString
+                });
+                _context.SaveChanges();
+            }
+
+            //If the second admin is not present into the DB, then we must add him
+            if (a2 == null)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+
+                //Add the admin 'a2'
+                _context.Admin.Add(new Admin()
+                {
+                    Username = "a2",
+                    Adresa = "Str. Nefericirii, Nr. 13, Ap. 66",
+                    Email = "admin2@yahoo.com",
+                    NumarTelefon = "0722222222",
+                    Nume = "Admin",
+                    Prenume = "2",
+                    UserType = UserType.ADMIN,
+                    Password = password,
+                    Salt = saltString
+                });
+                _context.SaveChanges();
+            }
         }
 
         // GET: api/Admins
