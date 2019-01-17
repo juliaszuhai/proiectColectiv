@@ -34,7 +34,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         public void PopulateDatabase()
         {
             //Try to retrieve the Student with the Username 'andi'
-            Student s = _context.Student.Where(st => st.Username.Equals("andi")).First();
+            Student s = _context.Student.Where(st => st.Username.Equals("andi")).FirstOrDefault();
 
             //If he is not present into the DB, then it means we must add him
             if (s == null)
