@@ -82,6 +82,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     response.Add(dict);
                 }
             }
+
             //Return the list of grades
             return Json(response);
         }
