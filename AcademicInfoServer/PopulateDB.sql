@@ -24,8 +24,8 @@ DELETE FROM [Teacher];
 DELETE FROM [Admin];
 
 --Admins (password = 'pass')
-INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a1', 'Str. Fericirii, Nr. 10, Ap. 10', 'admin1@yahoo.com', '0711111111', 'Admin1', 'Admin1', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
-INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a2', 'Str. Nefericirii, Nr. 13, Ap. 66', 'admin2@yahoo.com', '0722222222', 'Admin2', 'Admin2', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
+--INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a1', 'Str. Fericirii, Nr. 10, Ap. 10', 'admin1@yahoo.com', '0711111111', 'Admin1', 'Admin1', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
+--INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a2', 'Str. Nefericirii, Nr. 13, Ap. 66', 'admin2@yahoo.com', '0722222222', 'Admin2', 'Admin2', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
 
 --Teachers (password = 'pass')
 -- CS Teachers
@@ -46,7 +46,7 @@ INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Passwor
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('arthur', 'arthur@cs.ubbcluj.ro', '0711111125', 'Molnar', 'Arthur', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('mihis', 'mihis@cs.ubbcluj.ro', '0711111126', 'Pop', 'Andreea-Diana', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('forest', 'forest@cs.ubbcluj.ro', '0711111127', 'Sterca', 'Adrian', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
-INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('tzutzu', 'tzutzu@cs.ubbcluj.ro', '0711111128', 'Suciu', 'Dan Mircea', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
+--INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('tzutzu', 'tzutzu@cs.ubbcluj.ro', '0711111128', 'Suciu', 'Dan Mircea', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('mihai-suciu', 'mihai-suciu@cs.ubbcluj.ro', '0711111129', 'Suciu', 'Mihai', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('sabina', 'sabina@cs.ubbcluj.ro', '0711111130', 'Surdu', 'Sabina', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt) VALUES ('vancea', 'vancea@cs.ubbcluj.ro', '0711111131', 'Vancea', 'Alexandru', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
