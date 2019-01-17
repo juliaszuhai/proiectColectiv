@@ -20,7 +20,7 @@ export class NoteFinaleComponent implements OnInit {
 
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   dataSource = STUDENT_DATA;
-  nota: string;
+  grade: string;
   data: string;
   public students = [];
 
@@ -35,16 +35,39 @@ export class NoteFinaleComponent implements OnInit {
     console.log(this.tipNota);
   }
 
-  saveGrade(event){
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
-    this.nota=event.target.value;
-    console.log(this.nota);
+    this.grade=event.target.value;
+    console.log(this.grade);
+    if(this.data != "")
+    {
+      this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
+        data => {
+        console.log(data);
+      });
+
+      this.grade = "";
+      this.data = "";
+    }
   }
 
-  saveDate(event){
+  saveDate(event,elem){
     //save date into DB on focusout event
     this.data = event.target.value;
+    console.log(this.grade);
     console.log(this.data);
-  }
+    console.log(elem.username);
+    if(this.grade != "")
+    {
+      this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
+        data => {
+        console.log(data);
+      });
+
+      this.grade = "";
+      this.data = "";
+    }
+}
+
 
 }

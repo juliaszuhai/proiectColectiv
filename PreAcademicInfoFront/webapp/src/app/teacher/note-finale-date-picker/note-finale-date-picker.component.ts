@@ -27,7 +27,7 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
   isValidMoment: boolean = false;
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   dataSource = STUDENT_DATA;
-  nota: string;
+  grade: string;
   choosedDate: string;
   public students = [];
 
@@ -50,10 +50,21 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
     );
   }
 
-  saveGrade(event){
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
-    this.nota=event.target.value;
-    console.log("here"+ this.nota);
+    this.grade=event.target.value;
+    console.log(this.grade);
+    if(this.choosedDate != "")
+    {
+      this.teacherService.PostGrade(elem.username, this.grade, this.choosedDate,this.materie,this.tipNota).subscribe(
+        data => {
+        console.log(data);
+      });
+
+      this.grade = "";
+      this.choosedDate = "";
+    }
   }
+
 
 }

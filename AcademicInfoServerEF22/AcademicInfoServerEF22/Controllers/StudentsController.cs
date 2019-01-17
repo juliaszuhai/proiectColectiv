@@ -38,6 +38,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
             //If he is not present into the DB, then it means we must add him
             if (s == null)
+
             {
                 //Generate salt
                 byte[] saltNumber = new byte[10];
@@ -97,6 +98,16 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Ok(student);
         }
 
+        // GET: api/Students
+        [HttpGet("{materie}/{grupa}/{tipNota}")]
+        public IEnumerable<Student> GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
+        {
+            List<Student> students = _context.Student.Where(s => s.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault() != null)
+                                                    .Where(s => s.FacultiesEnrolled.Where(fe => fe.Group.GroupName.Equals(grupa)).FirstOrDefault() != null).ToList();
+
+            return students;
+        }
+        
         [HttpGet("{an}")]
         public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
         {

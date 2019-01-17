@@ -90,6 +90,75 @@ namespace AcademicInfoServerEF22EF22.Controllers
             //Return the list of grades
             return Json(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> PostGrade([FromBody] GradeRecived grade)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            grade.GradeFromJSONGrade();
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        public class GradeRecived
+        {
+            public string username, grade, data, materie, tipNota;
+            private AcademicInfoContext _context;
+
+            public GradeRecived(string username, string grade, string data, string materie, string tipNota)
+            {
+                this.username = username;
+                this.grade = grade;
+                this.data = data;
+                this.materie = materie;
+                this.tipNota = tipNota;
+            }
+
+            public void setContext(AcademicInfoContext context)
+            {
+                this._context = context;
+            }
+
+            public void GradeFromJSONGrade()
+            {
+                GradesToDiscipline gtd = _context.GradeToDiscipline.Where(g => g.Discipline.Nume.Equals(this.materie)).FirstOrDefault();
+                GradeType gt = GradeType.EXAMEN;
+                if (tipNota == "Examen final")
+                {
+                    gt = GradeType.EXAMEN;
+                }
+                else if (tipNota == "Laborator")
+                {
+                    gt = GradeType.LAB;
+                }
+                //to be added
+
+                Grade grade = new Grade()
+                {
+                    GradeValue = double.Parse(this.grade),
+                    DataNotei = this.data,
+                    Type = gt
+                };
+
+                if (gtd == null)
+                {
+                    gtd = new GradesToDiscipline() {
+                        Discipline = _context.Discipline.Where(d => d.Nume.Equals(this.materie)).FirstOrDefault(),
+                        Grades = new List<Grade>()
+                    };
+                    gtd.Grades.Add(grade);
+                }
+                else
+                {
+                    gtd.Grades.Add(grade);
+                }
+            }
+        }
+
 
         // PUT: api/Grades/5
         [HttpPut("{id}")]

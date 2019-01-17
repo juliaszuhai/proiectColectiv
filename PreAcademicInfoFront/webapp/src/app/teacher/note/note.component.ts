@@ -20,7 +20,7 @@ export class NoteComponent implements  OnInit {
   myModel: boolean = false;
 
   materii = [
-    {value: '0', viewValue: 'LFTC'},
+    {value: '0', viewValue: 'Programare orientata obiect'},
     {value: '1', viewValue: 'PPD'},
     {value: '2', viewValue: 'ASC'},
     {value:'3', viewValue:'WEB'},
