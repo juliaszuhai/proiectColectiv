@@ -65,6 +65,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             {
                 foreach (var grade in gradeToDicipline.Grades)
                 {
+                    //If the grade is a FINAL grade
                     if (grade.Type.ToString().Equals("FINAL"))
                     {
                         //Create a local dictionary

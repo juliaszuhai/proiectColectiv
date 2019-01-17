@@ -339,74 +339,52 @@ INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE500
 INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 3, 5, '01/01/2019', 0, 0);
 
 -- Seminar grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE0020', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 1, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5005', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 1, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5004', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 6, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 1, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 2, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 3, 1, '01/01/2019', 0, 0);
 
 -- Lab grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5005', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 7, 0, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5004', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 8, 0, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 2, 0, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 3, 0, '01/01/2019', 0, 0);
 
 -- Written exam grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE0020', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 9, 2, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5005', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 10, 2, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5004', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (5, 11, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 1, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 2, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (5, 3, 2, '01/01/2019', 0, 0);
 
 -- Partiam exam grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE0020', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 12, 3, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5004', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 13, 3, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 1, 3, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 3, 3, '01/01/2019', 0, 0);
 
 -- Bonus grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE0020', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 14, 4, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 1, 4, '01/01/2019', 0, 0);
 
 -- Semester 2
 -- Final grades
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5006', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 15, 5, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 16, 5, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 17, 5, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 6, 5, '01/01/2019', 0, 0);
 
 -- Seminar grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5006', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 18, 1, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 19, 1, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 20, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 1, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 6, 1, '01/01/2019', 0, 0);
 
 -- Lab grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5006', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 21, 0, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 22, 0, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 0, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 0, '01/01/2019', 0, 0);
 
 -- Written exam grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5006', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 23, 2, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 24, 2, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 25, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 4, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 2, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 6, 2, '01/01/2019', 0, 0);
 
 -- Partiam exam grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 26, 3, '01/01/2019', 0, 0);
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 27, 3, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 3, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 6, 3, '01/01/2019', 0, 0);
 
 -- Bonus grades
-INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 28, 4, '01/01/2019', 0, 0);
+INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 6, 4, '01/01/2019', 0, 0);
