@@ -4,10 +4,10 @@
 --iii) RUN THE REST OF THE SCRIPT
 
 --TRUNCATE ALL TABLES
-DELETE FROM [GradeToDiscipline];
-DBCC CHECKIDENT('GradeToDiscipline', RESEED, 0);
 DELETE FROM [Grade];
 DBCC CHECKIDENT('Grade', RESEED, 0);
+DELETE FROM [GradeToDiscipline];
+DBCC CHECKIDENT('GradeToDiscipline', RESEED, 0);
 DELETE FROM [Discipline];
 DELETE FROM [FacultyEnroll];
 DBCC CHECKIDENT('FacultyEnroll', RESEED, 0);
