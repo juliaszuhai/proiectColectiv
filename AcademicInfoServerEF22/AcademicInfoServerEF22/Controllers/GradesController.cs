@@ -52,63 +52,44 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<GradesToDiscipline> grades = _context.Student.Where(s => s.Username.Equals(username)).First().Grades.ToList();
-            //List<GradeJSON> gradesJSON = new List<GradeJSON>();
-            //foreach(var g in grades)
-            //{
+            //Get the list of GradesToDiscipline for the student with the given username
+            List<GradesToDiscipline> gradesToDiscipline = _context.Student.Where(
+                s => s.Username.Equals(username)
+            ).First().Grades.ToList();
 
-            //    //GradeJSON gJSON = new GradeJSON(g.Discipline.Nume, g.Discipline.An.ToString(), g.Discipline.Semestru.ToString(),
-            //    //              g.DataNotei, g.Discipline.Cod, g.GradeValue.ToString(), g.Discipline.Specializare.ToString());
+            //Create a response List that will store all the grades as dictionaries
+            var response = new List<Dictionary<string, string>>();
 
-            //    //until we fix binding object problem:
-            //    ////////////////////////////////////////////////////
-            //    Discipline d = new Discipline()
-            //    {
-            //        Type = DisciplineType.OBLIGATORIU,
-            //        Cod = "MLE5555",
-            //        Nume = "Baze de date distrb.",
-            //        Credite = 6,
-            //        An = 2,
-            //        Semestru = 2,
-                    
-            //    };
-            //    Specializare sp = _context.Specializare.FirstOrDefault();
-            //    d.Specializare = sp;
-            //    Teacher t = _context.Teacher.FirstOrDefault();
-            //    d.Teacher = t;
-            //    GradeJSON gJSON = new GradeJSON(d.Nume, d.An.ToString(), d.Semestru.ToString(),
-            //                    "2018-05-06", d.Cod, g.GradeValue.ToString(), d.Specializare.ToString());
-            //    ////////////////////////////////////////////////////
-
-            //    gradesJSON.Add(gJSON);
-            //}
-
-            //if (gradesJSON.Count == 0)
-            //{
-            //    return NotFound();
-            //}
-
-            ////var serializer = new JavaScriptSerializer();
-            ////var serializedResult = serializer.Serialize(gradesJSON);
-            return Ok(Json(grades));
-        }
-
-        public class GradeJSON
-        {
-            string numeMaterie, an, semestru, dataPromovarii, codMaterie, nota, specializare;
-
-            public GradeJSON(string numeMaterie, string an, string semestru, string dataPromovarii, string codMaterie, string nota,string specializare)
+            //For each grade
+            foreach (var gradeToDicipline in gradesToDiscipline)
             {
-                this.numeMaterie = numeMaterie;
-                this.an = an;
-                this.semestru = semestru;
-                this.dataPromovarii = dataPromovarii;
-                this.codMaterie = codMaterie;
-                this.nota = nota;
-                this.specializare = specializare;
-            }
-        }
+                foreach (var grade in gradeToDicipline.Grades)
+                {
+                    //If the grade is a FINAL grade
+                    if (grade.Type.ToString().Equals("FINAL"))
+                    {
+                        //Create a local dictionary
+                        var dict = new Dictionary<string, string>();
 
+                        //Add the grade informations to the local dictionary
+                        dict["numeMaterie"] = gradeToDicipline.Discipline.Nume;
+                        dict["an"] = gradeToDicipline.Discipline.An.ToString();
+                        dict["semestru"] = gradeToDicipline.Discipline.Semestru.ToString();
+                        dict["nota"] = grade.GradeValue.ToString();
+                        dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
+                        dict["dataPromovarii"] = grade.DataNotei;
+                        dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
+                        dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
+
+                        //Add the local dictionary to the list of grades
+                        response.Add(dict);
+                    }
+                }
+            }
+
+            //Return the list of grades
+            return Json(response);
+        }
 
         // PUT: api/Grades/5
         [HttpPut("{id}")]

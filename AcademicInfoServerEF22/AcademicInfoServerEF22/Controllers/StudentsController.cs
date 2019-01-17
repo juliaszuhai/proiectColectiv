@@ -28,33 +28,47 @@ namespace AcademicInfoServerEF22EF22.Controllers
         public StudentsController(AcademicInfoContext context)
         {
             _context = context;
-            //PopulateDatabase();
+            PopulateDatabase();
         }
 
         public void PopulateDatabase()
         {
-            byte[] saltNumber = new byte[10];
-            rngCsp.GetBytes(saltNumber);
-            String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-            String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
-            _context.Student.Add(new Student()
+            //Try to retrieve the Student with the Username 'andi'
+            Student s = _context.Student.Where(st => st.Username.Equals("andi")).FirstOrDefault();
+
+            //If he is not present into the DB, then it means we must add him
+            if (s == null)
             {
-                Username = "andi",
-                NumarMatricol = 2000,
-                Password = password,
-                Salt = saltString,
-                Email = "aaie2000@scs.ubbcluj.ro",
-                Nume = "Abrudean",
-                Prenume = "Andrei",
-                NumarTelefon = "0711111110",
-                CNP = "1960000000000",
-                InitialaParinte = "A",
-                Active = true,
-                Generatie = "2016",
-                An = "3",
-                UserType = UserType.STUDENT
-            });
-            _context.SaveChanges();
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+
+                //Add the student 'andi'
+                _context.Student.Add(new Student()
+                {
+                    Username = "andi",
+                    NumarMatricol = 2000,
+                    Password = password,
+                    Salt = saltString,
+                    Email = "aaie2000@scs.ubbcluj.ro",
+                    Nume = "Abrudean",
+                    Prenume = "Andrei",
+                    NumarTelefon = "0711111110",
+                    CNP = "1960000000000",
+                    InitialaParinte = "A",
+                    Active = true,
+                    Generatie = "2016",
+                    An = "3",
+                    UserType = UserType.STUDENT
+                });
+
+                //Commit changes to DB
+                _context.SaveChanges();
+            }
         }
 
         // GET: api/Students
