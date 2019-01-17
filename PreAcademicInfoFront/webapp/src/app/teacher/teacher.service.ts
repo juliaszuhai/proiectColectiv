@@ -7,18 +7,18 @@ import { Observable } from 'rxjs';
 
 export interface StudentData {
   username: string;
-  password: string;
   numarMatricol: string;
-  email : string;
   nume: string;
   prenume: string;
-  nrTelefon: string;
-  CNP: string;
-  initialaParinte: string;
-  generatie: string;
-  anCurent: string;
+  grades:GradesData[];
 }
-
+export interface GradesData{
+  id:string;
+  materie:string;
+  value:string;
+  tip:string;
+  data:string;
+}
 
 export interface StudentGrade{
   username:string;

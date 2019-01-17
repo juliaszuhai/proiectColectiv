@@ -98,7 +98,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Ok(student);
         }
 
-        // GET: api/Students
+        // GET: api/Students/{materie}/{grupa}/{tipNota}
         [HttpGet("{materie}/{grupa}/{tipNota}")]
         public IEnumerable<Student> GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
         {
@@ -107,7 +107,18 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
             return students;
         }
-        
+
+
+        //// GET: api/Students/{materie}/{grupa}/{tipNota}
+        //[HttpGet("{student}/{grupa}/{tipNota}")]
+        //public IEnumerable<Student> GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
+        //{
+        //    List<Student> students = _context.Student.Where(s => s.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault() != null)
+        //                                            .Where(s => s.FacultiesEnrolled.Where(fe => fe.Group.GroupName.Equals(grupa)).FirstOrDefault() != null).ToList();
+
+        //    return students;
+        //}
+
         [HttpGet("{an}")]
         public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
         {
