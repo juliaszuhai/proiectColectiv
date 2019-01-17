@@ -33,12 +33,24 @@ export class NoteFinaleComponent implements OnInit {
     //save the grade into DB on focusout event
     this.grade=event.target.value;
     console.log(this.grade);
-    if(this.data != "")
+    console.log(this.data);
+    //if(this.data != "")
     {
-      this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
-        data => {
-        console.log(data);
-      });
+      console.log("len of grades" + elem.grades.len);
+      if(elem.grades.length > 0)
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,elem.grades[0]["id"]).subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+      else
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,"").subscribe(
+          data => {
+          console.log(data);
+        });
+      }
 
       this.grade = "";
       this.data = "";
@@ -48,18 +60,18 @@ export class NoteFinaleComponent implements OnInit {
   saveDate(event,elem){
     //save date into DB on focusout event
     this.data = event.target.value;
-    console.log(this.grade);
+    //console.log(this.grade);
     console.log(this.data);
-    console.log(elem.username);
+    //console.log(elem.username);
     if(this.grade != "")
     {
-      this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
-        data => {
-        console.log(data);
-      });
+      // this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
+      //   data => {
+      //   console.log(data);
+      // });
 
-      this.grade = "";
-      this.data = "";
+     // this.grade = "";
+      //this.data = "";
     }
 }
 

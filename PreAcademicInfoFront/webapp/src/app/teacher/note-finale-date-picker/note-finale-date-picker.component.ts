@@ -50,10 +50,10 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
     console.log(this.grade);
     if(this.choosedDate != "")
     {
-      this.teacherService.PostGrade(elem.username, this.grade, this.choosedDate,this.materie,this.tipNota).subscribe(
-        data => {
-        console.log(data);
-      });
+      // this.teacherService.PostGrade(elem.username, this.grade, this.choosedDate,this.materie,this.tipNota).subscribe(
+      //   data => {
+      //   console.log(data);
+      // });
 
       this.grade = "";
       this.choosedDate = "";

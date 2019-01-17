@@ -98,7 +98,34 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 return BadRequest(ModelState);
             }
 
-            grade.GradeFromJSONGrade();
+            GradesToDiscipline gtd = _context.GradeToDiscipline.Where(g => g.Discipline.Nume.Equals(grade.materie)).FirstOrDefault();
+            GradeType gt = GradeType.EXAMEN;
+            if (grade.tipNota == "Examen final")
+            {
+                gt = GradeType.EXAMEN;
+            }
+            else if (grade.tipNota == "Laborator")
+            {
+                gt = GradeType.LAB;
+            }
+            //to be added
+            
+            if (grade.idNota == "")
+            {
+                Grade newGrade = new Grade()
+                {
+                    GradeValue = double.Parse(grade.grade),
+                    DataNotei = grade.data,
+                    Type = gt
+                };
+                gtd.Grades.Add(newGrade);
+            }
+            else
+            {
+                Grade recievedGrade = gtd.Grades.Where(g => g.Id == int.Parse(grade.idNota)).FirstOrDefault();
+                recievedGrade.GradeValue = double.Parse(grade.grade);
+                recievedGrade.DataNotei = grade.data;
+            }
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -106,59 +133,18 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
         public class GradeRecived
         {
-            public string username, grade, data, materie, tipNota;
-            private AcademicInfoContext _context;
+            public string username, grade, data, materie, tipNota, idNota;
 
-            public GradeRecived(string username, string grade, string data, string materie, string tipNota)
+            public GradeRecived(string username, string grade, string data, string materie, string tipNota, string idNota)
             {
                 this.username = username;
                 this.grade = grade;
                 this.data = data;
                 this.materie = materie;
                 this.tipNota = tipNota;
+                this.idNota = idNota;
             }
-
-            public void setContext(AcademicInfoContext context)
-            {
-                this._context = context;
-            }
-
-            public void GradeFromJSONGrade()
-            {
-                GradesToDiscipline gtd = _context.GradeToDiscipline.Where(g => g.Discipline.Nume.Equals(this.materie)).FirstOrDefault();
-                GradeType gt = GradeType.EXAMEN;
-                if (tipNota == "Examen final")
-                {
-                    gt = GradeType.EXAMEN;
-                }
-                else if (tipNota == "Laborator")
-                {
-                    gt = GradeType.LAB;
-                }
-                //to be added
-
-                Grade grade = new Grade()
-                {
-                    GradeValue = double.Parse(this.grade),
-                    DataNotei = this.data,
-                    Type = gt
-                };
-
-                if (gtd == null)
-                {
-                    //gtd = new GradesToDiscipline()
-                    //{
-                    //    Discipline = _context.Discipline.Where(d => d.Nume.Equals(this.materie)).FirstOrDefault(),
-                    //    Grades = new List<Grade>()
-                    //};
-                    //gtd.Grades.Add(grade);
-                }
-                else
-                {
-                    gtd.Grades.Where(g => g.Type == gt).FirstOrDefault();
-                }
-
-            }
+            
         }
 
 
@@ -196,21 +182,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Grades
-        [HttpPost]
-        public async Task<IActionResult> PostGrade([FromBody] Grade grade)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Grade.Add(grade);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetGrade", new { id = grade.Id }, grade);
-        }
+        
 
         // DELETE: api/Grades/5
         [HttpDelete("{id}")]
