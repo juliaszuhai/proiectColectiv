@@ -65,21 +65,24 @@ namespace AcademicInfoServerEF22EF22.Controllers
             {
                 foreach (var grade in gradeToDicipline.Grades)
                 {
-                    //Create a local dictionary
-                    var dict = new Dictionary<string, string>();
+                    if (grade.Type.ToString().Equals("FINAL"))
+                    {
+                        //Create a local dictionary
+                        var dict = new Dictionary<string, string>();
 
-                    //Add the grade informations to the local dictionary
-                    dict["numeMaterie"] = gradeToDicipline.Discipline.Nume;
-                    dict["an"] = gradeToDicipline.Discipline.An.ToString();
-                    dict["semestru"] = gradeToDicipline.Discipline.Semestru.ToString();
-                    dict["nota"] = grade.GradeValue.ToString();
-                    dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
-                    dict["dataPromovarii"] = grade.DataNotei;
-                    dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
-                    dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
+                        //Add the grade informations to the local dictionary
+                        dict["numeMaterie"] = gradeToDicipline.Discipline.Nume;
+                        dict["an"] = gradeToDicipline.Discipline.An.ToString();
+                        dict["semestru"] = gradeToDicipline.Discipline.Semestru.ToString();
+                        dict["nota"] = grade.GradeValue.ToString();
+                        dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
+                        dict["dataPromovarii"] = grade.DataNotei;
+                        dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
+                        dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
 
-                    //Add the local dictionary to the list of grades
-                    response.Add(dict);
+                        //Add the local dictionary to the list of grades
+                        response.Add(dict);
+                    }
                 }
             }
 
