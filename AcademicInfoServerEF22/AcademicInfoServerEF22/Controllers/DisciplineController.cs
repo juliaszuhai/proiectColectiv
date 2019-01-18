@@ -28,7 +28,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         // GET: api/Discipline/<teacherUsername>
-        [HttpGet("{teacherUsername}")]
+        [HttpGet("materii/teacher/{teacherUsername}")]
         public IActionResult GetTeacherDisciplines([FromRoute] string teacherUsername)
         {
             // Get all disciplines names that belong to a teacher
@@ -42,6 +42,31 @@ namespace AcademicInfoServerEF22EF22.Controllers
             // Return the list of disciplines
             return Json(disciplines);
         }
+
+        [HttpGet("materii/student/{username}")]
+        public IActionResult GetmateriiEnrolled([FromRoute] string username)
+        {
+            Student student = _context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault();
+            // Create the inner dictionary for the student's info
+            var studentDict = new Dictionary<string, object>();
+
+            // Create a list in which we store all the grades that we get for the students
+            List<string> gradesList = new List<string>();
+
+            // For each grade that we get
+            foreach (var m in student.Grades.Select(s => s.Discipline.Nume).ToList())
+            {
+                // Create an inner inner dictionary for his grades
+                var gradeDict = new Dictionary<string, string>();
+
+                // Append the inner inner dictionary to the list of grades
+                gradesList.Add(m);
+            }
+            
+            // Return the response
+            return Json(gradesList);
+        }
+
 
         // PUT: api/Discipline/5
         [HttpPut("{id}")]
