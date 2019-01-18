@@ -24,25 +24,6 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Grade;
         }
 
-        // GET: api/Grades/<id>
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetGrade([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var grade = await _context.Grade.SingleOrDefaultAsync(m => m.Id == id);
-
-        //    if (grade == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(grade);
-        //}
-
         // GET: api/Grades/<username>
         [HttpGet("{username}")]
         public IActionResult GetGradesOfStudent([FromRoute] string username)

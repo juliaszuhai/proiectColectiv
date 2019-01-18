@@ -43,25 +43,6 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Json(disciplines);
         }
 
-        //// GET: api/Discipline/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetDiscipline([FromRoute] string id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var discipline = await _context.Discipline.SingleOrDefaultAsync(m => m.Cod == id);
-
-        //    if (discipline == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(discipline);
-        //}
-
         // PUT: api/Discipline/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDiscipline([FromRoute] string id, [FromBody] Discipline discipline)
