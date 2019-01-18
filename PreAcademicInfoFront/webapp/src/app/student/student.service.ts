@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {tap} from "rxjs/operators";
+import { NewPassData } from '../signin/authentication-service.service';
 
 
 export interface StudentData {
@@ -66,7 +67,7 @@ export class StudentService {
 
   baseURL = 'https://localhost:44354/api/Students';
   gradesURL = 'https://localhost:44354/api/Grades';
-
+  changePassURL = 'https://localhost:44354/api/ChangePass'
   baseURLDisciplines='https://localhost:44354/api/Discipline';
   baseURLSpecializari='https://localhost:44354/api/Specializari';
 
@@ -82,6 +83,20 @@ export class StudentService {
         )
       });
   }
+
+  changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+    let username = localStorage['username']
+    let body = JSON.stringify({username,oldPassword,newPassword,confirmNewPassword});
+    console.log(localStorage['username']);
+    return this.http.put<NewPassData>(this.changePassURL,
+      body,
+      {
+      headers: new HttpHeaders(
+        {'Content-Type' : 'application/json'}
+      )
+    })
+  }
+
   getGrades(username:string)
   {
     return this.http.get(this.gradesURL+"/"+username,
