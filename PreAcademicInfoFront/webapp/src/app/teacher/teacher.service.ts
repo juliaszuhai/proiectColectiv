@@ -31,14 +31,14 @@ export interface Materie{
 export class TeacherService {
   baseURL = "https://localhost:44354/api/Students";
   gradesURL = "https://localhost:44354/api/Grades";
-
+  disciplineURL = "https://localhost:44354/api/Discipline";
   constructor(private http: HttpClient, private router: Router) {}
 
   getMaterii(
     teacher:string
-  ) :Observable<Materie[]> {
-    return this.http.get<Materie[]>(
-      this.gradesURL + "/" + teacher 
+  ) :Observable<string[]> {
+    return this.http.get<string[]>(
+      this.disciplineURL + "/" + teacher 
     );
   }
 
