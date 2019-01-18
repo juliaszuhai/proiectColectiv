@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
+import { TeacherService, StudentData } from '../teacher.service';
 
 @Component({
   selector: 'app-note',
@@ -9,7 +10,7 @@ import { MatRadioChange } from '@angular/material/radio';
 export class NoteComponent implements  OnInit {
 
 
-  constructor() { }
+  constructor(private teacherService: TeacherService) { }
   selectedMaterie: string;
   selectedGrupa: string;
   isExamenFinal: boolean = false;
@@ -39,7 +40,15 @@ export class NoteComponent implements  OnInit {
   optiuniNote=['Examen final', 'Laborator', 'Seminar', 'Bonus'];
 
   ngOnInit() {
-  }
+    this.teacherService.getMaterii("tzutzu")
+    .subscribe(data => 
+      { for (var _i = 0; _i < data.length; _i++)
+        {
+          this.materii.push({value: _i.toString(), viewValue: data[_i]["numeMaterie"]});
+        }
+      }
+      );
+    }
 
   radioChange(event: MatRadioChange) {
     if(event.value == 'Examen final'){this.isExamenFinal = true;}

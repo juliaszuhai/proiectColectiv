@@ -24,13 +24,23 @@ export interface StudentGrade {
   materie: string;
   tipNota: string;
 }
-
+export interface Materie{
+  numeMaterie:string
+}
 @Injectable()
 export class TeacherService {
   baseURL = "https://localhost:44354/api/Students";
   gradesURL = "https://localhost:44354/api/Grades";
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  getMaterii(
+    teacher:string
+  ) :Observable<Materie[]> {
+    return this.http.get<Materie[]>(
+      this.gradesURL + "/" + teacher 
+    );
+  }
 
   getStudents(
     materie: string,
