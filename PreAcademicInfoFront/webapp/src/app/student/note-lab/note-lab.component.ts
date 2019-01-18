@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {GradeData, StudentService} from "../student.service";
+import {GradeData, LabGrade, StudentService} from "../student.service";
 
 @Component({
   selector: 'app-note-lab',
@@ -9,8 +9,9 @@ import {GradeData, StudentService} from "../student.service";
 })
 export class NoteLabComponent implements OnInit {
   seven:boolean=true;
-  grades:GradeData[];
+  grades:LabGrade[];
   materii;
+  displayedColumns=['Nota', 'Data notei'];
 
   constructor(private studentService:StudentService, private router: Router ) { }
 

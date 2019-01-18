@@ -61,6 +61,12 @@ export interface SpecializareData{
   cuFrecventa:string;
   discipline:DisciplineData[];
 }
+export interface LabGrade{
+  id:string;
+  value:string;
+  data:string;
+}
+
 @Injectable()
 export class StudentService {
 
@@ -115,7 +121,7 @@ export class StudentService {
   }
 
   getLabGrades(username: string) {
-    return this.http.get<GradeData[]>(this.gradesURL+"/noteLab/"+username,
+    return this.http.get<LabGrade[]>(this.baseURL+"/noteLab/"+username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
@@ -123,7 +129,7 @@ export class StudentService {
   }
 
   getEnrolledDisciplines(username: string) {
-    return this.http.get(this.baseURL+'/enrolled/'+username,
+    return this.http.get(this.baseURL+'/materii/student'+username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
