@@ -32,6 +32,8 @@ export class TeacherService {
   baseURL = "https://localhost:44354/api/Students";
   gradesURL = "https://localhost:44354/api/Grades";
   disciplineURL = "https://localhost:44354/api/Discipline";
+  groupURL = "https://localhost:44354/api/Discipline";
+
   constructor(private http: HttpClient, private router: Router) {}
 
   getMaterii(
@@ -42,6 +44,15 @@ export class TeacherService {
     );
   }
 
+  getGrupe(
+    teacher:string
+  ) :Observable<string[]> {
+    return this.http.get<string[]>(
+      this.groupURL + "/" + teacher 
+    );
+  }
+
+
   getStudents(
     materie: string,
     grupa: string,
@@ -51,6 +62,7 @@ export class TeacherService {
       this.baseURL + "/" + materie + "/" + grupa + "/" + tipNota
     );
   }
+
 
   PostGrade(
     username: string,
