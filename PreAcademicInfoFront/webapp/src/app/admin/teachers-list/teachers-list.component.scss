@@ -1,0 +1,57 @@
+.big{
+    width:98.9%;
+    height: 100%;
+    position: absolute;
+    background: #6cb4b8;
+  }
+  .example-container {
+      margin-left: 10%;
+      margin-right: 10%;
+      background: white;
+  
+    }
+  .ex-container {
+      display: flex;
+      flex-direction: column;
+      padding-top:20px;
+    }
+  
+    .column {
+      margin-top: 1px;
+      float: left;
+      width: 100%;
+      padding: 10px;
+  }
+  
+  .row:after {
+      content: "";
+      display: table;
+      clear: both;
+  }
+  mat-grid-tile {
+    background: lightblue;
+  }
+  
+  .afis{
+    background: #6cb4b8;
+    width:98.9%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+  }
+  
+  table {
+    width: 75%;
+    display:table;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  td {
+    text-align: left;
+  }
+
+  tr:hover {
+    background: #b0e0ff;
+  }
+  

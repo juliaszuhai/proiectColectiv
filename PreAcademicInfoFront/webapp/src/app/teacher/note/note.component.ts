@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
+import { TeacherService, StudentData } from '../teacher.service';
 
 @Component({
   selector: 'app-note',
@@ -9,7 +10,7 @@ import { MatRadioChange } from '@angular/material/radio';
 export class NoteComponent implements  OnInit {
 
 
-  constructor() { }
+  constructor(private teacherService: TeacherService) { }
   selectedMaterie: string;
   selectedGrupa: string;
   isExamenFinal: boolean = false;
@@ -19,26 +20,36 @@ export class NoteComponent implements  OnInit {
   choosedOption: string;
   myModel: boolean = false;
 
-  materii = [
-    {value: '0', viewValue: 'LFTC'},
-    {value: '1', viewValue: 'PPD'},
-    {value: '2', viewValue: 'ASC'},
-    {value:'3', viewValue:'WEB'},
-    {value:'4', viewValue:'Proiect Colectiv'},
-    {value:'5', viewValue:'Mobile'}
-    ];
-  grupe = [
-    {value: '0', viewValue: '931'},
-    {value: '1', viewValue: '932'},
-    {value: '2', viewValue: '933'},
-    {value: '3', viewValue: '934'},
-    {value: '4', viewValue: '935'},
-    {value: '5', viewValue: '936'},
-  ];
-  
+  grupe = [];
+  materii = [];
   optiuniNote=['Examen final', 'Laborator', 'Seminar', 'Bonus'];
 
   ngOnInit() {
+    //load materile predate de un teacher
+    this.teacherService.getMaterii(localStorage.getItem('username'))
+    .subscribe(data => 
+      { console.log(data);
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.materii.push({value: _i.toString(), viewValue: data[_i]});
+        }
+      }
+      );
+    }
+
+  getGrupe(event)
+  {
+    //load grupele care au studenti care au materia curent selectata
+    console.log("got here");
+    this.teacherService.getGrupe(this.selectedMaterie)
+    .subscribe(data => 
+      { console.log(data);
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.grupe.push({value: _i.toString(), viewValue: data[_i]});
+        }
+      }
+      );
   }
 
   radioChange(event: MatRadioChange) {
