@@ -1,11 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input  } from '@angular/core';
 import { TeacherService, StudentData } from '../teacher.service';
 
-
-const STUDENT_DATA: StudentData[] = [
-  {username: "username1", password:"pass1",numarMatricol:"2020",email:"a@ceva.com",nume:"Delibas",prenume:"Stefan", nrTelefon:"00034",CNP:"1934223345",initialaParinte:"V",generatie:"2015",anCurent:"2018"},
-  {username: "username2", password:"pass2",numarMatricol:"2039",email:"b@ceva.com",nume:"Szuhai",prenume:"Iulia", nrTelefon:"073534",CNP:"2434254675",initialaParinte:"S",generatie:"2015",anCurent:"2018"}
-];
 
 @Component({
   selector: 'app-note-finale',
@@ -14,29 +9,71 @@ const STUDENT_DATA: StudentData[] = [
 })
 export class NoteFinaleComponent implements OnInit {
 
+  @Input() materie: string;
+  @Input() grupa: string;
+  @Input() tipNota: string;
+
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
-  dataSource = STUDENT_DATA;
-  nota: string;
+  grade: string;
   data: string;
   public students = [];
 
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
-    this.teacherService.getStudents()
+    this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
         .subscribe(data => this.students = data)
+
+    console.log(this.materie);
+    console.log(this.grupa);
+    console.log(this.tipNota);
   }
 
-  saveGrade(event){
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
-    this.nota=event.target.value;
-    console.log(this.nota);
+    this.grade=event.target.value;
+    console.log(this.grade);
+    console.log(this.data);
+    //if(this.data != "")
+    {
+      console.log("len of grades" + elem.grades.len);
+      if(elem.grades.length > 0)
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,elem.grades[0]["id"]).subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+      else
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,"").subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+
+      this.grade = "";
+      this.data = "";
+    }
   }
 
-  saveDate(event){
+  saveDate(event,elem){
     //save date into DB on focusout event
     this.data = event.target.value;
+    //console.log(this.grade);
     console.log(this.data);
-  }
+    //console.log(elem.username);
+    if(this.grade != "")
+    {
+      // this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
+      //   data => {
+      //   console.log(data);
+      // });
+
+     // this.grade = "";
+      //this.data = "";
+    }
+}
+
 
 }

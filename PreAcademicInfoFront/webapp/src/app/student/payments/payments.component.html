@@ -1,0 +1,34 @@
+<app-navigation></app-navigation>
+
+<h1>Taxa scolara</h1>
+<mat-form-field >
+    <mat-select class = "white" placeholder="Semestru" [(ngModel)]="selectedSemestru" name="semestru" (change)="semestuChanged($event)">
+      <mat-option *ngFor="let semestru of semestre" [value]="semestru.viewValue">
+        {{semestru.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+<mat-slide-toggle [(ngModel)] = "inTranse">plata in transe</mat-slide-toggle><br>
+<div *ngIf="inTranse">
+    <label>Transa: </label>
+    <mat-radio-group [(ngModel)]="choosedOption">
+      <mat-radio-button  [value]="1"
+                  (change)="radioChange($event)">
+          1 &nbsp; &nbsp;
+      </mat-radio-button>
+      <mat-radio-button  [value]="2"
+                  (change)="radioChange($event)">
+          2 &nbsp; &nbsp;
+      </mat-radio-button>
+      <mat-radio-button  [value]="3"
+                  (change)="radioChange($event)">
+          3 &nbsp; &nbsp;
+      </mat-radio-button>
+      <mat-radio-button  [value]="4"
+                  (change)="radioChange($event)">
+          4 &nbsp; &nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+</div>
+<button  mat-raised-button color="primary" (click)="openCheckout()" >Spre plata online</button>

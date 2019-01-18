@@ -1,0 +1,51 @@
+mat-grid-tile {
+    background: lightblue;
+  }
+
+.show{
+    background: #6cb4b8;
+    width:100%;
+    height: 100%;
+}
+
+.body{
+    margin: 0;
+}
+.selectors {
+    display: table;
+    margin: 0 auto;
+}
+  
+.mat-card{
+    background-color: #ffffff1f;
+    border-radius: 20px;
+}
+
+.mat-card-content{
+    font-size: 20px;
+    text-shadow: 0 0 0px black;
+    color: #000000de;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
+    
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.button-style{
+    margin-left:520px;
+    border-radius: 5px;
+    width: 200px;
+}

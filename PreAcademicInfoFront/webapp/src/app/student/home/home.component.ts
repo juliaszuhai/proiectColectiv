@@ -35,14 +35,14 @@ export class HomeComponent implements OnInit{
 
   datalist: GradeData[] = [
     {
+      numeMaterie:'LFTC',
       an:'3',
       semestru:'1',
-      numeMaterie:'LFTC',
       nota:'10',
       nrCredite:'6',
       dataPromovarii:'10.10.2010',
-      descriere:'cea mai grea materie',
-      codMaterie:'MLE11111'
+      codMaterie:'MLE11111',
+      specializare:'caca'
     },
     {
       an:'3',
@@ -51,8 +51,8 @@ export class HomeComponent implements OnInit{
       nota:'10',
       nrCredite:'6',
       dataPromovarii:'10.10.2030',
-      descriere:'de fapt asta e cea mai grea materie',
-      codMaterie:'MLE9865'
+      codMaterie:'MLE9865',
+      specializare:'caca'
     },
     {
       an:'3',
@@ -61,8 +61,8 @@ export class HomeComponent implements OnInit{
       nota:'9',
       nrCredite:'6',
       dataPromovarii:'10.10.2010',
-      descriere:'cel mai hater prof',
-      codMaterie:'MLE1444'
+      codMaterie:'MLE1444',
+      specializare:'caca'
     }
   ];
 
@@ -73,7 +73,13 @@ export class HomeComponent implements OnInit{
   constructor(private studentService:StudentService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getStudent();
+    //this.getStudent();
+    var username=localStorage.getItem("username");
+    this.studentService.getGrades(username).subscribe(
+      (data:GradeData[]) => {
+        this.dataSource = data;
+      }
+    )
   }
 
   getStudent()

@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+
+.cluj{
+  background: url("./cluj-napoca.jpg") no-repeat center ;
+}
+
+.ubb{
+  background: url("./ubb.jpg") no-repeat center;
+}
+.ghid{
+  background: url("./ghid.png") no-repeat center;
+}
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 40%;
+  padding: 10px;
+  height: 400PX; /* Should be removed. Only for demonstration */
+  border: 2px solid #000;
+  border-radius: 15px;
+  -moz-border-radius: 15px; 
+  margin-left: 10px;
+}
+mat-grid-list {
+  margin: 0;
+}
+mat-grid-tile{
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+}
+
+.fade
+{
+  opacity:1;
+  transition:all 0.5s ease;
+}
+.fade:hover
+{
+  opacity:0.5;
+  transition:all 0.5s ease;
+  border-radius:50%;
+}
+.fade:hover #title
+{
+  opacity:1;
+  transition:all 0.5s ease;
+  -webkit-transform: scale(3.5);
+  -ms-transform: scale(3.5);
+  transform: scale(3.5);
+}
+
+.fade #title
+{
+  opacity:0;
+
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

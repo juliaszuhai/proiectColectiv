@@ -13,24 +13,41 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {NavigationComponent} from "./navigation/navigation.component";
+import { GuideComponent } from './guide/guide.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { NoteProvizoriiComponent } from './note-provizorii/note-provizorii.component';
+import { NoteLabComponent } from './note-lab/note-lab.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { MatSlideToggleModule } from '@angular/material';
+
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
-  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]}
-
+  {path: 'contracte', component: DisciplinesComponent, canActivate:[LoginGuardGuard]},
+  {path: 'statistics', component: StatisticsComponent, canActivate:[LoginGuardGuard]},
+  {path:  'note-provizorii', component:NoteProvizoriiComponent, canActivate:[LoginGuardGuard]},
+  {path: 'note-lab',component:NoteLabComponent, canActivate:[LoginGuardGuard]},
+  {path: 'guide', component: GuideComponent, canActivate:[LoginGuardGuard]},
+  {path: 'taxe', component: PaymentsComponent}
 ];
 
 @NgModule({
   declarations:[
     HomeComponent,
     DisciplinesComponent,
-    NavigationComponent
+    NavigationComponent,
+    GuideComponent,
+    StatisticsComponent,
+    NoteProvizoriiComponent,
+    NoteLabComponent,
+    PaymentsComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule,],
+    HttpClientModule,
+    MatSlideToggleModule,],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   exports: [RouterModule,
     FormsModule,

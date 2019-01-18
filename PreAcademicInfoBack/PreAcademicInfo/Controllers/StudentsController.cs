@@ -33,6 +33,7 @@ namespace PreAcademicInfo.Controllers
 
         public void PopulateDatabase()
         {
+
             byte[] saltNumber = new byte[10];
             rngCsp.GetBytes(saltNumber);
             String saltString = System.Text.Encoding.Default.GetString(saltNumber);
@@ -61,6 +62,7 @@ namespace PreAcademicInfo.Controllers
         [HttpGet]
         public IEnumerable<Student> GetStudent()
         {
+            //PopulateDatabase();
             return _context.Student;
         }
 
@@ -83,17 +85,27 @@ namespace PreAcademicInfo.Controllers
             return Ok(student);
         }
 
+        [HttpGet("{an}")]
+        public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
+        {
+            return _context.Student.Where(student => student.An == an);
+        }
+
+
         // PUT: api/Students/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudent([FromBody] string id, [FromBody] Student student)
+        public async Task<IActionResult> PutStudent([FromRoute] string id, [FromBody] Student student)
         {
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("nu-i bine model");
                 return BadRequest(ModelState);
             }
 
             if (id != student.Username)
             {
+                Console.WriteLine("nu-i bine username");
+
                 return BadRequest();
             }
 
