@@ -8,7 +8,7 @@ import {GradeData, LabGrade, StudentService} from "../student.service";
   styleUrls: ['./note-lab.component.scss']
 })
 export class NoteLabComponent implements OnInit {
-  seven:boolean=true;
+  seven:number=0;
   grades:LabGrade[];
   materii;
   displayedColumns=['Nota', 'Data notei'];
@@ -35,11 +35,11 @@ export class NoteLabComponent implements OnInit {
     );
     if( this.grades.length>7)
     {
-      this.seven=true;
+      this.seven=1;
     }
     else
     {
-      this.seven=false;
+      this.seven=2;
     }
   }
 }

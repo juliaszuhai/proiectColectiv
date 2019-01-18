@@ -12,7 +12,7 @@
     </div>
       &nbsp;&nbsp;
 
-      <mat-grid-list  *ngIf="this.seven"  cols="1" rowHeight="1:1">
+      <mat-grid-list  *ngIf="seven==1"  cols="1" rowHeight="1:1">
         <mat-grid-tile>
       <table mat-table [dataSource]="this.grades" class="mat-elevation-z8">
 
@@ -33,7 +33,7 @@
         </mat-grid-tile>
       </mat-grid-list>
 
-  <mat-grid-list  *ngIf="!this.seven"  cols="2" rowHeight="2:1">
+  <mat-grid-list  *ngIf="seven==2"  cols="2" rowHeight="2:1">
     <mat-grid-tile>
 
       <table mat-table [dataSource]="this.grades" class="mat-elevation-z8">
