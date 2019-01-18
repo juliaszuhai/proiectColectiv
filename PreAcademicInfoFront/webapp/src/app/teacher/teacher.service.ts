@@ -40,7 +40,7 @@ export class TeacherService {
     teacher:string
   ) :Observable<string[]> {
     return this.http.get<string[]>(
-      this.disciplineURL + "/" + teacher 
+      this.disciplineURL + "/" + "materii/teacher/" + teacher 
     );
   }
 

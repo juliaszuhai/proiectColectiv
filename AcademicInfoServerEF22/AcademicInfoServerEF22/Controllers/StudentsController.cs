@@ -98,6 +98,37 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Ok(student);
         }
 
+        
+        [HttpGet("noteLab/{username}")]
+        public IActionResult GetStudentLabGrades([FromRoute] string username)
+        {
+            Student student = _context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault();
+            // Create the inner dictionary for the student's info
+            var studentDict = new Dictionary<string, object>();
+            
+            // Create a list in which we store all the grades that we get for the students
+            List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
+
+                // For each grade that we get
+                foreach (var g in student.Grades.FirstOrDefault().Grades)
+                {
+                    // Create an inner inner dictionary for his grades
+                    var gradeDict = new Dictionary<string, string>();
+
+                    // Add the hrade info to the inner inner dictionary
+                    gradeDict["id"] = g.Id.ToString();
+                    gradeDict["value"] = g.GradeValue.ToString();
+                    gradeDict["data"] = g.DataNotei;
+
+                    // Append the inner inner dictionary to the list of grades
+                    gradesList.Add(gradeDict);
+                }
+                
+            
+            // Return the response
+            return Json(gradesList);
+        }
+
         // GET: api/Students/{materie}/{grupa}/{tipNota}
         [HttpGet("{materie}/{grupa}/{tipNota}")]
         public IActionResult GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
