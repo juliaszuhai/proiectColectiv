@@ -27,24 +27,40 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Discipline;
         }
 
-        // GET: api/Discipline/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDiscipline([FromRoute] string id)
+        // GET: api/Discipline/<teacherUsername>
+        [HttpGet("{teacherUsername}")]
+        public IActionResult GetTeacherDisciplines([FromRoute] string teacherUsername)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // Get all disciplines names that belong to a teacher
+            List<string> disciplines = new List<string>();
+            disciplines = _context.Teacher.Where(
+                t => t.Username.Equals(teacherUsername)
+            ).FirstOrDefault().DisciplinesHolded.Select(
+                d => d.Nume
+            ).ToList();
 
-            var discipline = await _context.Discipline.SingleOrDefaultAsync(m => m.Cod == id);
-
-            if (discipline == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(discipline);
+            // Return the list of disciplines
+            return Json(disciplines);
         }
+
+        //// GET: api/Discipline/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetDiscipline([FromRoute] string id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var discipline = await _context.Discipline.SingleOrDefaultAsync(m => m.Cod == id);
+
+        //    if (discipline == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(discipline);
+        //}
 
         // PUT: api/Discipline/5
         [HttpPut("{id}")]
