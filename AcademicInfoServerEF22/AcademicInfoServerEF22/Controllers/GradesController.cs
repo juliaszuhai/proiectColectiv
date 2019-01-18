@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AcademicInfoServerEF22EF22.Models;
+using System;
 namespace AcademicInfoServerEF22EF22.Controllers
 {
     [Produces("application/json")]
@@ -24,6 +25,101 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Grade;
         }
 
+        // POST: api/Grades/percentage
+        [HttpPost("percentage")]
+        public IActionResult SetInnerandOutterPercentagesForGrades([FromBody] PercentageJSON body)
+        {
+            // Get all the students that are enrolled to the given discipline
+            List<Student> students = _context.Student.Where(
+                s => s.Grades.FirstOrDefault().Discipline.Nume.Equals(
+                    body.Materie
+                )
+            ).ToList();
+
+            // For each student
+            foreach(var s in students)
+            {
+                // Get the student's GradeToDiscipline for the respective discipline
+                GradesToDiscipline gradeToDiscipline = s.Grades.Where(
+                    gtd => gtd.Discipline.Equals(body.Materie)
+                ).FirstOrDefault();
+
+                // For each grade
+                foreach(var g in gradeToDiscipline.Grades)
+                {
+                    // Update the inner and outter fields acordingly
+                    switch(g.Type.ToString())
+                    {
+                        case "EXAMEN":
+                            if (body.Examen != null)
+                            {
+                                g.ProcentOuter = 1;
+                                g.ProcentInnerType = double.Parse(body.Examen);
+                            }
+                            break;
+                        case "SEMINAR":
+                            if (body.Seminar != null)
+                            {
+                                g.ProcentOuter = 1;
+                                g.ProcentInnerType = double.Parse(body.Seminar);
+                            }
+                            break;
+                        case "PARTIAL":
+                            if (body.Partial != null)
+                            {
+                                g.ProcentOuter = 1;
+                                g.ProcentInnerType = double.Parse(body.Partial);
+                            }
+                            break;
+                        case "BONUS":
+                            if (body.Bonus != null)
+                            {
+                                g.ProcentOuter = 1;
+                                g.ProcentInnerType = double.Parse(body.Bonus);
+                            }
+                            break;
+                        case "LAB":
+                            break;
+                        case "FINAL":
+                            g.ProcentOuter = 1;
+                            g.ProcentInnerType = 1;
+                            break;
+                    }
+                }
+                // Check if we need to update the lab grades
+                if (body.Laborator != null)
+                {
+                    // Now we update the lab grades by first selecting all the the lab grades of our current student
+                    List<Grade> labGrades = gradeToDiscipline.Grades.Where(
+                        g => g.Type.ToString().Equals("LAB")
+                    // and sort the list of grades after the grade ID
+                    ).ToList().OrderBy(g => g.Id).ToList();
+
+                    // Check if the number of lab grades is the same as the one in the DB
+                    if (labGrades.Count != body.Laborator.Count)
+                    {
+                        Dictionary<string, string> err = new Dictionary<string, string>();
+                        err.Add("error", String.Format("The number of lab grades sent by the teacher is not the same as the number of lab grades for the student {0}", s.Username));
+                        return Json(err);
+                    }
+
+                    // For each lab grade update the inner and outter fields acordingly
+                    for (int i = 0; i < labGrades.Count; i++)
+                    {
+                        labGrades[i].ProcentOuter = double.Parse((string)body.Laborator["Outter"]);
+                        labGrades[i].ProcentInnerType = double.Parse(((IList<string>)body.Laborator["Inner"])[i]);
+                    }
+                }
+            }
+
+            // Save changes into database
+            _context.SaveChanges();
+
+            Dictionary<string, string> success = new Dictionary<string, string>();
+            success.Add("success", "The percentages for the provided grade types were successfully updated!");
+            return Json(success);
+        }
+
         // GET: api/Grades/<username>
         [HttpGet("{username}")]
         public IActionResult GetGradesOfStudent([FromRoute] string username)
@@ -33,10 +129,21 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Try to retrieve the student with the given username
+            Student s = _context.Student.Where(
+                st => st.Username.Equals(username)
+            ).FirstOrDefault();
+
+            // If he is not present in the DB return an error message
+            if (s == null)
+            {
+                Dictionary<string, string> error = new Dictionary<string, string>() { };
+                error.Add("error", String.Format("There is no student with the username: '{0}'!", username));
+                return Json(error);
+            }
+
             //Get the list of GradesToDiscipline for the student with the given username
-            List<GradesToDiscipline> gradesToDiscipline = _context.Student.Where(
-                s => s.Username.Equals(username)
-            ).First().Grades.ToList();
+            List<GradesToDiscipline> gradesToDiscipline = s.Grades.ToList();
 
             //Create a response List that will store all the grades as dictionaries
             var response = new List<Dictionary<string, string>>();
@@ -190,6 +297,16 @@ namespace AcademicInfoServerEF22EF22.Controllers
         private bool GradeExists(int id)
         {
             return _context.Grade.Any(e => e.Id == id);
+        }
+
+        public class PercentageJSON
+        {
+            public string Examen { get; set; }
+            public string Partial { get; set; }
+            public string Seminar { get; set; }
+            public Dictionary<string, Object> Laborator { get; set; }
+            public string Bonus { get; set; }
+            public string Materie { get; set; }
         }
     }
 }
