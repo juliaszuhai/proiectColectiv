@@ -20,6 +20,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import { NoteLabTeacherComponent } from './note-lab-teacher/note-lab-teacher.component';
 
 const routes: Routes = [
   {path: 'teacher', component: NoteComponent},
@@ -29,7 +30,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     NoteComponent, 
-    NavTeacherComponent, NoteFinaleComponent, NoteFinaleDatePickerComponent, FormulaComponent
+    NavTeacherComponent, NoteFinaleComponent, NoteFinaleDatePickerComponent, FormulaComponent, NoteLabTeacherComponent
   ],
   imports: [
     CommonModule,
