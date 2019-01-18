@@ -33,6 +33,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
         public void PopulateDatabase()
         {
+            
             //Try to retrieve the Student with the Username 'andi'
             Student s = _context.Student.Where(st => st.Username.Equals("andi")).FirstOrDefault();
 

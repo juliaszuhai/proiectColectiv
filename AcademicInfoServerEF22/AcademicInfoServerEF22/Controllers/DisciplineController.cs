@@ -104,7 +104,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         // POST: api/Discipline
-        [HttpPost]
+        [HttpPost("/ceva")]
         public async Task<IActionResult> PostDiscipline([FromBody] Discipline discipline)
         {
             if (!ModelState.IsValid)
