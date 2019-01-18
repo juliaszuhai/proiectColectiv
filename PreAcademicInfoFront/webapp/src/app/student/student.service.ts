@@ -120,8 +120,8 @@ export class StudentService {
         )});
   }
 
-  getLabGrades(username: string) {
-    return this.http.get<LabGrade[]>(this.baseURL+"/noteLab/"+username,
+  getLabGrades(username: string,materieSelectata:string) {
+    return this.http.get<LabGrade[]>(this.baseURL+"/noteLab/"+username+"/"+materieSelectata,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
@@ -129,7 +129,7 @@ export class StudentService {
   }
 
   getEnrolledDisciplines(username: string) {
-    return this.http.get<string[]>(this.baseURL+'/materii/student/'+username,
+    return this.http.get<string[]>(this.baseURLDisciplines+'/materii/student/'+username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
