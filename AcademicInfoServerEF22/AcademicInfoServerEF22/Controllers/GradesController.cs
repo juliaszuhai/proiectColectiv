@@ -24,7 +24,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Grade;
         }
 
-        // GET: api/Grades/5
+        // GET: api/Grades/<id>
         //[HttpGet("{id}")]
         //public async Task<IActionResult> GetGrade([FromRoute] int id)
         //{
@@ -43,7 +43,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         //    return Ok(grade);
         //}
 
-        // GET: api/Grades/username
+        // GET: api/Grades/<username>
         [HttpGet("{username}")]
         public IActionResult GetGradesOfStudent([FromRoute] string username)
         {
@@ -90,6 +90,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             //Return the list of grades
             return Json(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> PostGrade([FromBody] GradeRecived grade)
         {
@@ -148,7 +149,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
 
-        // PUT: api/Grades/5
+        // PUT: api/Grades/<id>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGrade([FromRoute] int id, [FromBody] Grade grade)
         {
@@ -184,7 +185,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
         
 
-        // DELETE: api/Grades/5
+        // DELETE: api/Grades/<id>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGrade([FromRoute] int id)
         {
