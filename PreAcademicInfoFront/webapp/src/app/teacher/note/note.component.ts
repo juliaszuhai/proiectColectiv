@@ -31,22 +31,26 @@ export class NoteComponent implements  OnInit {
       { console.log(data);
         for (var _i = 0; _i < data.length; _i++)
         {
-          this.grupe.push({value: _i.toString(), viewValue: data[_i]});
-        }
-      }
-      );
-
-      //load grupele care au studenti care au materia curent selectata
-      this.teacherService.getGrupe(this.selectedMaterie)
-    .subscribe(data => 
-      { console.log(data);
-        for (var _i = 0; _i < data.length; _i++)
-        {
           this.materii.push({value: _i.toString(), viewValue: data[_i]});
         }
       }
       );
     }
+
+  getGrupe(event)
+  {
+    //load grupele care au studenti care au materia curent selectata
+    console.log("got here");
+    this.teacherService.getGrupe(this.selectedMaterie)
+    .subscribe(data => 
+      { console.log(data);
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.grupe.push({value: _i.toString(), viewValue: data[_i]});
+        }
+      }
+      );
+  }
 
   radioChange(event: MatRadioChange) {
     if(event.value == 'Examen final'){this.isExamenFinal = true;}

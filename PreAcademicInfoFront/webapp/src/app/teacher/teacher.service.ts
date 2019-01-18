@@ -32,7 +32,7 @@ export class TeacherService {
   baseURL = "https://localhost:44354/api/Students";
   gradesURL = "https://localhost:44354/api/Grades";
   disciplineURL = "https://localhost:44354/api/Discipline";
-  groupURL = "https://localhost:44354/api/Discipline";
+  groupURL = "https://localhost:44354/api/Groups";
 
   constructor(private http: HttpClient, private router: Router) {}
 
