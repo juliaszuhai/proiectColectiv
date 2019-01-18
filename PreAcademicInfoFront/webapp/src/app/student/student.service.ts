@@ -113,4 +113,21 @@ export class StudentService {
           {'Content-Type' : 'application/json'}
         )});
   }
+
+  getLabGrades(username: string) {
+    return this.http.get<GradeData[]>(this.gradesURL+"/noteLab/"+username,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )});
+  }
+
+  getEnrolledDisciplines(username: string) {
+    return this.http.get(this.baseURL+'/enrolled/'+username,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )});
+
+  }
 }
