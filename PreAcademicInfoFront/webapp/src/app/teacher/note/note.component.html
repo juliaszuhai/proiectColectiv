@@ -47,7 +47,7 @@
         </div>
     </div>
     <div *ngSwitchCase="'Laborator'">
-        Display layout for Laborator 
+        <app-note-lab-teacher [materie]="selectedMaterie" [grupa]="selectedGrupa" [tipNota]="choosedOption"></app-note-lab-teacher> 
     </div>
     <div *ngSwitchCase="'Seminar'">
         Display layout for Seminar

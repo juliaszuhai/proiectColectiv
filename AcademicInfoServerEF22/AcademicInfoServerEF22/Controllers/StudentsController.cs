@@ -29,6 +29,37 @@ namespace AcademicInfoServerEF22EF22.Controllers
         {
             _context = context;
             PopulateDatabase();
+
+            List<Student> students = new List<Student>();
+            List<Teacher> teacher = new List<Teacher>();
+
+            students = _context.Student.ToList();
+            teacher = _context.Teacher.ToList();
+            foreach (var u in students)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+                u.Password = password;
+                u.Salt = saltString;
+            }
+            foreach (var u in teacher)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+                u.Password = password;
+                u.Salt = saltString;
+            }
+            _context.SaveChanges();
         }
 
         public void PopulateDatabase()
