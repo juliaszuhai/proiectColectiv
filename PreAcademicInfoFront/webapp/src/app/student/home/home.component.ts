@@ -33,40 +33,9 @@ export class HomeComponent implements OnInit{
     {value: '3', viewValue: 'Anul 3'},
   ];
 
-  datalist: GradeData[] = [
-    {
-      numeMaterie:'LFTC',
-      an:'3',
-      semestru:'1',
-      nota:'10',
-      nrCredite:'6',
-      dataPromovarii:'10.10.2010',
-      codMaterie:'MLE11111',
-      specializare:'caca'
-    },
-    {
-      an:'3',
-      semestru:'1',
-      numeMaterie:'PDP',
-      nota:'10',
-      nrCredite:'6',
-      dataPromovarii:'10.10.2030',
-      codMaterie:'MLE9865',
-      specializare:'caca'
-    },
-    {
-      an:'3',
-      semestru:'1',
-      numeMaterie:'Mobile',
-      nota:'9',
-      nrCredite:'6',
-      dataPromovarii:'10.10.2010',
-      codMaterie:'MLE1444',
-      specializare:'caca'
-    }
-  ];
 
-  dataSource:GradeData[]=this.datalist;
+  dataSource:GradeData[];
+  intermediaryGrades:GradeData[];
   columnsToDisplay = ['an', 'semestru', 'numeMaterie', 'nota', 'nrCredite'];
   expandedElement: GradeData;
 
@@ -77,9 +46,11 @@ export class HomeComponent implements OnInit{
     var username=localStorage.getItem("username");
     this.studentService.getGrades(username).subscribe(
       (data:GradeData[]) => {
-        this.dataSource = data;
+        this.intermediaryGrades = data;
+        this.dataSource=data;
       }
-    )
+    );
+
   }
 
   getStudent()
@@ -120,18 +91,16 @@ export class HomeComponent implements OnInit{
   onChangeAn(event:any) {
     //console.log(event.value);
     let an=event.value;
-    this.dataSource=this.datalist.filter(grade=> grade.an == an);
+    this.dataSource=this.intermediaryGrades.filter(grade=> grade.an == an);
     //console.log(this.dataSource);
 
   }
 
   onChangeSemestru(event:any) {
     let semestru=event.value;
-    this.dataSource=this.datalist.filter(grade=> grade.semestru == semestru);
-    //console.log(this.dataSource);
+    this.dataSource=this.intermediaryGrades.filter(grade=> grade.semestru == semestru);
+
   }
-
-
 }
 
   function compare(a: number | string, b: number | string, isAsc: boolean) {

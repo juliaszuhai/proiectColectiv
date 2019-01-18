@@ -7,7 +7,7 @@ import { MatSelect } from '@angular/material';
   styleUrls: ['./payments.component.scss']
 })
 export class PaymentsComponent implements OnInit {
-  
+
   semestre = [
     {value: '1', viewValue: 'semestrul 1'},
     {value: '2', viewValue: 'semestrul 2'},
@@ -19,7 +19,7 @@ export class PaymentsComponent implements OnInit {
 
   handler: any;
   amount = 360000;
-  globalListener: any;
+  //globalListener: any;
   fixedamount = 360000;
   selectedSemestru :string;
 
@@ -38,7 +38,7 @@ export class PaymentsComponent implements OnInit {
     if(this.inTranse == false)
     {
       this.tipTranzactie = "Plata intgrala";
-      this.amount =this.fixedamount 
+      this.amount =this.fixedamount
     }
     else{
       this.amount =this.fixedamount / 4;
@@ -65,7 +65,5 @@ export class PaymentsComponent implements OnInit {
     this.selectedSemestru = event.value;
   }
 
-  ngOnDestroy() {
-    this.globalListener();
-}
+
 }
