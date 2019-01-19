@@ -185,5 +185,91 @@ namespace AcademicInfoServer.Controllers
         {
             return _context.Grade.Any(e => e.Id == id);
         }
+
+        // GET: api/Grades/Statistics/2018/Info-Engleza
+        [HttpGet("Statistics/{year}/{specialization}")]
+        public async Task<IActionResult> GradeBuckets([FromRoute] string year, [FromRoute] string specialization)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<double> grades = GetGradesByYearAndSpecialization(year, specialization);
+            
+            
+            //Put into buckets 0-5, 5-6, 6-7, 7-8, 8-9, 9-10, 10
+            List<int> nrGradesByBucket = new List<int>(new int[] { 0, 0, 0, 0, 0, 0, 0 });
+            foreach(double grade in grades)
+            {
+                if (grade == 10)
+                    nrGradesByBucket[0]++;
+                if (grade >= 9 && grade < 10)
+                    nrGradesByBucket[1]++;
+                if (grade >= 8 && grade < 9)
+                    nrGradesByBucket[2]++;
+                if (grade >= 7 && grade < 8)
+                    nrGradesByBucket[3]++;
+                if (grade >= 6 && grade < 7)
+                    nrGradesByBucket[4]++;
+                if (grade >= 5 && grade < 6)
+                    nrGradesByBucket[5]++;
+                if (grade < 5)
+                    nrGradesByBucket[6]++;
+            }
+
+            return Ok(nrGradesByBucket);
+        }
+
+        private List<double> GetGradesByYearAndSpecialization(string year, string specialization)
+        {
+            List<double> grades = new List<double>();
+
+            //Get all students enrolled to given specialization
+            List<Student> students = _context.Student.Where(student => student.FacultiesEnrolled.Any(fe => fe.Specializare.Nume == specialization)).ToList();
+
+            //Get all students from given year
+            students = students.Where(student => (student.An == year)).ToList();
+
+            //For each student in that specialization and year
+            foreach (Student student in students)
+            {
+                //Get grades to discipline for that student
+                List<GradesToDiscipline> studentGradesToDisciplines = student.Grades.ToList();
+                double sumFinalGrades = 0;
+                studentGradesToDisciplines.ForEach(
+                    sGD => 
+                    {
+                        //Get final grade at a discipline and add it to sum
+                        Grade grade = sGD.Grades.Where(g => g.Type == GradeType.FINAL).First();
+                        sumFinalGrades += grade.GradeValue;
+
+                    });
+                //Mean of final grades for that student
+                double meanFinalGrades = sumFinalGrades / studentGradesToDisciplines.Count;
+
+                //Add it to the list of final grades
+                grades.Add(meanFinalGrades);
+            }
+
+            //List<Student> students = _context.Student
+            //    .Join<Student, FacultyEnroll, Student, KeyValuePair<Student, Specializare>>(
+            //        _context.FacultyEnroll.ToList(),
+            //        student => student,
+            //        facultyEnroll => facultyEnroll.Student,
+            //        (student, facultyEnroll) => new KeyValuePair<Student, Specializare>(student, facultyEnroll.Specializare))
+            //    .Where(ss => (ss.Key.An == year && ss.Value.Nume == specialization))
+            //    .Select(ss => ss.Key).ToList();
+
+            //foreach (Student student in students)
+            //{
+            //      List<Grade> gradesPerStudent = _context.Grade
+            //          .Where(grade => (grade.Student.NumarMatricol == student.NumarMatricol && grade.Type == GradeType.FINAL)).ToList();
+
+            //      gradesPerStudent.ForEach(grade => grades.Add(grade));
+            //}
+
+            return grades;
+        }
     }
 }
