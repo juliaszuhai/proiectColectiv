@@ -118,6 +118,38 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return CreatedAtAction("GetDiscipline", new { id = discipline.Cod }, discipline);
         }
 
+        [HttpPost("prezenteLab/{materie}/{usernameStudent}/{noAttendance}")]
+        public IActionResult PostPrezenteLab([FromRoute] string materie, [FromRoute] string usernameStudent,
+                                            [FromRoute] string noAttendance)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var grade = _context.Student.Where(s => s.Username.Equals(usernameStudent)).FirstOrDefault().Grades
+                .Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault();
+            grade.AttendanceLab = int.Parse(noAttendance);
+           _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("prezenteSeminar/{materie}/{usernameStudent}/{noAttendance}")]
+        public IActionResult PostPrezenteSeminar([FromRoute] string materie, [FromBody] string usernameStudent,
+                                            [FromRoute] string noAttendance)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var grade = _context.Student.Where(s => s.Username.Equals(usernameStudent)).FirstOrDefault().Grades
+                .Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault();
+            grade.AttendanceSeminary = int.Parse(noAttendance);
+            _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         // DELETE: api/Discipline/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDiscipline([FromRoute] string id)
