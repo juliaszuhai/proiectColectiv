@@ -71,7 +71,7 @@ export interface TeacherData{
   Nume:string;
   Prenume: string;
   Email:string;
-  PictureUrl:string;
+  PictureURL:string;
   Website:string;
 }
 

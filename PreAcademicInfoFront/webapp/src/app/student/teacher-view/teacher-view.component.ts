@@ -42,6 +42,7 @@ export class TeacherViewComponent implements OnInit {
       data =>
       {
         this.teachers = data;
+        console.log(this.teachers);
       }
     );
   }
@@ -49,7 +50,7 @@ export class TeacherViewComponent implements OnInit {
   hide()
   {
     this.card = false;
-    this.toastr.successToastr('This is success toast.', 'Success!');
+    //this.toastr.successToastr('This is success toast.', 'Success!');
   }
 
 }

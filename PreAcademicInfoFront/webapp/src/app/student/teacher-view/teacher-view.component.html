@@ -85,19 +85,19 @@
 
 <mat-grid-list cols="3" rowHeight="3:3">
     <mat-grid-tile *ngFor="let teacher of teachers"> 
-        <mat-card class="card" *ngIf="card == true">
+        <mat-card class="card">
             <div class="content">
               <div class="front">
-                <img mat-card-image class="imgStyle" [src]=teacher.PictureUrl > 
+                <img mat-card-image class="imgStyle" [src]=teacher.PictureURL> 
                 <mat-card-title class="title"> {{teacher.Nume}} {{teacher.Prenume}} </mat-card-title>
               </div>
               <div class="back" (click)="hide()">
                   <mat-card-content>
-                      email:{{teacher.Email}}
+                      {{teacher.Email}}
                      
                   </mat-card-content>
                   <mat-card-subtitle style="color:white;">
-                      website:{{teacher.Website}}
+                      {{teacher.Website}}
                   </mat-card-subtitle>
               </div>
             </div>
