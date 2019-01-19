@@ -41,9 +41,9 @@ export class NoteLabTeacherComponent implements OnInit {
   }
 
   createArray(student: StudentData){
-    console.log(student);
+    //console.log(student);
     this.nrLabs = Array.from(new Array(student.grades.length + 1),(val,index)=>index);
-    console.log("here"+ this.nrLabs)
+    //console.log("here"+ this.nrLabs)
     return this.nrLabs;
   }
 
@@ -52,42 +52,43 @@ export class NoteLabTeacherComponent implements OnInit {
     for (var i = 0; i < N; i++) {
       foo.push(i);
     }
-    console.log(foo);
+    //console.log(foo);
     return foo;
   }
 
   saveGrade(event,student,idx){
     //save the grade into DB on focusout event
     this.grade=event.target.value;
-    console.log(this.grade);
-    console.log(this.data);
-    console.log(idx);
+    //console.log(this.grade);
+    //console.log(this.data);
+    //console.log(idx);
     
-      console.log("len of grades" + student.grades.len);
+      //console.log("len of grades" + student.grades.len);
       if(idx <= student.grades.length)
       {
-        
+        //console.log("update grade with id"+student.grades[idx]["id"]);
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,student.grades[idx]["id"]).subscribe(
           data => {
-          console.log(data);
+          //console.log(data);
         });
       }
       else
       {
+        //console.log("add new lab grade to"+student.username);
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,"").subscribe(
           data => {
-          console.log(data);
+          //console.log(data);
         });
       }
   }
 
   savePresence(event, student){
     this.presence = event.target.value;
-    console.log(student);
+    //console.log(student);
 
     this.teacherService.PostPrezenta(this.materie,student.username,this.presence).subscribe(
       data => {
-      console.log(data);
+      //console.log(data);
     });
   }
 
