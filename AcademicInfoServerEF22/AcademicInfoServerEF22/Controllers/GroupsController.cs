@@ -45,8 +45,8 @@ namespace AcademicInfoServerEF22.Controllers
         }
 
         // GET: api/Groups/Get/<specializare>
-        [HttpGet("Get/{numeSpecializare}")]
-        public IActionResult GetGroupsForSpecializare([FromRoute] string numeSpecializare)
+        [HttpGet("Get/{an}/{numeSpecializare}")]
+        public IActionResult GetGroupsForSpecializare([FromRoute] string an, [FromRoute] string numeSpecializare)
         {
             Specializare specializare = _context.Specializare.Where(
                 s => s.Nume.Equals(numeSpecializare)
@@ -64,7 +64,8 @@ namespace AcademicInfoServerEF22.Controllers
             List<string> response = new List<string>();
 
             foreach (var g in groups)
-                response.Add(g.GroupName);
+                if (g.GroupName[1] == char.Parse(an))
+                    response.Add(g.GroupName);
 
             return Ok(response);
         }
