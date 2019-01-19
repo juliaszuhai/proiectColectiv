@@ -68,9 +68,11 @@ export interface LabGrade {
 }
 
 export interface TeacherData{
-  name:string;
-  url:string;
-  description:string;
+  Nume:string;
+  Prenume: string;
+  Email:string;
+  PictureUrl:string;
+  Website:string;
 }
 
 @Injectable()
@@ -82,7 +84,7 @@ export class StudentService {
   changePassURL = 'https://localhost:44354/api/ChangePass'
   baseURLDisciplines='https://localhost:44354/api/Discipline';
   baseURLSpecializari='https://localhost:44354/api/Specializari';
-
+  teacherURL='https://localhost:44354/api/Teachers';
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -140,6 +142,16 @@ export class StudentService {
       });
   }
 
+  getTeachersDetails() {
+    return this.http.get<TeacherData[]>(
+      this.teacherURL+"/showcase/",
+      {
+        headers: new HttpHeaders(
+          { 'Content-Type': 'application/json' }
+        )
+      });
+  }
+
   getLabGrades(username: string, materieSelectata: string) {
     return this.http.get<LabGrade[]>(this.baseURL + "/noteLab/" + username + "/" + materieSelectata,
       {
@@ -181,6 +193,6 @@ export class StudentService {
     return this.http.post(this.baseURL,body,{
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     })
-
   }
+  
 }

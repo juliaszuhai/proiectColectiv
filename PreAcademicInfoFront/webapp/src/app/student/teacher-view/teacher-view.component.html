@@ -88,13 +88,17 @@
         <mat-card class="card" *ngIf="card == true">
             <div class="content">
               <div class="front">
-                <img mat-card-image class="imgStyle" [src]=teacher.url > 
-                <mat-card-title class="title"> {{teacher.name}} </mat-card-title>
+                <img mat-card-image class="imgStyle" [src]=teacher.PictureUrl > 
+                <mat-card-title class="title"> {{teacher.Nume}} {{teacher.Prenume}} </mat-card-title>
               </div>
               <div class="back" (click)="hide()">
                   <mat-card-content>
-                        {{teacher.description}}
+                      email:{{teacher.Email}}
+                     
                   </mat-card-content>
+                  <mat-card-subtitle style="color:white;">
+                      website:{{teacher.Website}}
+                  </mat-card-subtitle>
               </div>
             </div>
           </mat-card>
