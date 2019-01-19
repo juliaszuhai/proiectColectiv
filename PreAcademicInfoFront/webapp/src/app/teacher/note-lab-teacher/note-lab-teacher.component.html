@@ -41,7 +41,7 @@
             <div>
                 <span> L{{student.grades.length + 1}}: </span>
                 <mat-form-field>
-                    <input matInput  type="number" placeholder="" >
+                    <input matInput  type="number" placeholder="{{student.grades[student.grades.length + 1].value}}" #input (focusout)="saveGrade($event,student,student.grades.length + 1)" >
                   </mat-form-field>
             </div>
             <div>{{student.nume}}  </div>
