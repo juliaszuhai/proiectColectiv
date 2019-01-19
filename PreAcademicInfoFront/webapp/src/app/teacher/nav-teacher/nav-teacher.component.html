@@ -19,8 +19,8 @@
       <mat-menu #profile="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
     
           <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-        
-              <form (ngSubmit)="changePassword()" class="menu-form" >
+            <div class="toLeft">
+              <form (ngSubmit)="changePassword()">
                 <mat-form-field class="example-full-width">
                   <input type="password" matInput placeholder="Old Password" name="old-password" [(ngModel)]="newPassData.old_password" required>
                 </mat-form-field>
@@ -34,6 +34,7 @@
                 </mat-form-field> 
                 <button mat-raised-button color="primary">Change Password</button>
             </form>
+          </div>
             <div class="error_message" *ngIf="displayError()" >
               {{getMessage()}}
             </div>

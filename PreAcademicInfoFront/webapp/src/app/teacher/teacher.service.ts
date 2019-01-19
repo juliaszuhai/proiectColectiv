@@ -10,6 +10,8 @@ export interface StudentData {
   numarMatricol: string;
   nume: string;
   prenume: string;
+  prezenteLab: string;
+  prezenteSeminar: string;
   grades: GradesData[];
 }
 export interface GradesData {
@@ -126,4 +128,19 @@ export class TeacherService {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     });
   }
-}
+
+  PostPrezenta (
+    materie: string,
+    usernameStudent: string,
+    noAttendance: string)
+    {
+
+      console.log(materie + " " + usernameStudent + " " + noAttendance);
+      return this.http.post(
+        this.disciplineURL + "/prezenteLab/" + materie + "/" + usernameStudent + "/" + noAttendance , 
+        {
+          headers: new HttpHeaders({ "Content-Type": "application/json" })
+        });
+
+    }
+  }

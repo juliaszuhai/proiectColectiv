@@ -182,6 +182,18 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 studentDict["nume"] = s.Nume;
                 studentDict["prenume"] = s.Prenume;
 
+                studentDict["prezenteLab"] = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceLab.ToString();
+
+                studentDict["prezenteSeminar"] = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceSeminary.ToString();
+
                 // Get all his grades from the respective discipline with the provided grade type
                 List<Grade> grades = _context.Student.Where(
                     st => st.Username.Equals(s.Username)
@@ -190,6 +202,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 ).FirstOrDefault().Grades.Where(
                     g => g.Type.ToString().Equals(gradeType)
                 ).ToList();
+
 
                 // Create a list in which we store all the grades that we get for the students
                 List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
@@ -204,7 +217,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     gradeDict["id"] = g.Id.ToString();
                     gradeDict["value"] = g.GradeValue.ToString();
                     gradeDict["data"] = g.DataNotei;
-
+                    
                     // Append the inner inner dictionary to the list of grades
                     gradesList.Add(gradeDict);
                 }
