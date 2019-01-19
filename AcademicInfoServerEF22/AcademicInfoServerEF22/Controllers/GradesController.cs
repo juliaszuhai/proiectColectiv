@@ -155,7 +155,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 Grade examGrade = _context.GradeToDiscipline.Where(
                     gtd => gtd.Id.Equals(gradeToDicipline.Id)
                 ).FirstOrDefault().Grades.Where(
-                    g => g.Type.ToString().Equals("EXAM")
+                    g => g.Type.ToString().Equals("EXAMEN")
                 ).FirstOrDefault();
 
                 //Retrieve the final grade
