@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AcademicInfoServerEF22.Services
 using AcademicInfoServerEF22EF22.Models;
 
 namespace AcademicInfoServerEF22EF22.Controllers
@@ -110,6 +111,71 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Ok(admin);
         }
 
+        // POST: api/Admins/Notify
+        [HttpPost]
+        public IActionResult NotifyStudents([FromBody] NotifyJSON notifyJSON)
+        {
+            Service service = new Service (_context);
+            List<Student> students = new List<Student>();
+            Dictionary<string, string> response = new Dictionary<string, string>();
+
+            if (notifyJSON.grupa == null)
+            {
+                if (notifyJSON.an == null)
+                {
+                    if (notifyJSON.specializare == null)
+                    {
+                        if (notifyJSON.departament == null)
+                        {
+                            Dictionary<string, string> err = new Dictionary<string, string>();
+                            err.Add("error", "Who do you want to send the message to, hmmm ?");
+                            return Json(err);
+                        }
+
+                        // Send mail to the hole department
+                        students = _context.Student.Where(
+                            s => s.FacultiesEnrolled.FirstOrDefault().Specializare.DepartmentName.Equals(notifyJSON.departament)
+                        ).ToList();
+
+                        service.SendMailToStudents(students, notifyJSON.titlu, notifyJSON.mesaj);
+
+                        response.Add("success", "The students have been notified via GMail!");
+                        return Json(response);
+                    }
+
+                    // Send mail to the hole specialty
+                    students = _context.Student.Where(
+                        s => s.FacultiesEnrolled.FirstOrDefault().Specializare.Nume.Equals(notifyJSON.specializare)
+                    ).ToList();
+
+                    service.SendMailToStudents(students, notifyJSON.titlu, notifyJSON.mesaj);
+
+                    response.Add("success", "The students have been notified via GMail!");
+                    return Json(response);
+                }
+
+                // Send mail to the hole year
+                students = _context.Student.Where(
+                    s => s.An.Equals(int.Parse(notifyJSON.an))
+                ).ToList();
+
+                service.SendMailToStudents(students, notifyJSON.titlu, notifyJSON.mesaj);
+
+                response.Add("success", "The students have been notified via GMail!");
+                return Json(response);
+            }
+
+            // Send mail to the hole group
+            students = _context.Student.Where(
+                s => s.FacultiesEnrolled.FirstOrDefault().Group.GroupName.Equals(notifyJSON.grupa)
+            ).ToList();
+
+            service.SendMailToStudents(students, notifyJSON.titlu, notifyJSON.mesaj);
+
+            response.Add("success", "The students have been notified via GMail!");
+            return Json(response);
+        }
+
         // PUT: api/Admins/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAdmin([FromRoute] string id, [FromBody] Admin admin)
@@ -186,5 +252,14 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Admin.Any(e => e.Username == id);
         }
 
+        public class NotifyJSON
+        {
+            public string titlu { get; set; }
+            public string mesaj { get; set; }
+            public string departament { get; set; }
+            public string specializare { get; set; }
+            public string an { get; set; }
+            public string grupa { get; set; }
+        }
     }
 }
