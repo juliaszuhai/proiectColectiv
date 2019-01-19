@@ -32,16 +32,16 @@
       <div class="example-element-detail"
            [@detailExpand]="student == expandedElement ? 'expanded' : 'collapsed'">
          
-            <div *ngFor="let lab of createArray(student)">
-                <span> L{{lab}}: </span>
+            <div *ngFor="let lab of newArray(student.grades.length)">
+                <span> L{{lab+1}}: </span>
                 <mat-form-field>
-                  <input matInput  type="number" placeholder="{{student.grades[lab]['value']}}" #input (focusout)="saveGrade($event,element,lab)">
+                  <input matInput  type="number" placeholder="{{student.grades[lab].value}}" #input (focusout)="saveGrade($event,student,lab)">
                 </mat-form-field>
             </div>
             <div>
                 <span> L{{student.grades.length + 1}}: </span>
                 <mat-form-field>
-                    <input matInput  type="number" placeholder="">
+                    <input matInput  type="number" placeholder="" >
                   </mat-form-field>
             </div>
             <div>{{student.nume}}  </div>
