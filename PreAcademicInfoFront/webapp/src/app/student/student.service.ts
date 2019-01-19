@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { tap } from "rxjs/operators";
+import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {tap} from "rxjs/operators";
+import { NewPassData } from '../signin/authentication-service.service';
 
 
 export interface StudentData {
@@ -74,8 +75,10 @@ export class StudentService {
   baseURL = 'https://localhost:44354/api/Students';
   gradesURL = 'https://localhost:44354/api/Grades';
 
-  baseURLDisciplines = 'https://localhost:44354/api/Discipline';
-  baseURLSpecializari = 'https://localhost:44354/api/Specializari';
+  changePassURL = 'https://localhost:44354/api/ChangePass'
+  baseURLDisciplines='https://localhost:44354/api/Discipline';
+  baseURLSpecializari='https://localhost:44354/api/Specializari';
+
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -88,6 +91,7 @@ export class StudentService {
         )
       });
   }
+
   getGrades(username: string) {
     return this.http.get(this.gradesURL + "/" + username,
       {
@@ -95,6 +99,28 @@ export class StudentService {
           { 'Content-Type': 'application/json' }
         )
       });
+
+  changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+    let username = localStorage['username']
+    let body = JSON.stringify({username,oldPassword,newPassword,confirmNewPassword});
+    console.log(localStorage['username']);
+    return this.http.put<NewPassData>(this.changePassURL,
+      body,
+      {
+      headers: new HttpHeaders(
+        {'Content-Type' : 'application/json'}
+      )
+    })
+  }
+
+  getGrades(username:string)
+  {
+    return this.http.get(this.gradesURL+"/"+username,
+    {
+      headers: new HttpHeaders(
+        {'Content-Type' : 'application/json'}
+      )
+    });
   }
 
 
