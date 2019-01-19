@@ -7,6 +7,12 @@ export interface UserLoginData {
   username: string;
   password: string;
 }
+export interface NewPassData {
+  username: string;
+  old_password: string;
+  new_password: string;
+  confirm_new_password: string;
+}
 @Injectable()
 export class AuthenticationServiceService {
 

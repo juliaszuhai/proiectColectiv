@@ -140,6 +140,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
             switch (tipNota)
             {
                 case "Examen final":
+                    gradeType = "EXAM";
+                    break;
+                case "Final":
                     gradeType = "FINAL";
                     break;
                 case "Laborator":
