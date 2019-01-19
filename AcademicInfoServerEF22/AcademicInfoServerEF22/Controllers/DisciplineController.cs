@@ -143,5 +143,51 @@ namespace AcademicInfoServerEF22EF22.Controllers
         {
             return _context.Discipline.Any(e => e.Cod == id);
         }
+
+        [HttpGet("listDisciplines/{specializare}/{an}/{semestru}")]
+        public IActionResult GetAvailableDisciplines([FromRoute] string specializare, [FromRoute] string an, [FromRoute] string semestru)
+        {
+            List<Discipline> disciplines = null;
+            if (specializare != "" && !an.Equals("0") && !semestru.Equals("0"))
+            {
+                disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                           d.An.ToString().Equals(an) &&
+                                           d.Semestru.ToString().Equals(semestru)).ToList();
+            }
+            else if (specializare != "")
+            {
+                if (!an.Equals("0") && semestru.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                            d.An.ToString().Equals(an)).ToList();
+                }
+                if (!semestru.Equals("0") && an.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                            d.Semestru.ToString().Equals(semestru)).ToList();
+                }
+                if (semestru.Equals("0") && an.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare)).ToList();
+                }
+            }
+            List<Dictionary<string, string>> response = new List<Dictionary<string, string>>();
+            foreach (var d in disciplines)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("An", d.An.ToString());
+                dict.Add("semestru", d.Semestru.ToString());
+                dict.Add("nume", d.Nume);
+                dict.Add("type", d.Type.ToString());
+                dict.Add("codMaterie", d.Cod);
+                dict.Add("nrCredite", d.Credite.ToString());
+                dict.Add("locuriDisponibile", "0");
+                dict.Add("locuriOcupate", "0");
+
+                response.Add(dict);
+            }
+
+            return Ok(response);
+        }
     }
 }

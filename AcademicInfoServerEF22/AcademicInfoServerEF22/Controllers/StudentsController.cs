@@ -254,6 +254,14 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Json(response);
         }
 
+        [HttpGet("specializari/{username}")]
+        public IActionResult GetSpecializariOfDepartmentStudent([FromRoute]string username)
+        {
+            List<string> specializari = _context.Department.Where(d => d.Specializares.Contains(_context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault().FacultiesEnrolled.
+                  FirstOrDefault().Specializare)).SelectMany(d => d.Specializares.Select(sp => sp.Nume)).ToList();
+            return Json(specializari);
+        }
+
         [HttpGet("{an}")]
         public IEnumerable<Student> GetStudentsByYear([FromRoute] string an)
         {
