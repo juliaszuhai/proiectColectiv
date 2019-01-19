@@ -154,7 +154,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 foreach (var grade in gradeToDicipline.Grades)
                 {
                     //If the grade is a FINAL grade
-                    if (grade.Type.ToString().Equals("FINAL"))
+                    if (grade.Type.ToString().Equals("FINAL") || grade.Type.ToString().Equals("EXAMEN"))
                     {
                         //Create a local dictionary
                         var dict = new Dictionary<string, string>();
@@ -168,6 +168,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                         dict["dataPromovarii"] = grade.DataNotei;
                         dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
                         dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
+                        dict["gradeType"] = grade.Type.ToString();
 
                         //Add the local dictionary to the list of grades
                         response.Add(dict);
