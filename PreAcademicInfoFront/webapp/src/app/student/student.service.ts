@@ -99,6 +99,7 @@ export class StudentService {
           { 'Content-Type': 'application/json' }
         )
       });
+    }
 
   changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
     let username = localStorage['username']
@@ -112,17 +113,6 @@ export class StudentService {
       )
     })
   }
-
-  getGrades(username:string)
-  {
-    return this.http.get(this.gradesURL+"/"+username,
-    {
-      headers: new HttpHeaders(
-        {'Content-Type' : 'application/json'}
-      )
-    });
-  }
-
 
   private setStudent(res: any) {
 
