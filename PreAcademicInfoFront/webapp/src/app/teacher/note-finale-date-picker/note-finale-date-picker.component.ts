@@ -3,7 +3,7 @@ import { TeacherService, StudentData } from '../teacher.service';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MatDatepicker } from '@angular/material';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-note-finale-date-picker',
@@ -22,10 +22,10 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
   isValidMoment: boolean = false;
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
   grade: string;
-  choosedDate: string;
+  choosedDate: string = null;
   public students = [];
 
-  constructor(private teacherService: TeacherService){ }
+  constructor(private teacherService: TeacherService,public toastr: ToastrManager){ }
 
   ngOnInit() {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
@@ -72,6 +72,7 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
     }
     else
     {
+      this.toastr.warningToastr('Selecteaza data inainte de a completa notele', 'Alert!');
       console.log("baga ba o dataaaaaaaa baaaaa");
     }
   }

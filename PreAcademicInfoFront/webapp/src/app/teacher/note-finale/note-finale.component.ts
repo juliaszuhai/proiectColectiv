@@ -1,5 +1,6 @@
 import { Component, OnInit,Input  } from '@angular/core';
 import { TeacherService, StudentData } from '../teacher.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class NoteFinaleComponent implements OnInit {
   data: string = null;
   public students = [];
 
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService,public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
@@ -55,8 +56,10 @@ export class NoteFinaleComponent implements OnInit {
       this.grade = null;
       this.data = null;
     }
+    
     else
     {
+      this.toastr.warningToastr('Selecteaza data', 'Alert!');
       console.log("baga ba o dataaaaaaaa baaaaa");
     }
   }
