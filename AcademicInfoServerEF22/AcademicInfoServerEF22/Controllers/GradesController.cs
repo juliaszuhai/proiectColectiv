@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AcademicInfoServerEF22EF22.Models;
+using AcademicInfoServerEF22.Services
 using System;
 namespace AcademicInfoServerEF22EF22.Controllers
 {
@@ -197,6 +198,41 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
             //Return the list of grades
             return Json(response);
+        }
+
+        // GET: api/Grades/Statistics/2018/Info-Engleza
+        [HttpGet("Statistics/{year}/{specialization}")]
+        public IActionResult GradeBuckets([FromRoute] string year, [FromRoute] string specialization)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Service s = new Service (_context);
+
+            List<double> grades = s.GetGradesByYearAndSpecialization(year, specialization);
+
+            //Put into buckets 0-5, 5-6, 6-7, 7-8, 8-9, 9-10, 10
+            List<int> nrGradesByBucket = new List<int>(new int[] { 0, 0, 0, 0, 0, 0, 0 });
+            foreach (double grade in grades)
+            {
+                if (grade == 10)
+                    nrGradesByBucket[0]++;
+                if (grade >= 9 && grade < 10)
+                    nrGradesByBucket[1]++;
+                if (grade >= 8 && grade < 9)
+                    nrGradesByBucket[2]++;
+                if (grade >= 7 && grade < 8)
+                    nrGradesByBucket[3]++;
+                if (grade >= 6 && grade < 7)
+                    nrGradesByBucket[4]++;
+                if (grade >= 5 && grade < 6)
+                    nrGradesByBucket[5]++;
+                if (grade < 5)
+                    nrGradesByBucket[6]++;
+            }
+
+            return Ok(nrGradesByBucket);
         }
 
         [HttpPost]
