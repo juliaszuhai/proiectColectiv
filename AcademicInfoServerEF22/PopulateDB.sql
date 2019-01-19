@@ -71,7 +71,7 @@ INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Passwor
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('biju', 1, 3, 'delibas.stefan@gmail.com', 2016, 'S', '0711111111', 'Abrudean', 'Sergiu Valentin', 1, '1960000000001', 2001, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('andre', 1, 3, 'delibas.stefan@gmail.com', 2016, 'A', '0711111112', 'Acatrinei', 'Andreea Laura', 1, '1960000000002', 2002, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt)VALUES ('ladi', 1, 3, 'delibas.stefan@gmail.com', 2016, 'L', '0711111113', 'Andrasi', 'Ladislau', 1, '1960000000003', 2003, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
-INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('dutzi', 1, 3, 'delibas.stefan@gmail.com', 2016, 'V', '0711111114', 'Abrudan', 'Andrei', 1, '1960000000004', 2004, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
+INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('dutzi', 1, 3, 'delibas.stefan@gmail.com', 2016, 'V', '0711111114', 'Baican', 'Vlad', 1, '1960000000004', 2004, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('radub', 1, 3, 'delibas.stefan@gmail.com', 2016, 'R', '0711111115', 'Balc', 'Radu', 1, '1960000000005', 2005, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('dorinb', 1, 3, 'delibas.stefan@gmail.com', 2016, 'A', '0711111116', 'Balea', 'Dorin Constantin', 1, '1960000000006', 2006, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('raulb', 1, 3, 'delibas.stefan@gmail.com', 2016, 'R', '0711111117', 'Banciu', 'Raul', 1, '1960000000007', 2007, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
@@ -335,11 +335,11 @@ INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestr
 -- Semester 1
 -- Final grades
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE0020', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 1, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 1, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5005', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 2, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 2, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5004', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 3, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (8, 3, 5, '01/01/2019', 0, 0);
 
 
 -- Seminar grades
@@ -366,11 +366,11 @@ INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentI
 -- Semester 2
 -- Final grades
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5006', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 4, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5007', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (10, 5, 5, '01/01/2019', 0, 0);
 INSERT INTO [GradeToDiscipline] (DisciplineCod, StudentUsername) VALUES ('MLE5025', 'andi');
-INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 6, 2, '01/01/2019', 0, 0);
+-- INSERT INTO [Grade] (GradeValue, GradesToDisciplineId, Type, DataNotei, ProcentInnerType, ProcentOuter) VALUES (9, 6, 5, '01/01/2019', 0, 0);
 
 
 
