@@ -20,6 +20,8 @@ import { NoteLabComponent } from './note-lab/note-lab.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MatSlideToggleModule } from '@angular/material';
 import { TeacherViewComponent } from './teacher-view/teacher-view.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
@@ -50,13 +52,17 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    MatSlideToggleModule,],
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatCardModule],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   exports: [RouterModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatCardModule,
+    MatGridListModule,
     HttpClientModule,]
 })
 export class StudentModule { }
