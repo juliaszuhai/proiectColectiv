@@ -17,26 +17,14 @@ export class NewsComponent implements OnInit {
   mail : MailData;
   selected : boolean;
 
-  grupe = [
-    {value: '931', viewValue: '931'},
-    {value: '932', viewValue: '932'},
-    {value: '933', viewValue: '933'},
-    ];
+  grupe = [];
   ani = [
     {value: '1', viewValue: 'Anul 1'},
     {value: '2', viewValue: 'Anul 2'},
     {value: '3', viewValue: 'Anul 3'},
   ];
-  departamente=[
-    {value: 'Matematica', viewValue: 'Matematica'},
-    {value:'Informatica', viewValue: 'Informatica'}
-  ];
-  specializari=[
-    {value: 'Informatica engleza', viewValue: 'Informatica engleza'},
-    {value:'Informatica romana', viewValue: 'Informatica romana'},
-    {value: 'Informatica germana', viewValue: 'Informatica germana'},
-    {value:'Informatica maghiara', viewValue: 'Informatica maghiara'}
-  ];
+  departamente=[];
+  specializari=[];
   
   ngOnInit(): void {
     //load materile predate de un teacher
@@ -69,7 +57,7 @@ export class NewsComponent implements OnInit {
       this.selected = true;
     }
     this.mail.departament = param
-    this.adminService.getSpecializari(this.mail.specializare)
+    this.adminService.getSpecializari(this.mail.departament)
     .subscribe(data => 
       {
         for (var _i = 0; _i < data.length; _i++)
@@ -89,7 +77,7 @@ export class NewsComponent implements OnInit {
   onAnChange(event:any) {
     let param = event.value;
     this.mail.an = param;
-    this.adminService.getGrupe(this.mail.an)
+    this.adminService.getGrupe(this.mail.specializare,this.mail.an)
     .subscribe(data => 
       {
         for (var _i = 0; _i < data.length; _i++)

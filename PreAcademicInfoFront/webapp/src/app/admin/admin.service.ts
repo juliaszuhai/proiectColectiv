@@ -136,8 +136,8 @@ export class AdminService {
           {headers: new HttpHeaders({ "Content-Type": "application/json" })
         });
     }
-    getGrupe(specializare:string):Observable<string[]> {
-      return this.http.get<string[]>(this.grupeURL+"/"+specializare,
+    getGrupe(specializare:string,an:string):Observable<string[]> {
+      return this.http.get<string[]>(this.grupeURL+"/Get/" + an+ "/" +specializare,
           {headers: new HttpHeaders({ "Content-Type": "application/json" })
         });
     }
