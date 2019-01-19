@@ -177,14 +177,16 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 else
                     dict["notaExamen"] = examGrade.GradeValue.ToString();
                 if (finalGrade == null)
+                {
                     dict["notaFinala"] = "";
+                    dict["dataPromovarii"] = ""; 
+                }
                 else
+                {
                     dict["notaFinala"] = finalGrade.GradeValue.ToString();
-                dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
-                if (finalGrade.DataNotei == null)
-                    dict["dataPromovarii"] = "";
-                else
                     dict["dataPromovarii"] = finalGrade.DataNotei;
+                }
+                dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
                 dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
                 dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
 
