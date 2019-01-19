@@ -170,21 +170,21 @@ INSERT INTO [Department] (Name, FacultyId) VALUES ('Matematică', 1);
 
 --Specializari
 INSERT INTO [Specializare] (AdminUsername, CuFrecventa, DepartmentId, DepartmentName, Limba, NumarSemestre, Nume, TaxaPerCredit, Type) VALUES ('a1', 1, 1, 'Informatică', 1, 6, 'Informatică', 360, 1); --> Info-Engleza
-INSERT INTO [Specializare] (AdminUsername, CuFrecventa, DepartmentId, DepartmentName, Limba, NumarSemestre, Nume, TaxaPerCredit, Type) VALUES ('a2', 1, 2, 'Matematică', 0, 6, 'Matematica-Informatica', 260, 1);
+INSERT INTO [Specializare] (AdminUsername, CuFrecventa, DepartmentId, DepartmentName, Limba, NumarSemestre, Nume, TaxaPerCredit, Type) VALUES ('a2', 1, 2, 'Matematică', 0, 6, 'Matematică-Informatică', 260, 1);
 
 --Groups
-INSERT INTO [Group] (GroupName) VALUES ('911');
-INSERT INTO [Group] (GroupName) VALUES ('912');
-INSERT INTO [Group] (GroupName) VALUES ('921');
-INSERT INTO [Group] (GroupName) VALUES ('922');
-INSERT INTO [Group] (GroupName) VALUES ('931');
-INSERT INTO [Group] (GroupName) VALUES ('932');
-INSERT INTO [Group] (GroupName) VALUES ('311');
-INSERT INTO [Group] (GroupName) VALUES ('312');
-INSERT INTO [Group] (GroupName) VALUES ('321');
-INSERT INTO [Group] (GroupName) VALUES ('322');
-INSERT INTO [Group] (GroupName) VALUES ('331');
-INSERT INTO [Group] (GroupName) VALUES ('332');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('911', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('912', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('921', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('922', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('931', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('932', 'Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('311', 'Matematică-Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('312', 'Matematică-Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('321', 'Matematică-Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('322', 'Matematică-Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('331', 'Matematică-Informatică');
+INSERT INTO [Group] (GroupName, NumeSpecializare) VALUES ('332', 'Matematică-Informatică');
 
 --Faculty Enroll
 -- Info Engleza

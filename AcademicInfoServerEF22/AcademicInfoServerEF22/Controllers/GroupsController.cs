@@ -44,6 +44,31 @@ namespace AcademicInfoServerEF22.Controllers
             return Ok(groups);
         }
 
+        // GET: api/Groups/Get/<specializare>
+        [HttpGet("Get/{numeSpecializare}")]
+        public IActionResult GetGroupsForSpecializare([FromRoute] string numeSpecializare)
+        {
+            Specializare specializare = _context.Specializare.Where(
+                s => s.Nume.Equals(numeSpecializare)
+            ).FirstOrDefault();
+
+            if (specializare == null)
+            {
+                Dictionary<string, string> err = new Dictionary<string, string>();
+                err.Add("error", String.Format("There is no specializare named: '{0}'!", numeSpecializare));
+                return Ok(err);
+            }
+
+            List<Group> groups = _context.Group.Where(g => g.NumeSpecializare.Equals(numeSpecializare)).ToList();
+
+            List<string> response = new List<string>();
+
+            foreach (var g in groups)
+                response.Add(g.GroupName);
+
+            return Ok(response);
+        }
+
         // PUT: api/Groups/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGroup([FromRoute] int id, [FromBody] Group @group)

@@ -13,6 +13,9 @@ namespace AcademicInfoServerEF22EF22.Models
 
         [Required]
         public String GroupName { get; set; }
+
+        [Required]
+        public String NumeSpecializare { get; set; }
         
         //public ICollection<FacultyEnroll> FacultiesEnrolments { get; set; }
     }
