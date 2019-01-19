@@ -1,0 +1,16 @@
+MAP ana
+MPP teo
+Algebra ana
+Analiza starlord
+PE spiderman
+ASC spiderman
+OOP spiderman
+MAP starlord
+MAP yoda
+MPP luke
+Algebra blackpanther
+Analiza cptmarvel
+PE antman
+ASC blackwidow
+OOP strange
+MAP cptamerica

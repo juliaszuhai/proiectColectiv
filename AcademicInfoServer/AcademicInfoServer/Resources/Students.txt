@@ -1,0 +1,12 @@
+ana 1666 anaparola anamariame@yahoo.com Bocaniciu Ana-Maria 666666666 1980706080066 G true 2016 3
+teo 1346 teoparola teoemail Bocaniciu Radu-Teofil 6666666666 1980706080066 G true 2016 3
+spiderman 1552 peterparola peteremail Parker Peter 6666666666 1980706080066 G true 2016 1
+starlord 1552 starlordparola peteremail Quill Peter 6666666666 1980706080066 G true 2016 2
+strange 1666 strangeparola anamariame@yahoo.com Doctor Strange 666666666 1980706080066 G true 2016 3
+cptamerica 1346 cptamericaparola teoemail Rigers Steve 6666666666 1980706080066 G true 2016 3
+blackwidow 1552 blackwidowparola peteremail Black Widow 6666666666 1980706080066 G true 2016 1
+antman 1552 antmanparola peteremail Ant Man 6666666666 1980706080066 G true 2016 2
+cptmarvel 1666 cptmarvelparola anamariame@yahoo.com Captain Marvel 666666666 1980706080066 G true 2016 3
+blackpanther 1346 blackpantherparola teoemail Black Panther 6666666666 1980706080066 G true 2016 3
+yoda 1552 yodaparola peteremail Yoda Yodaa 6666666666 1980706080066 G true 2016 1
+luke 1552 lukeparola peteremail Luke Skywalker 6666666666 1980706080066 G true 2016 2

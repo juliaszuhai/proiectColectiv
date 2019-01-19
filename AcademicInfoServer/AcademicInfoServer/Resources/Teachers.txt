@@ -1,0 +1,10 @@
+loki lokiparola lokiemail Loki Odinson 6666666666 Strada-NrG
+stark starkparola starkemail Tony Stark 6666666666 Strada-NrG
+anakin anakinparola anakinemail Anakin Skywalker 6666666666 Strada-NrG
+hansolo hansoloparola hansoloemail Han Solo 6666666666 Strada-NrG
+leia leiaparola leiaemail Leia Organa 6666666666 Strada-NrG
+padme padmeparola padmeemail Padme Amidala 6666666666 Strada-NrG
+chewie chewieparola chewieemail Chewbacca Unknown 6666666666 Strada-NrG
+sidious sidiousparola sidiousemail Darth Sidious 6666666666 Strada-NrG
+obiwan obiwanparola obiwanemail Obi-Wan Kenobi 6666666666 Strada-NrG
+r2d2 r2d2parola r2d2email R2 D2 6666666666 Strada-NrG
