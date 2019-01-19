@@ -69,6 +69,12 @@ export interface LabGrade {
   data: string;
 }
 
+export interface TeacherData{
+  name:string;
+  url:string;
+  description:string;
+}
+
 @Injectable()
 export class StudentService {
 
