@@ -147,8 +147,13 @@ export class StudentService {
 
   saveContract(materiiSelectate: DisciplineData[]) {
     console.log(materiiSelectate);
+    var lista=[];
+    for(var i=0;i<materiiSelectate.length;i++)
+    {
+      lista.push({"codMaterie":materiiSelectate[i].codMaterie});
+    }
     var username=localStorage.getItem("username");
-    let body=JSON.stringify({materiiSelectate,username});
+    let body=JSON.stringify({lista,username});
     return this.http.post(this.baseURL,body,{
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     })
