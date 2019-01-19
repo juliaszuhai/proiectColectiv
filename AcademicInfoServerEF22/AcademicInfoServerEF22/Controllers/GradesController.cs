@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AcademicInfoServerEF22EF22.Models;
-using AcademicInfoServerEF22.Services
+using AcademicInfoServerEF22.Services;
 using System;
 namespace AcademicInfoServerEF22EF22.Controllers
 {

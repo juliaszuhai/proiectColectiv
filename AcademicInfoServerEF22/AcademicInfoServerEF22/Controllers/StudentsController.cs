@@ -174,7 +174,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             switch (tipNota)
             {
                 case "Examen final":
-                    gradeType = "EXAM";
+                    gradeType = "EXAMEN";
                     break;
                 case "Final":
                     gradeType = "FINAL";
