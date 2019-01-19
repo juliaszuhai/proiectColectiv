@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DisciplineData, AdminService, Mail } from '../admin.service';
+import { DisciplineData, AdminService, MailData } from '../admin.service';
 import { Router } from '@angular/router';
 
 const DISCIPLINE_DATA: DisciplineData[] = [
@@ -14,59 +14,8 @@ const DISCIPLINE_DATA: DisciplineData[] = [
 })
 export class NewsComponent implements OnInit {
 
-  mail : Mail;
+  mail : MailData;
   selected : boolean;
-
-  ngOnInit(): void {
-    
-  }
-
-  constructor(private adminService:AdminService, private router: Router) { 
-    this.mail = {
-      titlu : '',
-      mesaj : '',
-      departament:'',
-      an: '',
-      grupa: ''
-    }
-  }
-
-  onChange(event:any) {
-    let param = event.value;
-    if (param != '')
-    {
-      this.selected = true;
-    }
-    this.mail.departament = param
-    console.log("Departament:",this.mail.departament)
-
-  }
-  onAnChange(event:any) {
-    let param = event.value;
-    this.mail.an = param
-    console.log("An:",this.mail.an);
-  }
-  onGrupaChange(event:any) {
-    let param = event.value;
-    this.mail.grupa = param;
-    console.log("Grupa:",this.mail.grupa);
-  }
-  submitForm(){
-    this.adminService.sendMail(this.mail)
-    .subscribe(
-      data => {
-          
-          
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
-
-  columnsToDisplay1=['Check','An', 'semestru', 'nume', 'nrCredite', 'locuri'];
-  dataSource1 = DISCIPLINE_DATA;
 
   grupe = [
     {value: '931', viewValue: '931'},
@@ -88,4 +37,82 @@ export class NewsComponent implements OnInit {
     {value: 'Informatica germana', viewValue: 'Informatica germana'},
     {value:'Informatica maghiara', viewValue: 'Informatica maghiara'}
   ];
+  
+  ngOnInit(): void {
+    //load materile predate de un teacher
+    this.adminService.getDepartamente()
+    .subscribe(data => 
+      {
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.departamente.push({value:data[_i], viewValue: data[_i]});
+        }
+      }
+      );
+  }
+
+  constructor(private adminService:AdminService, private router: Router) { 
+    this.mail = {
+      titlu : '',
+      mesaj : '',
+      departament:'',
+      specializare:'',
+      an: '',
+      grupa: ''
+    }
+  }
+
+  onChange(event:any) {
+    let param = event.value;
+    if (param != '')
+    {
+      this.selected = true;
+    }
+    this.mail.departament = param
+    this.adminService.getSpecializari(this.mail.specializare)
+    .subscribe(data => 
+      {
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.specializari.push({value:data[_i], viewValue: data[_i]});
+        }
+      }
+      );
+    console.log("Departament:",this.mail.departament)
+
+  }
+  onSpecializareChange(event:any){
+    let param = event.value;
+    this.mail.specializare = param;
+    console.log("Specializare:",this.mail.specializare);
+  }
+  onAnChange(event:any) {
+    let param = event.value;
+    this.mail.an = param;
+    this.adminService.getGrupe(this.mail.an)
+    .subscribe(data => 
+      {
+        for (var _i = 0; _i < data.length; _i++)
+        {
+          this.grupe.push({value:data[_i], viewValue: data[_i]});
+        }
+      }
+    );
+    console.log("An:",this.mail.an);
+  }
+  onGrupaChange(event:any) {
+    let param = event.value;
+    this.mail.grupa = param;
+    
+    console.log("Grupa:",this.mail.grupa);
+  }
+  submitForm(){
+    this.adminService.sendMail(this.mail);
+  }
+
+
+  columnsToDisplay1=['Check','An', 'semestru', 'nume', 'nrCredite', 'locuri'];
+  dataSource1 = DISCIPLINE_DATA;
+
+ 
 }

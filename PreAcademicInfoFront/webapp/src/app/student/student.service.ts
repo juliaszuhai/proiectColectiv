@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {tap} from "rxjs/operators";
 import { NewPassData } from '../signin/authentication-service.service';
+import { Observable } from 'rxjs';
 
 
 export interface StudentData {
@@ -85,6 +86,7 @@ export class StudentService {
   baseURLDisciplines='https://localhost:44354/api/Discipline';
   baseURLSpecializari='https://localhost:44354/api/Specializari';
   teacherURL='https://localhost:44354/api/Teachers';
+  
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -193,6 +195,14 @@ export class StudentService {
     return this.http.post(this.baseURL,body,{
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     })
+  }
+
+  getMaterii(
+    teacher:string
+  ) :Observable<string[]> {
+    return this.http.get<string[]>(
+      this.baseURLDisciplines + "/toatematerile/"+localStorage['username']
+    );
   }
   
 }

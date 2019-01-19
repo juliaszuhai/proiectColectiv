@@ -15,7 +15,7 @@
   }
 
 .show{
-    background: #6cb4b8;
+    
     width:98.9%;
     height: 100%;
     position: absolute;
@@ -31,3 +31,13 @@
     display: table;
     margin: 0 auto;
 }
+
+#wrapper {
+    text-align: center;
+  }
+.atcenter {
+    margin:50px;
+    display: inline-block;
+    width:200px;
+    height: 200px;
+  }

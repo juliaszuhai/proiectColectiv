@@ -28,6 +28,7 @@ export class NoteLabTeacherComponent implements OnInit {
   expandedElement: StudentData | null;
   nrLabs = [];
 
+  prezenta:string;
   constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
@@ -80,11 +81,14 @@ export class NoteLabTeacherComponent implements OnInit {
       }
   }
 
-  savePresence(event,elem){
-    //save presence into DB on focusout event
+  savePresence(event, student){
     this.presence = event.target.value;
-    
-    console.log(this.presence);
+    console.log(student);
+
+    this.teacherService.PostPrezenta(this.materie,student.username,this.presence).subscribe(
+      data => {
+      console.log(data);
+    });
   }
 
 
