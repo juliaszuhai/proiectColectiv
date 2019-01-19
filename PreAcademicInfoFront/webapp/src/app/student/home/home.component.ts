@@ -54,7 +54,8 @@ export class HomeComponent implements OnInit{
   }
 
   getStudent()
-  {var username=localStorage.getItem("username");
+  {
+    var username=localStorage.getItem("username");
     this.studentService.getStudent(username).subscribe(
       data => {
         console.log(data);

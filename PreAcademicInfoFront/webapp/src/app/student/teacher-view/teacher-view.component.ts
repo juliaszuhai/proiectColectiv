@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-teacher-view',
@@ -7,14 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(public toastr: ToastrManager) {
+
+   }
+   
   card:boolean =true;
   ngOnInit() {
+    
   }
 
   hide()
   {
     this.card = false;
+    this.toastr.successToastr('This is success toast.', 'Success!');
   }
 
 }
