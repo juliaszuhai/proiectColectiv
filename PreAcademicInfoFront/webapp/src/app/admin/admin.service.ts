@@ -121,9 +121,9 @@ export class AdminService {
       console.log("we got right before the call");
       let body = JSON.stringify(mail);
       console.log(body);
-    //   return this.http.post<MailData>(this.adminURL + "/sendMail", body, {
-    //     headers: new HttpHeaders({ "Content-Type": "application/json" })
-    //   });
+      return this.http.post<MailData>(this.adminURL + "/Notify", body, {
+        headers: new HttpHeaders({ "Content-Type": "application/json" })
+      });
     }
 
     getDepartamente() :Observable<string[]> {

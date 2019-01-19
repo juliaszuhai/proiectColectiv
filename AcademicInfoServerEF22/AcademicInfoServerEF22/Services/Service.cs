@@ -24,20 +24,6 @@ namespace AcademicInfoServerEF22.Services
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("da6447743@gmail.com");
 
-            //Receivers
-            foreach (var email in emails)
-            {
-                msg.To.Add(new MailAddress(email));
-            }
-            msg.Priority = MailPriority.High;
-            msg.Subject = subject;
-            msg.Body = messageBody;
-            msg.IsBodyHtml = true;
-
-            // Attaching some data
-            //msg.Attachments.Add(new Attachment("C:\\Site.lnk"));
-
-            // Connecting to the server and configuring it
             SmtpClient client = new SmtpClient();
             client.Host = "smtp.gmail.com";
             client.Port = 587;
@@ -46,7 +32,21 @@ namespace AcademicInfoServerEF22.Services
             client.Credentials = new NetworkCredential("da6447743@gmail.com", "pass1234pass");
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
+            //Receivers
+            foreach (var email in emails)
+            {
+                msg.To.Add(new MailAddress(email));
+            
+                msg.Priority = MailPriority.High;
+                msg.Subject = subject;
+                msg.Body = messageBody;
+                msg.IsBodyHtml = true;
+
+            // Attaching some data
+            //msg.Attachments.Add(new Attachment("C:\\Site.lnk"));
+              
             client.Send(msg);
+            }
         }
 
         public List<double> GetGradesByYearAndSpecialization(string year, string specialization)

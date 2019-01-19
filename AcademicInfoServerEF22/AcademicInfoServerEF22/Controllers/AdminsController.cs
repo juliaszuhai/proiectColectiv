@@ -112,7 +112,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         // POST: api/Admins/Notify
-        [HttpPost]
+        [HttpPost("Notify")]
         public IActionResult NotifyStudents([FromBody] NotifyJSON notifyJSON)
         {
             Service service = new Service (_context);

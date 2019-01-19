@@ -95,7 +95,11 @@ export class NewsComponent implements OnInit {
     console.log("Grupa:",this.mail.grupa);
   }
   submitForm(){
-    this.adminService.sendMail(this.mail);
+    this.adminService.sendMail(this.mail).subscribe(data => 
+      {
+        console.log(data);
+      }
+    );
   }
 
 
