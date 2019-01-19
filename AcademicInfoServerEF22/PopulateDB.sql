@@ -19,6 +19,9 @@ DELETE FROM [Department];
 DBCC CHECKIDENT('Department', RESEED, 0);
 DELETE FROM [Faculty];
 DBCC CHECKIDENT('Faculty', RESEED, 0);
+DELETE FROM [ContractToDiscipline];
+DBCC CHECKIDENT('ContractToDiscipline', RESEED, 0);
+DELETE FROM [Contracts];
 DELETE FROM [Student];
 DELETE FROM [Teacher];
 DELETE FROM [Admin];
@@ -279,54 +282,54 @@ INSERT INTO [FacultyEnroll] (GroupId, SpecializareId, StudentUsername) VALUES (1
 
 --Disciplines
 -- Info-Engleza
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0020', 1, 5, 'Algebra', 'crivei', 0, 1, 1, 201, 0, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5005', 1, 5, 'Fundamentele programarii', 'arthur', 0, 1, 1, 201, 12, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5004', 1, 5, 'Arhitectura sistemelor de calcul', 'vancea', 0, 1, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0020', 1, 5, 'Algebra', 'crivei', 0, 1, 1, 201, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5005', 1, 5, 'Fundamentele programarii', 'arthur', 0, 1, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5004', 1, 5, 'Arhitectura sistemelor de calcul', 'vancea', 0, 1, 1, 201, 12, 10);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5006', 1, 5, 'Programare orientata obiect', 'iuliana', 0, 2, 1, 201, 12, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5025', 1, 5, 'Algoritmica grafelor', 'rlupsa', 0, 2, 1, 201, 12, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5007', 1, 5, 'Sisteme de operare', 'rares', 0, 2, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5006', 1, 5, 'Programare orientata obiect', 'iuliana', 0, 2, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5025', 1, 5, 'Algoritmica grafelor', 'rlupsa', 0, 2, 1, 201, 12, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5007', 1, 5, 'Sisteme de operare', 'rares', 0, 2, 1, 201, 12, 10);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5008', 2, 5, 'Metode avansate de programare', 'craciunf', 0, 3, 1, 201, 12, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5002', 2, 5, 'Retele de calculatoare', 'dadi', 0, 3, 1, 201, 12, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5027', 2, 5, 'Baze de date', 'sabina', 0, 3, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5008', 2, 5, 'Metode avansate de programare', 'craciunf', 0, 3, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5002', 2, 5, 'Retele de calculatoare', 'dadi', 0, 3, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5027', 2, 5, 'Baze de date', 'sabina', 0, 3, 1, 201, 12, 10);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5013', 2, 5, 'Medii de proiectare și programare', 'rgaceanu', 0, 4, 1, 201, 12, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5015', 2, 5, 'Programare web', 'forest', 0, 4, 1, 201, 12, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5029', 2, 5, 'Inteligenta artificiala', 'mihoct', 0, 4, 1, 201, 12, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5013', 2, 5, 'Medii de proiectare și programare', 'rgaceanu', 0, 4, 1, 201, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5015', 2, 5, 'Programare web', 'forest', 0, 4, 1, 201, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5029', 2, 5, 'Inteligenta artificiala', 'mihoct', 0, 4, 1, 201, 12, 5);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5023', 3, 5, 'Limbaje formale şi tehnici de compilare', 'motogna', 0, 5, 1, 201, 12, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLR5012', 3, 5, 'Proiect colectiv', 'tzutzu', 0, 5, 1, 201, 0, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLR8112', 3, 5, 'Gestionarea proiectelor software', 'tzutzu', 1, 5, 1, 80, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5023', 3, 5, 'Limbaje formale şi tehnici de compilare', 'motogna', 0, 5, 1, 201, 12, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLR5012', 3, 5, 'Proiect colectiv', 'tzutzu', 0, 5, 1, 201, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLR8112', 3, 5, 'Gestionarea proiectelor software', 'tzutzu', 1, 5, 1, 80, 0, 5);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE2001', 3, 5, 'Elaborarea lucrarii de licenta', 'avescan', 0, 6, 1, 201, 0, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLR5039', 3, 5, 'Fundamentele limbajelor de programare', 'vancea', 1, 6, 1, 60, 10, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE8115', 3, 5, 'Sabloane de proiectare', 'arthur', 1, 6, 1, 80, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE2001', 3, 5, 'Elaborarea lucrarii de licenta', 'avescan', 0, 6, 1, 201, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLR5039', 3, 5, 'Fundamentele limbajelor de programare', 'vancea', 1, 6, 1, 60, 10, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE8115', 3, 5, 'Sabloane de proiectare', 'arthur', 1, 6, 1, 80, 0, 10);
 
 -- Mate-Info
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0002', 1, 5, 'Analiza matematica', 'popovici', 0, 1, 2, 145, 0, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5055', 1, 5, 'Logica computationala', 'lupea', 0, 1, 2, 145, 0, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLR5076', 1, 5, 'Programare in C', 'mircea', 0, 1, 2, 145, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0002', 1, 5, 'Analiza matematica', 'popovici', 0, 1, 2, 145, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5055', 1, 5, 'Logica computationala', 'lupea', 0, 1, 2, 145, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLR5076', 1, 5, 'Programare in C', 'mircea', 0, 1, 2, 145, 12, 0);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0014', 1, 5, 'Geometrie (geometrie analitica)', 'cpintea', 0, 2, 2, 145, 0, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0010', 1, 5, 'Sisteme dinamice', 'abuica', 0, 2, 2, 145, 5, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5022', 1, 5, 'Structuri de date si algoritmi', 'marianzsu', 0, 2, 2, 145, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0014', 1, 5, 'Geometrie (geometrie analitica)', 'cpintea', 0, 2, 2, 145, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0010', 1, 5, 'Sisteme dinamice', 'abuica', 0, 2, 2, 145, 5, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5022', 1, 5, 'Structuri de date si algoritmi', 'marianzsu', 0, 2, 2, 145, 0, 5);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0031', 2, 5, 'Probabilitati si statistica', 'smicula', 0, 3, 2, 145, 5, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5009', 2, 5, 'Programare functionala si logica', 'adrianac', 0, 3, 2, 145, 12, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0003', 2, 5, 'Analiza matematica II', 'lorinczi', 0, 3, 2, 145, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0031', 2, 5, 'Probabilitati si statistica', 'smicula', 0, 3, 2, 145, 5, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5009', 2, 5, 'Programare functionala si logica', 'adrianac', 0, 3, 2, 145, 12, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0003', 2, 5, 'Analiza matematica II', 'lorinczi', 0, 3, 2, 145, 0, 10);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5011', 2, 5, 'Ingineria sistemelor soft', 'imre', 0, 4, 2, 145, 0, 10);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5016', 2, 5, 'Programare web', 'forest', 0, 4, 2, 145, 12, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5028', 2, 5, 'Sisteme de gestiune a bazelor de date', 'sabina', 0, 4, 2, 145, 10, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5011', 2, 5, 'Ingineria sistemelor soft', 'imre', 0, 4, 2, 145, 0, 10);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5016', 2, 5, 'Programare web', 'forest', 0, 4, 2, 145, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5028', 2, 5, 'Sisteme de gestiune a bazelor de date', 'sabina', 0, 4, 2, 145, 10, 5);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5077', 3, 5, 'Programare paralela si distribuita', 'rlupsa', 0, 5, 2, 145, 12, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5078', 3, 5, 'Programare pentru dispozitive mobile', 'dan', 0, 5, 2, 145, 5, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE0049', 3, 5, 'Criptografie cu cheie publica', 'crivei', 1, 5, 2, 70, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5077', 3, 5, 'Programare paralela si distribuita', 'rlupsa', 0, 5, 2, 145, 12, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5078', 3, 5, 'Programare pentru dispozitive mobile', 'dan', 0, 5, 2, 145, 5, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE0049', 3, 5, 'Criptografie cu cheie publica', 'crivei', 1, 5, 2, 70, 12, 0);
 
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE2002', 3, 5, 'Elaborarea lucrarii de licenta', 'avescan', 0, 6, 2, 145, 0, 5);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLE5072', 3, 5, 'Administrare de sistem si retea', 'radu.dragos', 1, 6, 2, 70, 12, 0);
-INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, Required SeminaryAttendance) VALUES ('MLR2006', 3, 5, 'Istoria matematicii', 'motogna', 1, 6, 2, 70, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE2002', 3, 5, 'Elaborarea lucrarii de licenta', 'avescan', 0, 6, 2, 145, 0, 5);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLE5072', 3, 5, 'Administrare de sistem si retea', 'radu.dragos', 1, 6, 2, 70, 12, 0);
+INSERT INTO [Discipline] (Cod, An, Credite, Nume, TeacherUsername, Type, Semestru, SpecializareId, LocuriDisponibile, RequiredLabAttendance, RequiredSeminaryAttendance) VALUES ('MLR2006', 3, 5, 'Istoria matematicii', 'motogna', 1, 6, 2, 70, 0, 5);
 
 --Grades
 -- Semester 1
