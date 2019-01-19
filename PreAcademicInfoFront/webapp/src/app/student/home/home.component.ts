@@ -3,9 +3,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {GradeData, StudentData, StudentService} from "../student.service";
 import {Router} from "@angular/router";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {Sort} from "@angular/material";
 import { MatTableDataSource, Sort } from "@angular/material";
-import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-home',
