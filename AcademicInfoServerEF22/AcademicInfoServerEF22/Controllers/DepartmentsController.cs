@@ -22,9 +22,16 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
         // GET: api/Departments
         [HttpGet]
-        public IEnumerable<Department> GetDepartment()
+        public IActionResult GetDepartment()
         {
-            return _context.Department;
+            List<Department> departaments =  _context.Department.ToList();
+
+            List<string> response = new List<string>();
+
+            foreach (var d in departaments)
+                response.Add(d.Name);
+
+            return Json(response);
         }
 
 

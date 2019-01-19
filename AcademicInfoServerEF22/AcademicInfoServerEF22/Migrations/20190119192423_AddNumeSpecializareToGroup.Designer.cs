@@ -4,14 +4,16 @@ using AcademicInfoServerEF22EF22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademicInfoServerEF22.Migrations
 {
     [DbContext(typeof(AcademicInfoContext))]
-    partial class AcademicInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20190119192423_AddNumeSpecializareToGroup")]
+    partial class AddNumeSpecializareToGroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
