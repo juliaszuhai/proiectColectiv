@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherService } from '../teacher.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-formula',
@@ -8,7 +9,7 @@ import { TeacherService } from '../teacher.service';
 })
 export class FormulaComponent implements OnInit {
 
-  constructor(private teacherService: TeacherService) {
+  constructor(private teacherService: TeacherService,public toastr: ToastrManager) {
     this.notEvenPercetageLabs=[];
    }
 
@@ -32,11 +33,11 @@ export class FormulaComponent implements OnInit {
   checkedSeminar = false;
   checkedBonus = false;
 
-  percentageLabUnic:number;
-  percentageExam: number;
-  percentagePartial: number;
-  percentageSeminar: number;
-  puncteBonus: number;
+  percentageLabUnic:number = 0;
+  percentageExam: number = 0;
+  percentagePartial: number= 0;
+  percentageSeminar: number= 0;
+  puncteBonus: number= 0;
 
 
   nrLab: number;
@@ -45,7 +46,7 @@ export class FormulaComponent implements OnInit {
   nrLabs = [];
   notEvenPercetageLabs=[];
   labPrecentageInner=[];
-  percentageLabOuter:number;
+  percentageLabOuter:number= 0;
   evenPercentageLab:number;
 
   materii = [];
@@ -75,27 +76,23 @@ export class FormulaComponent implements OnInit {
 
   submit($event)
   {
-    
-    if(this.checkedExamen != true)
+    let s:number = 0;
+    if(this.checkedExamen != true){this.percentageExam = 0;}
+    else{s += this.percentageExam;}
+    if(this.checkedPartial != true){this.percentagePartial = 0;}
+    else{s += this.percentagePartial;}
+    if(this.checkedLaborator != true){this.percentageLabOuter = 0;}
+    else{s += this.percentageLabOuter;}
+    if(this.checkedSeminar != true){this.percentageSeminar = 0;}
+    else{s += this.percentageSeminar;}
+    if(this.checkedBonus != true){this.puncteBonus = 0;}
+
+    if(s!=100)
     {
-      this.percentageExam = 0;
+      this.toastr.errorToastr('Suma procentajelor nu este 100%, ci:'+s+"%", 'Oops!');
     }
-    if(this.checkedPartial != true)
-    {
-      this.percentagePartial = 0;
-    }
-    if(this.checkedLaborator != true)
-    {
-      this.percentageLabOuter = 0;
-    }
-    if(this.checkedSeminar != true)
-    {
-      this.percentageSeminar = 0;
-    }
-    if(this.checkedBonus != true)
-    {
-      this.puncteBonus = 0;
-    }
+    else{
+
     if(this.checked1 == true)
     {
       for(var _i = 0;_i < this.nrLab; _i++)
@@ -107,12 +104,20 @@ export class FormulaComponent implements OnInit {
         this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.labPrecentageInner);
     }
     else{
-      console.log(this.notEvenPercetageLabs);
-      this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
-        this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs);
+      let sl:number = 0;
+      for(var _i = 0;_i < this.nrLab; _i++)
+      {
+        sl += this.notEvenPercetageLabs[_i];
+      }
+      if(sl == 100)
+      {
+        this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
+          this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs);
+      }
+      else{
+        this.toastr.errorToastr('Suma procentajelor laboratoarelor nu este 100%, ci:'+sl+"%", 'Oops!');
+      }
     }
-
-
+    }
   }
-
 }
