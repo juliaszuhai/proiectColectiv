@@ -30,9 +30,9 @@ export interface GradeData {
   nrCredite: string;
   dataPromovarii: string;
   codMaterie: string;
-  nota: string;
+  notaExamen: string;
+  notaFinala: string;
   specializare: string;
-  gradeType: string;
 }
 
 export interface DisciplineData {
