@@ -38,9 +38,7 @@ export interface DisciplineData{
   An:string;
   semestru:string;
   nume:string;
-  obligatoriu:boolean;
-  optional:boolean;
-  facultativ:boolean;
+  type:string;
   codMaterie:string;
   nrCredite:string;
   locuriDisponibile:number;
@@ -112,8 +110,8 @@ export class StudentService {
     return this.http.get<SpecializareData>(this.baseURL,{params: params});
   }
 
-  getSpecializari() {
-    return this.http.get<SpecializareData[]>(this.baseURLSpecializari,
+  getSpecializari(username:string) {
+    return this.http.get<string[]>(this.baseURL+"/specializari/"+username,
       {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
@@ -134,6 +132,26 @@ export class StudentService {
         headers: new HttpHeaders(
           {'Content-Type' : 'application/json'}
         )});
+
+  }
+
+  getAvailableDisciplines(selectedSpecializare:string,selectedAn:string,selectedStemestru:string) {
+    return this.http.get<DisciplineData[]>(this.baseURLDisciplines+"/listDisciplines/"+selectedSpecializare+"/"+selectedAn+"/"+selectedStemestru,
+      {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      }
+    );
+  }
+
+  saveContract(materiiSelectate: DisciplineData[]) {
+    console.log(materiiSelectate);
+    var username=localStorage.getItem("username");
+    let body=JSON.stringify({materiiSelectate,username});
+    return this.http.post(this.baseURL,body,{
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
+    })
 
   }
 }

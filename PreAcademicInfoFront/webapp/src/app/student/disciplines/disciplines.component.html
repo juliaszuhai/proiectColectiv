@@ -2,113 +2,116 @@
 <div class="afis">
   <div *ngIf="!showTable">
   <div class="selectors">
-    <mat-form-field class="select" *ngIf="isMoreThanOne()">
-      <mat-select class = "white" placeholder="Departament">
-        <mat-option *ngFor="let food of departamente" [value]="food.value">
-          {{food.viewValue}}
+    <mat-form-field class="select">
+      <mat-select class = "white" (selectionChange)="onChangeSpecializare($event)" placeholder="Specializare">
+        <mat-option *ngFor="let specializare of specializari" [value]="specializare.value">
+          {{specializare.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
    &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-form-field class="select">
-    <mat-select class = "white" placeholder="An">
-      <mat-option *ngFor="let food of ani" [value]="food.value">
-        {{food.viewValue}}
+    <mat-select class = "white" (selectionChange)="onChangeAn($event)" placeholder="An">
+      <mat-option *ngFor="let an of ani" [value]="an.value">
+        {{an.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
     &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-form-field class="select">
-    <mat-select class = "white" placeholder="Semestru">
-      <mat-option *ngFor="let food of semestre" [value]="food.value">
-        {{food.viewValue}}
+    <mat-select class = "white" (selectionChange)="onChangeSemestru($event)" placeholder="Semestru">
+      <mat-option *ngFor="let semestru of semestre" [value]="semestru.value">
+        {{semestru.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   </div>
 
   <form (ngSubmit)="submitContract()" class="form_style">
-      <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource1" *ngIf="show==true" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="Check">
-          <th mat-header-cell *matHeaderCellDef> Check </th>
-          <td mat-cell *matCellDef="let element">
-          <mat-checkbox [disabled]="isDisabled(element) || showTable"
-          [checked]="isDisabled(element)" (change)="AddSelected($event,element)"></mat-checkbox>
-          </td>
-        </ng-container>
-        <!-- Position Column -->
-        <ng-container matColumnDef="An">
-          <th mat-header-cell *matHeaderCellDef> An </th>
-          <td mat-cell *matCellDef="let element"> {{element.An}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="semestru">
-          <th mat-header-cell *matHeaderCellDef> Semestru </th>
-          <td mat-cell *matCellDef="let element"> {{element.semestru}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="nume">
-          <th mat-header-cell *matHeaderCellDef> Nume </th>
-          <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="nrCredite">
-          <th mat-header-cell *matHeaderCellDef> nr Credite </th>
-          <td mat-cell *matCellDef="let element"> {{element.nrCredite}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="locuri">
-          <th mat-header-cell *matHeaderCellDef> Locuri disponibile/Locuri ocupate </th>
-          <td mat-cell *matCellDef="let element"> {{element.locuriDisponibile}}/{{element.locuriOcupate}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay1"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnsToDisplay1;"></tr>
-      </table>
-
-    &nbsp;&nbsp;
-  <button mat-raised-button color="primary" >Previzualizare contract</button>
-  </form>
-</div>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <div *ngIf="showTable">
-    <p>Previzualizare contract</p>
-    <table mat-table [dataSource]="materiiSelectate" class="mat-elevation-z8">
+      <ng-container matColumnDef="Check">
+        <th mat-header-cell *matHeaderCellDef> Check </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox  showTable
+                         (change)="AddSelected($event,element)"></mat-checkbox>
+        </td>
+      </ng-container>
 
       <ng-container matColumnDef="An">
         <th mat-header-cell *matHeaderCellDef> An </th>
         <td mat-cell *matCellDef="let element"> {{element.An}} </td>
-        <td mat-footer-cell *matFooterCellDef> Total numar credite: </td>
       </ng-container>
 
       <ng-container matColumnDef="semestru">
         <th mat-header-cell *matHeaderCellDef> Semestru </th>
         <td mat-cell *matCellDef="let element"> {{element.semestru}} </td>
-        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <ng-container matColumnDef="nume">
         <th mat-header-cell *matHeaderCellDef> Nume </th>
         <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
-        <td mat-footer-cell *matFooterCellDef> </td>
       </ng-container>
 
       <ng-container matColumnDef="nrCredite">
         <th mat-header-cell *matHeaderCellDef> Numar Credite </th>
         <td mat-cell *matCellDef="let element"> {{element.nrCredite}} </td>
-        <td mat-footer-cell *matFooterCellDef> {{getTotalCredite()}} </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-      <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Tip </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="locuri">
+        <th mat-header-cell *matHeaderCellDef> Nr locuri disponibile/ Nr locuri ocupate </th>
+        <td mat-cell *matCellDef="let element"> {{element.locuriDisponibile}}/{{element.locuriOcupate}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay1"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay1;"></tr>
     </table>
+
     &nbsp;&nbsp;
-    <button mat-raised-button color="primary" (click)="btnClick();">Inapoi</button>
-    <button mat-raised-button color="primary" >Trimite contract</button>
+    <button mat-raised-button color="primary" >Previzualizare contract</button>
+    </form>
   </div>
-</div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <div *ngIf="showTable">
+      <p>Previzualizare contract</p>
+      <table mat-table [dataSource]="materiiSelectate" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="An">
+          <th mat-header-cell *matHeaderCellDef> An </th>
+          <td mat-cell *matCellDef="let element"> {{element.An}} </td>
+          <td mat-footer-cell *matFooterCellDef> Total numar credite: </td>
+        </ng-container>
+
+        <ng-container matColumnDef="semestru">
+          <th mat-header-cell *matHeaderCellDef> Semestru </th>
+          <td mat-cell *matCellDef="let element"> {{element.semestru}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="nume">
+          <th mat-header-cell *matHeaderCellDef> Nume </th>
+          <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nrCredite">
+          <th mat-header-cell *matHeaderCellDef> Numar Credite </th>
+          <td mat-cell *matCellDef="let element"> {{element.nrCredite}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalCredite()}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+      </table>
+      &nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="btnClick();">Inapoi</button>
+      <button mat-raised-button color="primary" (click)="btnClick()" >Trimite contract</button>
+    </div>
+  </div>

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {GradeData, StudentData, StudentService} from "../student.service";
 import {Router} from "@angular/router";
-
-import {MatTableDataSource, Sort} from "@angular/material";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Sort} from "@angular/material";
 
 @Component({
   selector: 'app-home',
@@ -79,7 +78,8 @@ export class HomeComponent implements OnInit{
         case 'numeMaterie':
           return compare(a.numeMaterie, b.numeMaterie, isAsc);
         case 'nota':
-          return compare(a.nota, b.nota, isAsc);
+        {   console.log(a.nota,b.nota);
+          return compare(a.nota, b.nota, isAsc);}
         case 'nrCredite':
           return compare(a.nrCredite, b.nrCredite, isAsc);
         default:
