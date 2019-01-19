@@ -24,41 +24,6 @@ namespace AcademicInfoServerEF22EF22.Controllers
         public TeachersController(AcademicInfoContext context)
         {
             _context = context;
-            PopulateDatabase();
-        }
-
-        public void PopulateDatabase()
-        {
-            //Try to retrieve the Teacher with the Username 'tzutzu'
-            Teacher t = _context.Teacher.Where(teacher => teacher.Username.Equals("tzutzu")).FirstOrDefault();
-
-            //If he is not present into the DB, then it means we must add him
-            if (t == null)
-            {
-                //Generate salt
-                byte[] saltNumber = new byte[10];
-                rngCsp.GetBytes(saltNumber);
-                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-
-                //Encrypt password
-                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
-
-                //Add the student 'andi'
-                _context.Teacher.Add(new Teacher()
-                {
-                    Username = "tzutzu",
-                    Email = "tzutzu@cs.ubbcluj.ro",
-                    NumarTelefon = "0711111128",
-                    Nume = "Suciu",
-                    Prenume = "Dan Mircea",
-                    UserType = UserType.TEACHER,
-                    Password = password,
-                    Salt = saltString
-                });
-
-                //Commit changes to DB
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/Teachers
@@ -66,6 +31,37 @@ namespace AcademicInfoServerEF22EF22.Controllers
         public IEnumerable<Teacher> GetTeacher()
         {
             return _context.Teacher;
+        }
+
+        // GET: api/Teachers/showcase
+        [HttpGet("showcase")]
+        public IActionResult ShowcaseTeachers()
+        {
+            // Retrieve all teachers from the DB
+            var teachers = _context.Teacher.Select(t => new { t.Nume, t.Prenume, t.Email, t.PictureURL, t.Description }).ToArray();
+
+            // Create a list of dictionaries that will store the required informations for each teacher
+            List<Dictionary<string, string>> response = new List<Dictionary<string, string>>  { };
+
+            // For every teacher
+            foreach (var t in teachers)
+            {
+                // Create an inner dictionary
+                Dictionary<string, string> d = new Dictionary<string, string> { };
+
+                // Append the teacher informations to the inner dictionary
+                d.Add("Nume", t.Nume);
+                d.Add("Prenume", t.Prenume);
+                d.Add("Email", t.Email);
+                d.Add("PictureURL", t.PictureURL);
+                d.Add("Website", t.Description);
+
+                // Append the inner dictionary to the response list
+                response.Add(d);
+            }
+
+            // Return the response list of dictionaries
+            return Json(response);
         }
 
         // GET: api/Teachers/5

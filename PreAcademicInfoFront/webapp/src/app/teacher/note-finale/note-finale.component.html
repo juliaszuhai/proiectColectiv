@@ -7,7 +7,7 @@
 
   
   <ng-container matColumnDef="nume">
-    <th mat-header-cell *matHeaderCellDef> Nume </th>
+    <th mat-header-cell *matHeaderCellDef> Nume Prenume </th>
     <td mat-cell *matCellDef="let element"> {{element.nume}} {{element.prenume}} </td>
   </ng-container>
 
@@ -26,7 +26,7 @@
       <th mat-header-cell *matHeaderCellDef> Data </th>
       <td mat-cell *matCellDef="let element">
           <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Alege o data" (focusout)="saveDate($event,element)">
+              <input matInput [matDatepicker]="picker" placeholder="{{element.grades[0]['data']}}" (focusout)="saveDate($event,element)">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

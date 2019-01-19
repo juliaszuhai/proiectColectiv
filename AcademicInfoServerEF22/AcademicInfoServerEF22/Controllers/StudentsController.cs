@@ -29,10 +29,12 @@ namespace AcademicInfoServerEF22EF22.Controllers
         {
             _context = context;
             PopulateDatabase();
+            _context.SaveChanges();
         }
 
         public void PopulateDatabase()
         {
+            
             //Try to retrieve the Student with the Username 'andi'
             Student s = _context.Student.Where(st => st.Username.Equals("andi")).FirstOrDefault();
 
@@ -138,6 +140,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
             switch (tipNota)
             {
                 case "Examen final":
+                    gradeType = "EXAM";
+                    break;
+                case "Final":
                     gradeType = "FINAL";
                     break;
                 case "Laborator":

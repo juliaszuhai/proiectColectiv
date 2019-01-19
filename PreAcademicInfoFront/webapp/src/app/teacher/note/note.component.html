@@ -2,7 +2,7 @@
 <div class="show">
 
   <div class="selectors">
-    <mat-form-field class="select" *ngIf="isMoreThanOneMaterii()" >
+    <mat-form-field class="select">
       <mat-select class = "white" placeholder="Materie" [(ngModel)]="selectedMaterie" (ngModelChange)="getGrupe()" name="materie">
         <mat-option *ngFor="let materie of materii" [value]="materie.viewValue" >
           {{materie.viewValue}}
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div *ngSwitchCase="'Laborator'">
-        Display layout for Laborator 
+        <app-note-lab-teacher [materie]="selectedMaterie" [grupa]="selectedGrupa" [tipNota]="choosedOption"></app-note-lab-teacher> 
     </div>
     <div *ngSwitchCase="'Seminar'">
         Display layout for Seminar

@@ -1,0 +1,102 @@
+<app-navigation></app-navigation>
+
+<!-- <mat-grid-list cols="3" rowHeight="3:3">
+    <mat-grid-tile> 
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image [src]="'https://www.scrisulfacebine.ro/wp-content/uploads/2018/02/dan-mircea-suciu.jpg'" >
+                <mat-card-title class="title" >Tzutzu</mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        Domenii de interes: Baze de date
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image [src]="'https://www.scrisulfacebine.ro/wp-content/uploads/2018/02/dan-mircea-suciu.jpg'" >
+                <mat-card-title class="title" >Tzutzu</mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        Domenii de interes: Baze de date
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image [src]="'https://www.scrisulfacebine.ro/wp-content/uploads/2018/02/dan-mircea-suciu.jpg'" >
+                <mat-card-title class="title" >Tzutzu</mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        Domenii de interes: Baze de date
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image [src]="'https://www.scrisulfacebine.ro/wp-content/uploads/2018/02/dan-mircea-suciu.jpg'" >
+                <mat-card-title class="title" >Tzutzu</mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        Domenii de interes: Baze de date
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image [src]="'https://www.scrisulfacebine.ro/wp-content/uploads/2018/02/dan-mircea-suciu.jpg'" >
+                <mat-card-title class="title" >Tzutzu</mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        Domenii de interes: Baze de date
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+    
+</mat-grid-list> -->
+
+<mat-grid-list cols="3" rowHeight="3:3">
+    <mat-grid-tile *ngFor="let teacher of teachers"> 
+        <mat-card class="card" *ngIf="card == true">
+            <div class="content">
+              <div class="front">
+                <img mat-card-image class="imgStyle" [src]=teacher.url > 
+                <mat-card-title class="title"> {{teacher.name}} </mat-card-title>
+              </div>
+              <div class="back" (click)="hide()">
+                  <mat-card-content>
+                        {{teacher.description}}
+                  </mat-card-content>
+              </div>
+            </div>
+          </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

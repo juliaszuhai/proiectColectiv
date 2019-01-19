@@ -4,14 +4,16 @@ using AcademicInfoServerEF22EF22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademicInfoServerEF22.Migrations
 {
     [DbContext(typeof(AcademicInfoContext))]
-    partial class AcademicInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20190119124054_Attendance")]
+    partial class Attendance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,42 +55,6 @@ namespace AcademicInfoServerEF22.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Contract", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("StudentUsername")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentUsername");
-
-                    b.ToTable("Contracts");
-                });
-
-            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.ContractToDiscipline", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContractId");
-
-                    b.Property<string>("DisciplineCod")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContractId");
-
-                    b.HasIndex("DisciplineCod");
-
-                    b.ToTable("ContractToDiscipline");
-                });
-
             modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -116,14 +82,8 @@ namespace AcademicInfoServerEF22.Migrations
 
                     b.Property<int>("Credite");
 
-                    b.Property<int>("LocuriDisponibile");
-
                     b.Property<string>("Nume")
                         .IsRequired();
-
-                    b.Property<int>("RequiredLabAttendance");
-
-                    b.Property<int>("RequiredSeminaryAttendance");
 
                     b.Property<int>("Semestru");
 
@@ -336,8 +296,6 @@ namespace AcademicInfoServerEF22.Migrations
                     b.Property<string>("Username")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Email")
                         .IsRequired();
 
@@ -351,8 +309,6 @@ namespace AcademicInfoServerEF22.Migrations
                     b.Property<string>("Password")
                         .IsRequired();
 
-                    b.Property<string>("PictureURL");
-
                     b.Property<string>("Prenume")
                         .IsRequired();
 
@@ -364,27 +320,6 @@ namespace AcademicInfoServerEF22.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("Teacher");
-                });
-
-            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Contract", b =>
-                {
-                    b.HasOne("AcademicInfoServerEF22EF22.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentUsername")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.ContractToDiscipline", b =>
-                {
-                    b.HasOne("AcademicInfoServerEF22EF22.Models.Contract", "Contract")
-                        .WithMany("Disciplines")
-                        .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AcademicInfoServerEF22EF22.Models.Discipline", "Discipline")
-                        .WithMany()
-                        .HasForeignKey("DisciplineCod")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Department", b =>

@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { tap } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {tap} from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { NewPassData } from '../signin/authentication-service.service';
 
 export interface StudentData {
   username: string;
@@ -24,8 +25,15 @@ export interface StudentGrade {
   materie: string;
   tipNota: string;
 }
-export interface Materie{
-  numeMaterie:string
+
+export interface Percentage{
+  materie:string;
+  procentajExamen:string;
+  procentajPartial:string;
+  procentajSeminar:string;
+  procentajBonus:string;
+  procentajLabOuter:string;
+  procentajeLab:string[];
 }
 @Injectable()
 export class TeacherService {
@@ -51,7 +59,20 @@ export class TeacherService {
       this.groupURL + "/" + teacher 
     );
   }
+  changePassURL = 'https://localhost:44354/api/ChangePass';
 
+  changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+    let username = localStorage['username']
+    let body = JSON.stringify({username,oldPassword,newPassword,confirmNewPassword});
+    console.log(localStorage['username']);
+    return this.http.put<NewPassData>(this.changePassURL,
+      body,
+      {
+      headers: new HttpHeaders(
+        {'Content-Type' : 'application/json'}
+      )
+    })
+  }
 
   getStudents(
     materie: string,
@@ -63,6 +84,32 @@ export class TeacherService {
     );
   }
 
+
+  PostProcentaje(
+  materie:string,
+  examenP:number,
+  partialP:number,
+  seminarP:number,
+  bonusP:number,
+  laboratorP:number,
+  labs:number[]
+  ) {
+  let examen:string,partial:string, seminar:string, bonus:string, laboratorS:string;
+  if(laboratorP == 0) {laboratorS = ""; }
+  else{laboratorS = laboratorP.toString();}
+  if(partialP == 0) { partial = ""; }
+  else{partial = partialP.toString();}
+  if(seminarP == 0) { seminar = ""; }
+  else{seminar = seminarP.toString();}
+  if(bonusP == 0) { bonus = ""; }
+  else{bonus = bonusP.toString();}
+
+  let laborator = {"Inner":labs,"Outer":laboratorS}
+  let body = JSON.stringify({ materie, examen, partial, seminar, bonus, laborator });
+   return this.http.post<Percentage>(this.gradesURL+"/percentage", body, {
+     headers: new HttpHeaders({ "Content-Type": "application/json" })
+   });
+  }
 
   PostGrade(
     username: string,

@@ -37,5 +37,9 @@ namespace AcademicInfoServerEF22EF22.Models
 
         public DbSet<AcademicInfoServerEF22EF22.Models.Student> Student { get; set; }
 
+        public DbSet<AcademicInfoServerEF22EF22.Models.Contract> Contracts { get; set; }
+
+        public DbSet<AcademicInfoServerEF22EF22.Models.ContractToDiscipline> ContractToDiscipline { get; set; }
+
     }
 }

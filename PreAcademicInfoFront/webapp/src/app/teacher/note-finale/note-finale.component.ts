@@ -14,8 +14,8 @@ export class NoteFinaleComponent implements OnInit {
   @Input() tipNota: string;
 
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
-  grade: string;
-  data: string;
+  grade: string = null;
+  data: string = null;
   public students = [];
 
   constructor(private teacherService: TeacherService) { }
@@ -34,7 +34,7 @@ export class NoteFinaleComponent implements OnInit {
     this.grade=event.target.value;
     console.log(this.grade);
     console.log(this.data);
-    //if(this.data != "")
+    if(this.data !== null)
     {
       console.log("len of grades" + elem.grades.len);
       if(elem.grades.length > 0)
@@ -52,8 +52,12 @@ export class NoteFinaleComponent implements OnInit {
         });
       }
 
-      this.grade = "";
-      this.data = "";
+      this.grade = null;
+      this.data = null;
+    }
+    else
+    {
+      console.log("baga ba o dataaaaaaaa baaaaa");
     }
   }
 
@@ -63,15 +67,24 @@ export class NoteFinaleComponent implements OnInit {
     //console.log(this.grade);
     console.log(this.data);
     //console.log(elem.username);
-    if(this.grade != "")
+    if(this.grade !== null )
     {
-      // this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota).subscribe(
-      //   data => {
-      //   console.log(data);
-      // });
-
-     // this.grade = "";
-      //this.data = "";
+      if(elem.grades.length > 0)
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,elem.grades[0]["id"]).subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+      else
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,"").subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+      this.grade = null;
+      this.data = null;
     }
 }
 
