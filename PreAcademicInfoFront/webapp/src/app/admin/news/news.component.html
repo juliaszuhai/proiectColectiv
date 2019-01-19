@@ -10,7 +10,7 @@
   </mat-form-field>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-form-field class="select">
-    <mat-select class = "white" placeholder="Specializare">
+    <mat-select class = "white" (selectionChange)="onSpecializareChange($event)" placeholder="Specializare">
       <mat-option *ngFor="let s of specializari" [value]="s.value" >
         {{s.viewValue}}
       </mat-option>

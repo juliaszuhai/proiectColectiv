@@ -45,13 +45,7 @@ export interface Teacher{
   password:string;
   disciplinesHolded: string[]
 }
-export interface Mail{
-  titlu: string;
-  mesaj: string;
-  departament: string;
-  an:string;
-  grupa:string;
-}
+
 
 export interface DisciplineData{
   An:string;
@@ -72,6 +66,14 @@ export interface SpecializareData{
   semestre:string,
   discipline: DisciplineData[]
 }
+export interface MailData{
+  departament:string;
+  specializare:string;
+  an:string;
+  grupa:string;
+  titlu:string;
+  mesaj:string;
+}
 @Injectable()
 export class AdminService {
   
@@ -81,6 +83,12 @@ export class AdminService {
   baseURLTeachers='https://localhost:44354/api/Teachers';
   baseUrlStudents='https://localhost:44354/api/Students';
   changePassURL='https://localhost:44354/api/ChangePass';
+  adminURL='https://localhost:44354/api/Admins';
+  departamenteURL='https://localhost:44354/api/Departments';
+  specializareURL='https://localhost:44354/api/Specializari';
+  grupeURL='https://localhost:44354/api/Groups';
+
+  
   constructor(private http: HttpClient,
     private router: Router) { }
 
@@ -108,12 +116,32 @@ export class AdminService {
         return this.http.get<Student[]>(this.baseUrlStudents + "/" + an); 
       }    
 
-   
-    
-      
-    sendMail(mail: Mail): any {
-      throw new Error("Method not implemented.");
+    sendMail(mail:MailData) 
+    {
+      console.log("we got right before the call");
+      let body = JSON.stringify(mail);
+      console.log(body);
+    //   return this.http.post<MailData>(this.adminURL + "/sendMail", body, {
+    //     headers: new HttpHeaders({ "Content-Type": "application/json" })
+    //   });
     }
+
+    getDepartamente() :Observable<string[]> {
+      return this.http.get<string[]>(this.departamenteURL,
+        {headers: new HttpHeaders({ "Content-Type": "application/json" })
+      });
+    }
+    getSpecializari(departament:string) :Observable<string[]> {
+      return this.http.get<string[]>(this.specializareURL+"/"+departament,
+          {headers: new HttpHeaders({ "Content-Type": "application/json" })
+        });
+    }
+    getGrupe(specializare:string):Observable<string[]> {
+      return this.http.get<string[]>(this.grupeURL+"/"+specializare,
+          {headers: new HttpHeaders({ "Content-Type": "application/json" })
+        });
+    }
+
     addUser( user:User)
       {
         if(user.type == "Student")
