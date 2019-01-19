@@ -58,11 +58,8 @@ export class TeacherService {
     return this.http.get<string[]>(
       this.groupURL + "/" + teacher 
     );
-  baseURL = 'https://localhost:44354/api/Students';
+  }
   changePassURL = 'https://localhost:44354/api/ChangePass';
-  constructor(private http: HttpClient,
-              private router: Router)
-  { }
 
   changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
     let username = localStorage['username']
@@ -76,12 +73,6 @@ export class TeacherService {
       )
     })
   }
-
-  getStudents(materie:string, grupa: string, tipNota:string): Observable<StudentData[]>{
-      return this.http.get<StudentData[]>(this.baseURL);
-
-  }
-
 
   getStudents(
     materie: string,
