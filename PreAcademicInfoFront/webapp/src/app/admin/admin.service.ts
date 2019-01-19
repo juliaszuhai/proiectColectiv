@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NewPassData } from '../signin/authentication-service.service';
 
 export interface User{
   username: string;
@@ -79,9 +80,22 @@ export class AdminService {
   baseURL = 'https://localhost:44354/api/';
   baseURLTeachers='https://localhost:44354/api/Teachers';
   baseUrlStudents='https://localhost:44354/api/Students';
-
+  changePassURL='https://localhost:44354/api/ChangePass';
   constructor(private http: HttpClient,
     private router: Router) { }
+
+    changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+      let username = localStorage['username']
+      let body = JSON.stringify({username,oldPassword,newPassword,confirmNewPassword});
+      console.log(localStorage['username']);
+      return this.http.put<NewPassData>(this.changePassURL,
+        body,
+        {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      })
+    }
 
     getTeachers(): Observable<Teacher[]>{
        return this.http.get<Teacher[]>(this.baseURLTeachers); 
@@ -95,6 +109,8 @@ export class AdminService {
       }    
 
    
+    
+      
     sendMail(mail: Mail): any {
       throw new Error("Method not implemented.");
     }

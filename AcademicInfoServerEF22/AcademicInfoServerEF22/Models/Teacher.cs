@@ -9,5 +9,9 @@ namespace AcademicInfoServerEF22EF22.Models
     public class Teacher : User
     {
         public virtual ICollection<Discipline> DisciplinesHolded { get; set; }
+
+        public string PictureURL { get; set; }
+
+        public string Description { get; set; }
     }
 }

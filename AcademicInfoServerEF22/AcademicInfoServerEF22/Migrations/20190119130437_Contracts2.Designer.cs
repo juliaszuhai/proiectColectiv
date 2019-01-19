@@ -4,14 +4,16 @@ using AcademicInfoServerEF22EF22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcademicInfoServerEF22.Migrations
 {
     [DbContext(typeof(AcademicInfoContext))]
-    partial class AcademicInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20190119130437_Contracts2")]
+    partial class Contracts2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -336,8 +338,6 @@ namespace AcademicInfoServerEF22.Migrations
                     b.Property<string>("Username")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Email")
                         .IsRequired();
 
@@ -350,8 +350,6 @@ namespace AcademicInfoServerEF22.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired();
-
-                    b.Property<string>("PictureURL");
 
                     b.Property<string>("Prenume")
                         .IsRequired();

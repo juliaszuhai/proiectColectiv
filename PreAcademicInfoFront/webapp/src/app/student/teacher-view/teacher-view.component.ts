@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherData } from "../student.service";
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 
 @Component({
   selector: 'app-teacher-view',
@@ -8,7 +10,10 @@ import { TeacherData } from "../student.service";
 })
 export class TeacherViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(public toastr: ToastrManager) {
+
+   }
+   
   card:boolean =true;
   //public teachers: TeacherData[];
   teachers: TeacherData[] = [
@@ -33,11 +38,13 @@ export class TeacherViewComponent implements OnInit {
   ];
   teacher: TeacherData;
   ngOnInit() {
+    
   }
 
   hide()
   {
     this.card = false;
+    this.toastr.successToastr('This is success toast.', 'Success!');
   }
 
 }
