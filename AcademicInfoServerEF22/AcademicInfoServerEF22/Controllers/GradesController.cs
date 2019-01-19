@@ -148,32 +148,49 @@ namespace AcademicInfoServerEF22EF22.Controllers
             //Create a response List that will store all the grades as dictionaries
             var response = new List<Dictionary<string, string>>();
 
-            //For each grade
+            //For each gradeToDiscipline
             foreach (var gradeToDicipline in gradesToDiscipline)
             {
-                foreach (var grade in gradeToDicipline.Grades)
-                {
-                    //If the grade is a FINAL grade
-                    if (grade.Type.ToString().Equals("FINAL") || grade.Type.ToString().Equals("EXAMEN"))
-                    {
-                        //Create a local dictionary
-                        var dict = new Dictionary<string, string>();
+                //Retrieve the exam grade
+                Grade examGrade = _context.GradeToDiscipline.Where(
+                    gtd => gtd.Id.Equals(gradeToDicipline.Id)
+                ).FirstOrDefault().Grades.Where(
+                    g => g.Type.ToString().Equals("EXAM")
+                ).FirstOrDefault();
 
-                        //Add the grade informations to the local dictionary
-                        dict["numeMaterie"] = gradeToDicipline.Discipline.Nume;
-                        dict["an"] = gradeToDicipline.Discipline.An.ToString();
-                        dict["semestru"] = gradeToDicipline.Discipline.Semestru.ToString();
-                        dict["nota"] = grade.GradeValue.ToString();
-                        dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
-                        dict["dataPromovarii"] = grade.DataNotei;
-                        dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
-                        dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
-                        dict["gradeType"] = grade.Type.ToString();
+                //Retrieve the final grade
+                Grade finalGrade = _context.GradeToDiscipline.Where(
+                    gtd => gtd.Id.Equals(gradeToDicipline.Id)
+                ).FirstOrDefault().Grades.Where(
+                    g => g.Type.ToString().Equals("FINAL")
+                ).FirstOrDefault();
 
-                        //Add the local dictionary to the list of grades
-                        response.Add(dict);
-                    }
-                }
+                //Create a local dictionary
+                var dict = new Dictionary<string, string>();
+
+                //Add the grades informations to the local dictionary
+                dict["numeMaterie"] = gradeToDicipline.Discipline.Nume;
+                dict["an"] = gradeToDicipline.Discipline.An.ToString();
+                dict["semestru"] = gradeToDicipline.Discipline.Semestru.ToString();
+                if (examGrade == null)
+                    dict["notaExamen"] = "";
+                else
+                    dict["notaExamen"] = examGrade.GradeValue.ToString();
+                if (finalGrade == null)
+                    dict["notaFinala"] = "";
+                else
+                    dict["notaFinala"] = finalGrade.GradeValue.ToString();
+                dict["nrCredite"] = gradeToDicipline.Discipline.Credite.ToString();
+                if (finalGrade.DataNotei == null)
+                    dict["dataPromovarii"] = "";
+                else
+                    dict["dataPromovarii"] = finalGrade.DataNotei;
+                dict["codMaterie"] = gradeToDicipline.Discipline.Cod.ToString();
+                dict["specializare"] = gradeToDicipline.Discipline.Specializare.Nume;
+
+
+                //Add the local dictionary to the list of grades
+                response.Add(dict);
             }
 
             //Return the list of grades
