@@ -76,9 +76,11 @@ export class FormulaComponent implements OnInit {
   noteFinale(event)
   {
     console.log(this.submitted);
-    //if(this.submitted == true)
+    if(this.submitted == true)
     {
-      this.teacherService.ComputeNotaFinala(this.selectedMaterie).subscribe(data => {});
+      this.teacherService.ComputeNotaFinala(this.selectedMaterie).subscribe(data => {
+        this.toastr.successToastr('Notele finale au fost calculate si salvate la loc sigur',"Relax!");
+      });
     }
   }
   submitProcentaje($event)
@@ -89,14 +91,13 @@ export class FormulaComponent implements OnInit {
     if(this.checkedPartial != true){this.percentagePartial = 0;}
     else{s += this.percentagePartial;}
     if(this.checkedLaborator != true){this.percentageLabOuter = 0;}
-    else{s += this.percentageLabOuter;}
     if(this.checkedSeminar != true){this.percentageSeminar = 0;}
     else{s += this.percentageSeminar;}
     if(this.checkedBonus != true){this.puncteBonus = 0;}
 
-    if(s!=100)
+    if(s!=100-this.percentageLabOuter)
     {
-      this.toastr.errorToastr('Suma procentajelor nu este 100%, ci:'+s+"%", 'Oops!');
+      this.toastr.errorToastr('Suma procentajelor nu este 100%, ci:'+s+this.percentageLabOuter+"%", 'Oops!');
     }
     else{
 
@@ -110,6 +111,7 @@ export class FormulaComponent implements OnInit {
       this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
         this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.labPrecentageInner).subscribe(data => 
           { 
+              this.submitted = true;
              this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
           }
           );
@@ -120,7 +122,7 @@ export class FormulaComponent implements OnInit {
       {
         sl += this.notEvenPercetageLabs[_i];
       }
-      if(sl == 100)
+      if(100-sl == s)
       {
         
         console.log(this.submitted);
@@ -128,7 +130,7 @@ export class FormulaComponent implements OnInit {
           this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs).subscribe(data => 
             { 
               this.submitted = true;
-                //this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
+                this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
             });
         
       }
