@@ -233,17 +233,31 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 finalGrade += labGrade;
                 finalGrade = finalGrade / 100;
 
-                Grade grade = new Grade
-                {
-                    GradeValue = finalGrade,
-                    DataNotei = DateTime.Now.ToString("dd/MM/yyyy"),
-                    Type = GradeType.FINAL,
-                    ProcentInnerType = 100,
-                    ProcentOuter = 100
-                };
+                Grade grade = _context.Grade.Where(gr => gr.Type.ToString().Equals("FINAL")).FirstOrDefault();
 
-                gtd.Grades.Add(grade);
+                if (grade == null)
+                {
+                    grade = new Grade
+                    {
+                        GradeValue = finalGrade,
+                        DataNotei = DateTime.Now.ToString("dd/MM/yyyy"),
+                        Type = GradeType.FINAL,
+                        ProcentInnerType = 100,
+                        ProcentOuter = 100
+                    };
+
+                    gtd.Grades.Add(grade);
+                }
+                
+                else
+                {
+                    grade.GradeValue = finalGrade;
+                    grade.ProcentInnerType = 100;
+                    grade.ProcentOuter = 100;
+                }                
             }
+
+            _context.SaveChanges();
 
             List<Student> students = _context.Student.Where(
                     s => s.Grades.Where(
