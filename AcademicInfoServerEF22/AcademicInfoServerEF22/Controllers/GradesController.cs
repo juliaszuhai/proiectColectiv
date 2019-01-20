@@ -242,8 +242,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
             {
                 return BadRequest(ModelState);
             }
+            Student student = _context.Student.Where(s => s.Username.Equals(grade.username)).FirstOrDefault();
+            GradesToDiscipline gtd = student.Grades.Where(g => g.Discipline.Nume.Equals(grade.materie)).FirstOrDefault();
 
-            GradesToDiscipline gtd = _context.GradeToDiscipline.Where(g => g.Discipline.Nume.Equals(grade.materie)).FirstOrDefault();
             GradeType gt = GradeType.EXAMEN;
             if (grade.tipNota == "Examen final")
             {
@@ -277,10 +278,10 @@ namespace AcademicInfoServerEF22EF22.Controllers
 
             if (gt == GradeType.EXAMEN)
             {
-                List<Student> student = new List<Student>();
-                student.Add(_context.Student.Where(s => s.Username.Equals(grade.username)).FirstOrDefault());
+                List<Student> students = new List<Student>();
+                students.Add(_context.Student.Where(s => s.Username.Equals(grade.username)).FirstOrDefault());
                 Service service = new Service ( _context );
-                service.SendMailToStudents(student, "Exam grade", String.Format("Hello!\n\nYour teacher posted youe exam grade: {0}.\nWe hope you did good and we wish you the best of luck :)", grade.grade));
+                service.SendMailToStudents(students, "Exam grade at "+ grade.materie + " published", String.Format("Hello!\n\nYour teacher posted youe exam grade: {0}.\nWe hope you did good and we wish you the best of luck :)", grade.grade));
             }
 
             return Ok();

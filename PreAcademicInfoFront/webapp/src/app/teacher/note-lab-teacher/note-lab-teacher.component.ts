@@ -72,7 +72,7 @@ export class NoteLabTeacherComponent implements OnInit {
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,student.grades[idx]["id"]).subscribe(
           data => {
           //console.log(data);
-          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru" + student.username);
+          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a updatat cu succes!","nota pentru " + student.username);
         });
       }
       else
@@ -81,7 +81,7 @@ export class NoteLabTeacherComponent implements OnInit {
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,"").subscribe(
           data => {
           //console.log(data);
-          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru" + student.username);
+          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru " + student.username);
        
         });
       }
