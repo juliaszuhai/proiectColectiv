@@ -15,5 +15,9 @@ namespace AcademicInfoServerEF22EF22.Models
         public virtual Discipline Discipline { get; set; }
 
          public virtual ICollection<Grade> Grades { get; set; }
+
+        public Int32 AttendanceLab { get; set; }
+
+        public Int32 AttendanceSeminary { get; set; }
     }
 }

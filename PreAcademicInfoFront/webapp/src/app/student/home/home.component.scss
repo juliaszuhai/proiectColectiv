@@ -6,7 +6,6 @@ table {
 
 }
 .afis{
-  background: #6cb4b8;
   width:98.9%;
   height: 100%;
   position: absolute;
@@ -59,4 +58,8 @@ tr.example-element-row:not(.example-expanded-row):hover {
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.red-class{
+  color: crimson;
 }

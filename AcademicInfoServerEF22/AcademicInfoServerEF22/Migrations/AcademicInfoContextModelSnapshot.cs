@@ -53,6 +53,42 @@ namespace AcademicInfoServerEF22.Migrations
                     b.ToTable("Admin");
                 });
 
+            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Contract", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StudentUsername")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentUsername");
+
+                    b.ToTable("Contracts");
+                });
+
+            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.ContractToDiscipline", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContractId");
+
+                    b.Property<string>("DisciplineCod")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("DisciplineCod");
+
+                    b.ToTable("ContractToDiscipline");
+                });
+
             modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -80,8 +116,14 @@ namespace AcademicInfoServerEF22.Migrations
 
                     b.Property<int>("Credite");
 
+                    b.Property<int>("LocuriDisponibile");
+
                     b.Property<string>("Nume")
                         .IsRequired();
+
+                    b.Property<int>("RequiredLabAttendance");
+
+                    b.Property<int>("RequiredSeminaryAttendance");
 
                     b.Property<int>("Semestru");
 
@@ -175,6 +217,10 @@ namespace AcademicInfoServerEF22.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AttendanceLab");
+
+                    b.Property<int>("AttendanceSeminary");
+
                     b.Property<string>("DisciplineCod")
                         .IsRequired();
 
@@ -196,6 +242,9 @@ namespace AcademicInfoServerEF22.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("GroupName")
+                        .IsRequired();
+
+                    b.Property<string>("NumeSpecializare")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -290,6 +339,8 @@ namespace AcademicInfoServerEF22.Migrations
                     b.Property<string>("Username")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Email")
                         .IsRequired();
 
@@ -303,6 +354,8 @@ namespace AcademicInfoServerEF22.Migrations
                     b.Property<string>("Password")
                         .IsRequired();
 
+                    b.Property<string>("PictureURL");
+
                     b.Property<string>("Prenume")
                         .IsRequired();
 
@@ -314,6 +367,27 @@ namespace AcademicInfoServerEF22.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("Teacher");
+                });
+
+            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Contract", b =>
+                {
+                    b.HasOne("AcademicInfoServerEF22EF22.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentUsername")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.ContractToDiscipline", b =>
+                {
+                    b.HasOne("AcademicInfoServerEF22EF22.Models.Contract", "Contract")
+                        .WithMany("Disciplines")
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AcademicInfoServerEF22EF22.Models.Discipline", "Discipline")
+                        .WithMany()
+                        .HasForeignKey("DisciplineCod")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AcademicInfoServerEF22EF22.Models.Department", b =>

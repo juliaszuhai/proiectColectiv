@@ -1,0 +1,67 @@
+<table mat-table [dataSource]="students" multiTemplateDataRows class="lessons-table mat-elevation-z8" >
+
+    <ng-container matColumnDef="nrMatricol">
+      <th mat-header-cell *matHeaderCellDef> Nr Matricol </th>
+      <td mat-cell *matCellDef="let element"> {{element.numarMatricol}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="nume">
+      <th mat-header-cell *matHeaderCellDef> Nume Prenume </th>
+      <td mat-cell *matCellDef="let element"> {{element.nume}} {{element.prenume}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="prezente">
+      <th mat-header-cell *matHeaderCellDef> Prezente laborator </th>
+      <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                  <input matInput placeholder="{{element.prezenteLab}}" #input (focusout)="savePresence($event,element)">
+              </mat-form-field>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="prezenteSeminar">
+        <th mat-header-cell *matHeaderCellDef> Prezente seminar </th>
+        <td mat-cell *matCellDef="let element">
+                <mat-form-field>
+                    <input matInput placeholder="{{element.prezenteSeminar}}" #input (focusout)="savePresenceSeminar($event,element)">
+                </mat-form-field>
+        </td>
+      </ng-container>
+    
+    <!-- <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table> -->
+  
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let student" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="student == expandedElement ? 'expanded' : 'collapsed'">
+         
+            <div *ngFor="let lab of newArray(student.grades.length)">
+                <span> L{{lab+1}}: </span>
+                <mat-form-field>
+                  <input matInput  type="number" placeholder="{{student.grades[lab].value}}" #input (focusout)="saveGrade($event,student,lab)">
+                </mat-form-field>
+            </div>
+            <div>
+                <span> L{{student.grades.length + 1}}: </span>
+                <mat-form-field>
+                    <input matInput  type="number" placeholder="new grade" #input (focusout)="saveGrade($event,student,student.grades.length + 1)" >
+                  </mat-form-field>
+            </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

@@ -30,23 +30,29 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Specializare.ToArray();
         }
 
-        // GET: api/Specializari/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSpecializare([FromRoute] int id)
+        // GET: api/Specializari/<department>
+        [HttpGet("{department}")]
+        public IActionResult GetSpecializariForDepartments([FromRoute] string department)
         {
-            if (!ModelState.IsValid)
+            Department d = _context.Department.Where(dep => dep.Name == department).FirstOrDefault();
+
+            if (d == null)
             {
-                return BadRequest(ModelState);
+                Dictionary<string, string> err = new Dictionary<string, string>();
+                err.Add("error", String.Format("There is no department named: '{0}'!", department));
+                return Json(err);
             }
 
-            var specializare = await _context.Specializare.SingleOrDefaultAsync(m => m.Id == id);
+            List<Specializare> specializari = _context.Specializare.Where(
+                s => s.DepartmentName.Equals(d.Name)
+            ).ToList();
 
-            if (specializare == null)
-            {
-                return NotFound();
-            }
+            List<string> response = new List<string>();
 
-            return Ok(specializare);
+            foreach(var s in specializari)
+                response.Add(s.Nume);
+
+            return Json(response);
         }
 
         // PUT: api/Specializari/5

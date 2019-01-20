@@ -28,33 +28,84 @@ namespace AcademicInfoServerEF22EF22.Controllers
         public StudentsController(AcademicInfoContext context)
         {
             _context = context;
-            //PopulateDatabase();
+            PopulateDatabase();
+            _context.SaveChanges();
+            //updateAllPasswords();
         }
 
+        public void updateAllPasswords()
+        {
+            List<Student> students = new List<Student>();
+            List<Teacher> teacher = new List<Teacher>();
+
+            students = _context.Student.ToList();
+            teacher = _context.Teacher.ToList();
+            foreach (var u in students)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+                u.Password = password;
+                u.Salt = saltString;
+            }
+            foreach (var u in teacher)
+            {
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+                u.Password = password;
+                u.Salt = saltString;
+            }
+            _context.SaveChanges();
+        }
         public void PopulateDatabase()
         {
-            byte[] saltNumber = new byte[10];
-            rngCsp.GetBytes(saltNumber);
-            String saltString = System.Text.Encoding.Default.GetString(saltNumber);
-            String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
-            _context.Student.Add(new Student()
+            
+            //Try to retrieve the Student with the Username 'andi'
+            Student s = _context.Student.Where(st => st.Username.Equals("andi")).FirstOrDefault();
+
+            //If he is not present into the DB, then it means we must add him
+            if (s == null)
+
             {
-                Username = "andi",
-                NumarMatricol = 2000,
-                Password = password,
-                Salt = saltString,
-                Email = "aaie2000@scs.ubbcluj.ro",
-                Nume = "Abrudean",
-                Prenume = "Andrei",
-                NumarTelefon = "0711111110",
-                CNP = "1960000000000",
-                InitialaParinte = "A",
-                Active = true,
-                Generatie = "2016",
-                An = "3",
-                UserType = UserType.STUDENT
-            });
-            _context.SaveChanges();
+                //Generate salt
+                byte[] saltNumber = new byte[10];
+                rngCsp.GetBytes(saltNumber);
+                String saltString = System.Text.Encoding.Default.GetString(saltNumber);
+
+                //Encrypt password
+                String password = BCrypt.Net.BCrypt.HashPassword(saltString + "pass");
+
+                //Add the student 'andi'
+                _context.Student.Add(new Student()
+                {
+                    Username = "andi",
+                    NumarMatricol = 2000,
+                    Password = password,
+                    Salt = saltString,
+                    Email = "aaie2000@scs.ubbcluj.ro",
+                    Nume = "Abrudean",
+                    Prenume = "Andrei",
+                    NumarTelefon = "0711111110",
+                    CNP = "1960000000000",
+                    InitialaParinte = "A",
+                    Active = true,
+                    Generatie = "2016",
+                    An = "3",
+                    UserType = UserType.STUDENT
+                });
+
+                //Commit changes to DB
+                _context.SaveChanges();
+            }
         }
 
         // GET: api/Students
@@ -81,6 +132,169 @@ namespace AcademicInfoServerEF22EF22.Controllers
             }
 
             return Ok(student);
+        }
+
+        
+        [HttpGet("noteLab/{username}/{materie}")]
+        public IActionResult GetStudentLabGrades([FromRoute] string username, [FromRoute] string materie)
+        {
+            Student student = _context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault();
+            // Create the inner dictionary for the student's info
+            var studentDict = new Dictionary<string, object>();
+            
+            // Create a list in which we store all the grades that we get for the students
+            List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
+
+                // For each grade that we get
+                foreach (var g in student.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault().Grades.Where(g => g.Type == GradeType.LAB))
+                {
+                    // Create an inner inner dictionary for his grades
+                    var gradeDict = new Dictionary<string, string>();
+
+                    // Add the hrade info to the inner inner dictionary
+                    gradeDict["id"] = g.Id.ToString();
+                    gradeDict["value"] = g.GradeValue.ToString();
+                    gradeDict["data"] = g.DataNotei;
+
+                    // Append the inner inner dictionary to the list of grades
+                    gradesList.Add(gradeDict);
+                }
+                
+            
+            // Return the response
+            return Json(gradesList);
+        }
+
+        [HttpGet("prezente/{materie}/{username}")]
+        public IActionResult GetPrezenteStdent([FromRoute] string materie, [FromRoute] string username)
+        {
+            string prezenteLab = _context.Student.Where(
+                    st => st.Username.Equals(username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceLab.ToString();
+
+            string prezenteSeminar = _context.Student.Where(
+                st => st.Username.Equals(username)
+            ).First().Grades.Where(
+                gtd => gtd.Discipline.Nume == materie
+            ).FirstOrDefault().AttendanceSeminary.ToString();
+
+            List<string> prezente = new List<string>();
+            prezente.Add( prezenteLab);
+            prezente.Add(prezenteSeminar);
+
+            return Json(prezente);
+        }
+
+        // GET: api/Students/{materie}/{grupa}/{tipNota}
+        [HttpGet("{materie}/{grupa}/{tipNota}")]
+        public IActionResult GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)
+        {
+            // Convert the grade type received from FrontEnd to the one in the DB
+            string gradeType = "";
+            switch (tipNota)
+            {
+                case "Examen final":
+                    gradeType = "EXAMEN";
+                    break;
+                case "Final":
+                    gradeType = "FINAL";
+                    break;
+                case "Laborator":
+                    gradeType = "LAB";
+                    break;
+                case "Seminar":
+                    gradeType = "SEMINAR";
+                    break;
+                case "Bonus":
+                    gradeType = "BONUS";
+                    break;
+            }
+
+            // Get a list of students that have the provided discipline and that are also from the given group
+            List<Student> students = _context.Student.Where(
+                s => s.Grades.Where(
+                    gtd => gtd.Discipline.Nume.Equals(materie)
+                ).FirstOrDefault() != null
+            ).Where(
+                s => s.FacultiesEnrolled.Where(
+                    fe => fe.Group.GroupName.Equals(grupa)
+                ).FirstOrDefault() != null
+            ).ToList();
+
+            // Create a list of dictionaries that will store the student informations
+            List<Dictionary<string, object>> response = new List<Dictionary<string, object>>();
+
+            // For each student that we get
+            foreach (var s in students)
+            {
+                // Create the inner dictionary for the student's info
+                var studentDict = new Dictionary<string, object>();
+
+                // Add his info to the inner dictionary
+                studentDict["username"] = s.Username;
+                studentDict["numarMatricol"] = s.NumarMatricol;
+                studentDict["nume"] = s.Nume;
+                studentDict["prenume"] = s.Prenume;
+
+                studentDict["prezenteLab"] = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceLab.ToString();
+
+                studentDict["prezenteSeminar"] = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceSeminary.ToString();
+
+                // Get all his grades from the respective discipline with the provided grade type
+                List<Grade> grades = _context.Student.Where(
+                    st => st.Username.Equals(s.Username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().Grades.Where(
+                    g => g.Type.ToString().Equals(gradeType)
+                ).ToList();
+
+
+                // Create a list in which we store all the grades that we get for the students
+                List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
+
+                // For each grade that we get
+                foreach (var g in grades)
+                {
+                    // Create an inner inner dictionary for his grades
+                    var gradeDict = new Dictionary<string, string>();
+
+                    // Add the hrade info to the inner inner dictionary
+                    gradeDict["id"] = g.Id.ToString();
+                    gradeDict["value"] = g.GradeValue.ToString();
+                    gradeDict["data"] = g.DataNotei;
+                    
+                    // Append the inner inner dictionary to the list of grades
+                    gradesList.Add(gradeDict);
+                }
+
+                // Append the list of grades to the dictionary of students
+                studentDict["grades"] = gradesList;
+
+                // Append the dictionary with the students info to the response
+                response.Add(studentDict);
+            }
+
+            // Return the response
+            return Json(response);
+        }
+
+        [HttpGet("specializari/{username}")]
+        public IActionResult GetSpecializariOfDepartmentStudent([FromRoute]string username)
+        {
+            List<string> specializari = _context.Department.Where(d => d.Specializares.Contains(_context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault().FacultiesEnrolled.
+                  FirstOrDefault().Specializare)).SelectMany(d => d.Specializares.Select(sp => sp.Nume)).ToList();
+            return Json(specializari);
         }
 
         [HttpGet("{an}")]

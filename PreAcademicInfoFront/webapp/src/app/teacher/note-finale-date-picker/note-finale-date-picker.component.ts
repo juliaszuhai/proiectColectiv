@@ -3,12 +3,7 @@ import { TeacherService, StudentData } from '../teacher.service';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MatDatepicker } from '@angular/material';
-
-
-const STUDENT_DATA: StudentData[] = [
-  {username: "username1", password:"pass1",numarMatricol:"2020",email:"a@ceva.com",nume:"Delibas",prenume:"Stefan", nrTelefon:"00034",CNP:"1934223345",initialaParinte:"V",generatie:"2015",anCurent:"2018"},
-  {username: "username2", password:"pass2",numarMatricol:"2039",email:"b@ceva.com",nume:"Szuhai",prenume:"Iulia", nrTelefon:"073534",CNP:"2434254675",initialaParinte:"S",generatie:"2015",anCurent:"2018"}
-];
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-note-finale-date-picker',
@@ -26,12 +21,11 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
 
   isValidMoment: boolean = false;
   columnsToDisplay = ['nrMatricol','nume','nota', 'data'];
-  dataSource = STUDENT_DATA;
-  nota: string;
-  choosedDate: string;
+  grade: string;
+  choosedDate: string = null;
   public students = [];
 
-  constructor(private teacherService: TeacherService){ }
+  constructor(private teacherService: TeacherService,public toastr: ToastrManager){ }
 
   ngOnInit() {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
@@ -50,10 +44,38 @@ export class NoteFinaleDatePickerComponent implements OnInit , AfterViewInit {
     );
   }
 
-  saveGrade(event){
+  saveGrade(event,elem){
     //save the grade into DB on focusout event
-    this.nota=event.target.value;
-    console.log("here"+ this.nota);
+    this.grade=event.target.value;
+    console.log(this.grade);
+    console.log(this.choosedDate);
+    if(this.choosedDate !== null)
+    {
+      console.log("len of grades" + elem.grades.len);
+      if(elem.grades.length > 0)
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.choosedDate,this.materie,this.tipNota,elem.grades[0]["id"]).subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+      else
+      {
+        this.teacherService.PostGrade(elem.username, this.grade, this.choosedDate,this.materie,this.tipNota,"").subscribe(
+          data => {
+          console.log(data);
+        });
+      }
+
+      this.grade = null;
+      this.choosedDate = null;
+    }
+    else
+    {
+      this.toastr.warningToastr('Selecteaza data inainte de a completa notele', 'Alert!');
+      console.log("baga ba o dataaaaaaaa baaaaa");
+    }
   }
+
 
 }

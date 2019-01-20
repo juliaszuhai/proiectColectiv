@@ -27,24 +27,46 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Discipline;
         }
 
-        // GET: api/Discipline/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDiscipline([FromRoute] string id)
+        // GET: api/Discipline/<teacherUsername>
+        [HttpGet("materii/teacher/{teacherUsername}")]
+        public IActionResult GetTeacherDisciplines([FromRoute] string teacherUsername)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // Get all disciplines names that belong to a teacher
+            List<string> disciplines = new List<string>();
+            disciplines = _context.Teacher.Where(
+                t => t.Username.Equals(teacherUsername)
+            ).FirstOrDefault().DisciplinesHolded.Select(
+                d => d.Nume
+            ).ToList();
 
-            var discipline = await _context.Discipline.SingleOrDefaultAsync(m => m.Cod == id);
-
-            if (discipline == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(discipline);
+            // Return the list of disciplines
+            return Json(disciplines);
         }
+
+        [HttpGet("materii/student/{username}")]
+        public IActionResult GetmateriiEnrolled([FromRoute] string username)
+        {
+            Student student = _context.Student.Where(s => s.Username.Equals(username)).FirstOrDefault();
+            // Create the inner dictionary for the student's info
+            var studentDict = new Dictionary<string, object>();
+
+            // Create a list in which we store all the grades that we get for the students
+            List<string> gradesList = new List<string>();
+
+            // For each grade that we get
+            foreach (var m in student.Grades.Select(s => s.Discipline.Nume).ToList())
+            {
+                // Create an inner inner dictionary for his grades
+                var gradeDict = new Dictionary<string, string>();
+
+                // Append the inner inner dictionary to the list of grades
+                gradesList.Add(m);
+            }
+            
+            // Return the response
+            return Json(gradesList);
+        }
+
 
         // PUT: api/Discipline/5
         [HttpPut("{id}")]
@@ -96,6 +118,38 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return CreatedAtAction("GetDiscipline", new { id = discipline.Cod }, discipline);
         }
 
+        [HttpPost("prezenteLab/{materie}/{usernameStudent}/{noAttendance}")]
+        public IActionResult PostPrezenteLab([FromRoute] string materie, [FromRoute] string usernameStudent,
+                                            [FromRoute] string noAttendance)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var grade = _context.Student.Where(s => s.Username.Equals(usernameStudent)).FirstOrDefault().Grades
+                .Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault();
+            grade.AttendanceLab = int.Parse(noAttendance);
+           _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("prezenteSeminar/{materie}/{usernameStudent}/{noAttendance}")]
+        public IActionResult PostPrezenteSeminar([FromRoute] string materie, [FromRoute] string usernameStudent,
+                                            [FromRoute] string noAttendance)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var grade = _context.Student.Where(s => s.Username.Equals(usernameStudent)).FirstOrDefault().Grades
+                .Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault();
+            grade.AttendanceSeminary = int.Parse(noAttendance);
+            _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         // DELETE: api/Discipline/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDiscipline([FromRoute] string id)
@@ -120,6 +174,52 @@ namespace AcademicInfoServerEF22EF22.Controllers
         private bool DisciplineExists(string id)
         {
             return _context.Discipline.Any(e => e.Cod == id);
+        }
+
+        [HttpGet("listDisciplines/{specializare}/{an}/{semestru}")]
+        public IActionResult GetAvailableDisciplines([FromRoute] string specializare, [FromRoute] string an, [FromRoute] string semestru)
+        {
+            List<Discipline> disciplines = null;
+            if (specializare != "" && !an.Equals("0") && !semestru.Equals("0"))
+            {
+                disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                           d.An.ToString().Equals(an) &&
+                                           d.Semestru.ToString().Equals(semestru)).ToList();
+            }
+            else if (specializare != "")
+            {
+                if (!an.Equals("0") && semestru.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                            d.An.ToString().Equals(an)).ToList();
+                }
+                if (!semestru.Equals("0") && an.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare) &&
+                                            d.Semestru.ToString().Equals(semestru)).ToList();
+                }
+                if (semestru.Equals("0") && an.Equals("0"))
+                {
+                    disciplines = _context.Discipline.Where(d => d.Specializare.Nume.Equals(specializare)).ToList();
+                }
+            }
+            List<Dictionary<string, string>> response = new List<Dictionary<string, string>>();
+            foreach (var d in disciplines)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict.Add("An", d.An.ToString());
+                dict.Add("semestru", d.Semestru.ToString());
+                dict.Add("nume", d.Nume);
+                dict.Add("type", d.Type.ToString());
+                dict.Add("codMaterie", d.Cod);
+                dict.Add("nrCredite", d.Credite.ToString());
+                dict.Add("locuriDisponibile", "0");
+                dict.Add("locuriOcupate", "0");
+
+                response.Add(dict);
+            }
+
+            return Ok(response);
         }
     }
 }

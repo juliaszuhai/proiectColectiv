@@ -33,6 +33,37 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return _context.Teacher;
         }
 
+        // GET: api/Teachers/showcase
+        [HttpGet("showcase")]
+        public IActionResult ShowcaseTeachers()
+        {
+            // Retrieve all teachers from the DB
+            var teachers = _context.Teacher.Select(t => new { t.Nume, t.Prenume, t.Email, t.PictureURL, t.Description }).ToArray();
+
+            // Create a list of dictionaries that will store the required informations for each teacher
+            List<Dictionary<string, string>> response = new List<Dictionary<string, string>>  { };
+
+            // For every teacher
+            foreach (var t in teachers)
+            {
+                // Create an inner dictionary
+                Dictionary<string, string> d = new Dictionary<string, string> { };
+
+                // Append the teacher informations to the inner dictionary
+                d.Add("Nume", t.Nume);
+                d.Add("Prenume", t.Prenume);
+                d.Add("Email", t.Email);
+                d.Add("PictureURL", t.PictureURL);
+                d.Add("Website", t.Description);
+
+                // Append the inner dictionary to the response list
+                response.Add(d);
+            }
+
+            // Return the response list of dictionaries
+            return Json(response);
+        }
+
         // GET: api/Teachers/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTeacher([FromRoute] string id)

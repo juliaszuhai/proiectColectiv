@@ -33,5 +33,11 @@ namespace AcademicInfoServerEF22EF22.Models
         //[Required]
         //public Teacher Teacher { get; set; }
 
+        public Int32 LocuriDisponibile { get; set; }
+
+        public Int32 RequiredLabAttendance { get; set; }
+
+        public Int32 RequiredSeminaryAttendance { get; set; }
+
     }
 }

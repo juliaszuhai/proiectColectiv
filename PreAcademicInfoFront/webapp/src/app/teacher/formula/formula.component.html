@@ -1,7 +1,7 @@
 <app-nav-teacher></app-nav-teacher>
 <div class="show">
   <div class="selectors">
-    <mat-form-field class="select" *ngIf="isMoreThanOneMaterii()">
+    <mat-form-field class="select">
       <mat-select class = "white" placeholder="Materie" [(ngModel)]="selectedMaterie" name="materie">
         <mat-option *ngFor="let materie of materii" [value]="materie.viewValue">
           {{materie.viewValue}}
@@ -49,17 +49,20 @@
         </mat-card-content>
 
         <mat-card-actions>
+            
+            <br>
+            <span> Procentaj Global: </span>
+            <input matInput [(ngModel)]="percentageLabOuter" type="number" placeholder="%">
+            
+            <br>
             <span> Numar laboratoare: </span>
               <mat-form-field>
                   <input matInput [(ngModel)]="nrLab" type="number" placeholder="">
               </mat-form-field>
               <br>
-              <mat-slide-toggle [(ngModel)]="checked1">Acelasi procentaj</mat-slide-toggle>
+              <mat-slide-toggle (change)="updateEvenPercentage()" [(ngModel)]="checked1">Acelasi procentaj</mat-slide-toggle>
               <div *ngIf="checked1">
-                  <span> Procent: </span>
-                  <mat-form-field>
-                    <input matInput [(ngModel)]="percentageLab" type="number" placeholder="%">
-                  </mat-form-field>
+                  <span>{{nrLab}} laboratoare cu procentaj de {{evenPercentageLab}}%</span>
               </div>
               <br>
               <mat-slide-toggle [(ngModel)]="checked2">Procentaje diferite</mat-slide-toggle>
@@ -67,7 +70,7 @@
                 <div *ngFor="let lab of createArray()">
                     <span> L{{lab}}: </span>
                     <mat-form-field>
-                      <input matInput [(ngModel)]="percentageLab" type="number" placeholder="%">
+                      <input matInput [(ngModel)]="notEvenPercetageLabs[lab-1]" type="number" placeholder="%">
                     </mat-form-field>
                 </div>
               </div>
@@ -78,13 +81,13 @@
 
       <mat-card class="card">
         <mat-card-content>
-          <mat-checkbox  [(ngModel)]="checkedExamPr">Examen practic / proiect</mat-checkbox>
+          <mat-checkbox  [(ngModel)]="checkedSeminar">Seminar</mat-checkbox>
         </mat-card-content>
 
         <mat-card-actions>
             <span> Procent: </span>
               <mat-form-field>
-                  <input matInput [(ngModel)]="percentageExamPr" type="number" placeholder="%">
+                  <input matInput [(ngModel)]="checkedSeminar" type="number" placeholder="%">
               </mat-form-field>
           </mat-card-actions>
       </mat-card>
@@ -105,6 +108,9 @@
       </mat-card>
   </div>
   <br>
-  <button mat-flat-button color="primary" class="button-style">Submit</button>
+  <button mat-flat-button color="primary" class="button-style" (click)="submitProcentaje($event)">Submit</button>
+  <div *ngIf="submitted">
+  <button mat-flat-button color="primary" class="button-style" (click)="noteFinale($event)">Calculeaza note finale</button>
+  </div>
   <br>
 </div>

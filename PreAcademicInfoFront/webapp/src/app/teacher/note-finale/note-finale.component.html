@@ -7,7 +7,7 @@
 
   
   <ng-container matColumnDef="nume">
-    <th mat-header-cell *matHeaderCellDef> Nume </th>
+    <th mat-header-cell *matHeaderCellDef> Nume Prenume </th>
     <td mat-cell *matCellDef="let element"> {{element.nume}} {{element.prenume}} </td>
   </ng-container>
 
@@ -15,21 +15,31 @@
   <ng-container matColumnDef="nota">
     <th mat-header-cell *matHeaderCellDef> Nota </th>
     <td mat-cell *matCellDef="let element">
-            <mat-form-field >
-                <input matInput placeholder="Give a grade" #input (focusout)="saveGrade($event)">
+            <mat-form-field *ngIf="element.grades.length > 0">
+                <input matInput placeholder="{{element.grades[0]['value']}}" #input (focusout)="saveGrade($event,element)">
             </mat-form-field>
-             {{element.nota}} </td>
+            <mat-form-field *ngIf="element.grades.length == 0">
+                <input matInput placeholder="introdu nota" #input (focusout)="saveGrade($event,element)">
+            </mat-form-field>
+      </td>
   </ng-container>
 
 
   <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef> Data </th>
       <td mat-cell *matCellDef="let element">
-          <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Alege o data" (focusout)="saveDate($event)">
+          <mat-form-field *ngIf="element.grades.length > 0">
+              <input matInput [matDatepicker]="picker" placeholder="{{element.grades[0]['data']}}" (focusout)="saveDate($event,element)">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+          <mat-form-field *ngIf="element.grades.length == 0">
+              <input matInput [matDatepicker]="picker" placeholder="introdu data" (focusout)="saveDate($event,element)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          
         {{element.data}}</td>
     </ng-container>
 

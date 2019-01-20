@@ -7,12 +7,11 @@
   <button mat-button [matMenuTriggerFor]="menu">Note</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="../home">Note finale</button>
-    <button mat-menu-item routerLink="../note-provizorii">Note provizorii</button>
     <button mat-menu-item routerLink="../note-lab">Note lab/sem</button>
     <button mat-menu-item routerLink="../statistics">Statistica note</button>
   </mat-menu>
   <button mat-button routerLink="../contracte" >Contracte studii</button>
-  <button mat-button >Profesori</button>
+  <button mat-button routerLink="../profesori">Profesori</button>
   <button mat-button [matMenuTriggerFor]="cereri">Cereri</button>
     <mat-menu #cereri="matMenu">
       <button mat-menu-item >Trimite Cerere</button>
@@ -24,11 +23,36 @@
 
     <span class="fill-space"></span>
     <div>
-  <button class="profile">
+  <button  mat-button [matMenuTriggerFor]="profile"  class="profile">
     <i class="material-icons">
       account_circle
     </i>
   </button>
+  <mat-menu #profile="matMenu" class="menu-form-wrapper" [hasBackdrop]="false">
+
+      <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+    
+          <form (ngSubmit)="changePassword()" class="menu-form" >
+            <mat-form-field class="example-full-width">
+              <input type="password" matInput placeholder="Old Password" name="old-password" [(ngModel)]="newPassData.old_password" required>
+            </mat-form-field>
+            <mat-divider [vertical]="true"></mat-divider>
+            <mat-form-field class="example-full-width">
+              <input type="password" matInput placeholder="New Password" name="new_password" [(ngModel)]="newPassData.new_password" required>
+            </mat-form-field>
+            <mat-divider [vertical]="true"></mat-divider>
+            <mat-form-field class="example-full-width">
+              <input type="password" matInput placeholder="Confirm New Password" name="confirm-new-password" [(ngModel)]="newPassData.confirmm_new_password" required>
+            </mat-form-field> 
+            <button mat-raised-button color="primary">Change Password</button>
+        </form>
+        <div class="error_message" *ngIf="displayError()" >
+          {{getMessage()}}
+        </div>
+      </div>
+    
+    </mat-menu>
+ 
     </div>
 
   </mat-toolbar-row>

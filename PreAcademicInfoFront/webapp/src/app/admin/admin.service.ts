@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NewPassData } from '../signin/authentication-service.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 export interface User{
   username: string;
@@ -44,13 +46,7 @@ export interface Teacher{
   password:string;
   disciplinesHolded: string[]
 }
-export interface Mail{
-  titlu: string;
-  mesaj: string;
-  departament: string;
-  an:string;
-  grupa:string;
-}
+
 
 export interface DisciplineData{
   An:string;
@@ -71,6 +67,14 @@ export interface SpecializareData{
   semestre:string,
   discipline: DisciplineData[]
 }
+export interface MailData{
+  departament:string;
+  specializare:string;
+  an:string;
+  grupa:string;
+  titlu:string;
+  mesaj:string;
+}
 @Injectable()
 export class AdminService {
   
@@ -79,9 +83,28 @@ export class AdminService {
   baseURL = 'https://localhost:44354/api/';
   baseURLTeachers='https://localhost:44354/api/Teachers';
   baseUrlStudents='https://localhost:44354/api/Students';
+  changePassURL='https://localhost:44354/api/ChangePass';
+  adminURL='https://localhost:44354/api/Admins';
+  departamenteURL='https://localhost:44354/api/Departments';
+  specializareURL='https://localhost:44354/api/Specializari';
+  grupeURL='https://localhost:44354/api/Groups';
 
+  
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,public toastr: ToastrManager) { }
+
+    changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
+      let username = localStorage['username']
+      let body = JSON.stringify({username,oldPassword,newPassword,confirmNewPassword});
+      console.log(localStorage['username']);
+      return this.http.put<NewPassData>(this.changePassURL,
+        body,
+        {
+        headers: new HttpHeaders(
+          {'Content-Type' : 'application/json'}
+        )
+      })
+    }
 
     getTeachers(): Observable<Teacher[]>{
        return this.http.get<Teacher[]>(this.baseURLTeachers); 
@@ -94,10 +117,32 @@ export class AdminService {
         return this.http.get<Student[]>(this.baseUrlStudents + "/" + an); 
       }    
 
-   
-    sendMail(mail: Mail): any {
-      throw new Error("Method not implemented.");
+    sendMail(mail:MailData) 
+    {
+      console.log("we got right before the call");
+      let body = JSON.stringify(mail);
+      console.log(body);
+      return this.http.post<MailData>(this.adminURL + "/Notify", body, {
+        headers: new HttpHeaders({ "Content-Type": "application/json" })
+      });
     }
+
+    getDepartamente() :Observable<string[]> {
+      return this.http.get<string[]>(this.departamenteURL,
+        {headers: new HttpHeaders({ "Content-Type": "application/json" })
+      });
+    }
+    getSpecializari(departament:string) :Observable<string[]> {
+      return this.http.get<string[]>(this.specializareURL+"/"+departament,
+          {headers: new HttpHeaders({ "Content-Type": "application/json" })
+        });
+    }
+    getGrupe(specializare:string,an:string):Observable<string[]> {
+      return this.http.get<string[]>(this.grupeURL+"/Get/" + an+ "/" +specializare,
+          {headers: new HttpHeaders({ "Content-Type": "application/json" })
+        });
+    }
+
     addUser( user:User)
       {
         if(user.type == "Student")

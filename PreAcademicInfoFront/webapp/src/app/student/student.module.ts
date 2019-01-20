@@ -19,6 +19,9 @@ import { NoteProvizoriiComponent } from './note-provizorii/note-provizorii.compo
 import { NoteLabComponent } from './note-lab/note-lab.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MatSlideToggleModule } from '@angular/material';
+import { TeacherViewComponent } from './teacher-view/teacher-view.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate:[LoginGuardGuard]},
@@ -27,7 +30,8 @@ const routes: Routes = [
   {path:  'note-provizorii', component:NoteProvizoriiComponent, canActivate:[LoginGuardGuard]},
   {path: 'note-lab',component:NoteLabComponent, canActivate:[LoginGuardGuard]},
   {path: 'guide', component: GuideComponent, canActivate:[LoginGuardGuard]},
-  {path: 'taxe', component: PaymentsComponent}
+  {path: 'taxe', component: PaymentsComponent},
+  {path:'profesori',component:TeacherViewComponent}
 ];
 
 @NgModule({
@@ -39,7 +43,8 @@ const routes: Routes = [
     StatisticsComponent,
     NoteProvizoriiComponent,
     NoteLabComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    TeacherViewComponent
   ],
   imports: [RouterModule.forRoot(routes),
     FormsModule,
@@ -47,13 +52,17 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    MatSlideToggleModule,],
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatCardModule],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   exports: [RouterModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatCardModule,
+    MatGridListModule,
     HttpClientModule,]
 })
 export class StudentModule { }

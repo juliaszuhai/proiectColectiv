@@ -1,6 +1,23 @@
 .fill-space {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
+.menu-form-wrapper .mat-menu-content:not(:empty) {
+  padding: 0;
+}
+
+// layout for the form
+.menu-form-wrapper .menu-form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.error_message{
+  background: #6cb4b8;
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin: 10px 20px;
+}
   
   
   

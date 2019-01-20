@@ -14,6 +14,7 @@ import {AuthenticationServiceService} from "./signin/authentication-service.serv
 import {StudentModule} from "./student/student.module";
 import {AdminModule} from "./admin/admin.module";
 import {TeacherModule} from "./teacher/teacher.module";
+import { ToastrModule } from 'ng6-toastr-notifications';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'}
@@ -33,12 +34,12 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     AdminModule,
-    TeacherModule
+    TeacherModule,
+    ToastrModule.forRoot()
   ],
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
   exports:[
-
    ]
 })
 export class AppModule { }
