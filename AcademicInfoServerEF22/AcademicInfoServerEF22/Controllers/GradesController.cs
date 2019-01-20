@@ -197,7 +197,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         // GET: api/Grades/Compute-Final-Grades/<numeMaterie>
-        [HttpGet("Compute-Final-Grades/{numeMaterie}")]
+        [HttpGet("ComputeFinalGrades/{numeMaterie}")]
         public IActionResult ComputeFinalGrades([FromRoute] string numeMaterie)
         {
             Discipline discipline = _context.Discipline.Where(d => d.Nume.Equals(numeMaterie)).FirstOrDefault();
@@ -227,18 +227,33 @@ namespace AcademicInfoServerEF22EF22.Controllers
                         labGrade += g.ProcentInnerType * g.GradeValue;
 
                 finalGrade += labGrade;
+                finalGrade = finalGrade / 100;
 
-                Grade grade = new Grade
+                Grade grade = _context.Grade.Where(gr => gr.Type.ToString().Equals("FINAL")).FirstOrDefault();
+
+                if (grade == null)
                 {
-                    GradeValue = finalGrade,
-                    DataNotei = DateTime.Now.ToString("dd/MM/yyyy"),
-                    Type = GradeType.FINAL,
-                    ProcentInnerType = 100,
-                    ProcentOuter = 100
-                };
+                    grade = new Grade
+                    {
+                        GradeValue = finalGrade,
+                        DataNotei = DateTime.Now.ToString("dd/MM/yyyy"),
+                        Type = GradeType.FINAL,
+                        ProcentInnerType = 100,
+                        ProcentOuter = 100
+                    };
 
-                gtd.Grades.Add(grade);
+                    gtd.Grades.Add(grade);
+                }
+                
+                else
+                {
+                    grade.GradeValue = finalGrade;
+                    grade.ProcentInnerType = 100;
+                    grade.ProcentOuter = 100;
+                }                
             }
+
+            _context.SaveChanges();
 
             List<Student> students = _context.Student.Where(
                     s => s.Grades.Where(
