@@ -32,48 +32,43 @@ namespace AcademicInfoServerEF22EF22.Controllers
         {
             // Get all the students that are enrolled to the given discipline
             List<Student> students = _context.Student.Where(
-                s => s.Grades.FirstOrDefault().Discipline.Nume.Equals(
-                    body.Materie
-                )
-            ).ToList();
+                s => s.Grades.Where(gtd => gtd.Discipline.Nume.Equals(body.Materie)).FirstOrDefault() != null).ToList();
 
             // For each student
             foreach(var s in students)
             {
                 // Get the student's GradeToDiscipline for the respective discipline
-                GradesToDiscipline gradeToDiscipline = s.Grades.Where(
-                    gtd => gtd.Discipline.Equals(body.Materie)
-                ).FirstOrDefault();
+                GradesToDiscipline gradeToDiscipline = s.Grades.Where(gtd => gtd.Discipline.Nume.Equals(body.Materie)).FirstOrDefault();
 
                 // For each grade
-                foreach(var g in gradeToDiscipline.Grades)
+                foreach (var g in gradeToDiscipline.Grades)
                 {
                     // Update the inner and outter fields acordingly
                     switch(g.Type.ToString())
                     {
                         case "EXAMEN":
-                            if (body.Examen != null)
+                            if (body.Examen != "")
                             {
                                 g.ProcentOuter = 1;
                                 g.ProcentInnerType = double.Parse(body.Examen);
                             }
                             break;
                         case "SEMINAR":
-                            if (body.Seminar != null)
+                            if (body.Seminar != "")
                             {
                                 g.ProcentOuter = 1;
                                 g.ProcentInnerType = double.Parse(body.Seminar);
                             }
                             break;
                         case "PARTIAL":
-                            if (body.Partial != null)
+                            if (body.Partial != "")
                             {
                                 g.ProcentOuter = 1;
                                 g.ProcentInnerType = double.Parse(body.Partial);
                             }
                             break;
                         case "BONUS":
-                            if (body.Bonus != null)
+                            if (body.Bonus != "")
                             {
                                 g.ProcentOuter = 1;
                                 g.ProcentInnerType = double.Parse(body.Bonus);
@@ -88,7 +83,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     }
                 }
                 // Check if we need to update the lab grades
-                if (body.Laborator != null)
+                if (body.Laborator.Keys.Count != 0)
                 {
                     // Now we update the lab grades by first selecting all the the lab grades of our current student
                     List<Grade> labGrades = gradeToDiscipline.Grades.Where(
@@ -97,7 +92,8 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     ).ToList().OrderBy(g => g.Id).ToList();
 
                     // Check if the number of lab grades is the same as the one in the DB
-                    if (labGrades.Count != body.Laborator.Count)
+             
+                    if (labGrades.Count != body.Laborator["Inner"].Count)
                     {
                         Dictionary<string, string> err = new Dictionary<string, string>();
                         err.Add("error", String.Format("The number of lab grades sent by the teacher is not the same as the number of lab grades for the student {0}", s.Username));
@@ -107,8 +103,8 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     // For each lab grade update the inner and outter fields acordingly
                     for (int i = 0; i < labGrades.Count; i++)
                     {
-                        labGrades[i].ProcentOuter = double.Parse((string)body.Laborator["Outter"]);
-                        labGrades[i].ProcentInnerType = double.Parse(((IList<string>)body.Laborator["Inner"])[i]);
+                        labGrades[i].ProcentOuter = double.Parse(body.Laborator["Outer"][0]);
+                        labGrades[i].ProcentInnerType = double.Parse(body.Laborator["Inner"][i]);
                     }
                 }
             }
@@ -434,7 +430,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             public string Examen { get; set; }
             public string Partial { get; set; }
             public string Seminar { get; set; }
-            public Dictionary<string, Object> Laborator { get; set; }
+            public Dictionary<string, IList<string>> Laborator { get; set; }
             public string Bonus { get; set; }
             public string Materie { get; set; }
         }

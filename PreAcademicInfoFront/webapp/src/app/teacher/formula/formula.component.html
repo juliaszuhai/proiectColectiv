@@ -1,7 +1,7 @@
 <app-nav-teacher></app-nav-teacher>
 <div class="show">
   <div class="selectors">
-    <mat-form-field class="select" *ngIf="isMoreThanOneMaterii()">
+    <mat-form-field class="select">
       <mat-select class = "white" placeholder="Materie" [(ngModel)]="selectedMaterie" name="materie">
         <mat-option *ngFor="let materie of materii" [value]="materie.viewValue">
           {{materie.viewValue}}

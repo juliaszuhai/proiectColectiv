@@ -97,6 +97,8 @@ export class TeacherService {
   labs:number[]
   ) {
   let examen:string,partial:string, seminar:string, bonus:string, laboratorS:string;
+  if(examenP == 0) {examen = ""; }
+  else{examen = examenP.toString();}
   if(laboratorP == 0) {laboratorS = ""; }
   else{laboratorS = laboratorP.toString();}
   if(partialP == 0) { partial = ""; }
@@ -106,7 +108,9 @@ export class TeacherService {
   if(bonusP == 0) { bonus = ""; }
   else{bonus = bonusP.toString();}
 
-  let laborator = {"Inner":labs,"Outer":laboratorS}
+  let list = [];
+  list.push(laboratorS);
+  let laborator = {"Inner":labs,"Outer":list}
   let body = JSON.stringify({ materie, examen, partial, seminar, bonus, laborator });
    return this.http.post<Percentage>(this.gradesURL+"/percentage", body, {
      headers: new HttpHeaders({ "Content-Type": "application/json" })

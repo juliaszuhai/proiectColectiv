@@ -101,7 +101,11 @@ export class FormulaComponent implements OnInit {
       }
       console.log(this.labPrecentageInner);
       this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
-        this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.labPrecentageInner);
+        this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.labPrecentageInner).subscribe(data => 
+          { 
+             this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
+          }
+          );
     }
     else{
       let sl:number = 0;
@@ -112,7 +116,11 @@ export class FormulaComponent implements OnInit {
       if(sl == 100)
       {
         this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
-          this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs);
+          this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs).subscribe(data => 
+            { 
+                this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
+            }
+            );
       }
       else{
         this.toastr.errorToastr('Suma procentajelor laboratoarelor nu este 100%, ci:'+sl+"%", 'Oops!');
