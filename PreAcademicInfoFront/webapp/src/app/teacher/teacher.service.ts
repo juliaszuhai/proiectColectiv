@@ -153,4 +153,19 @@ export class TeacherService {
         });
 
     }
+
+    PostPrezentaSeminar(
+      materie: string,
+      usernameStudent: string,
+      noAttendance: string)
+      {
+  
+        console.log(materie + " " + usernameStudent + " " + noAttendance);
+        return this.http.post(
+          this.disciplineURL + "/prezenteSeminar/" + materie + "/" + usernameStudent + "/" + noAttendance , 
+          {
+            headers: new HttpHeaders({ "Content-Type": "application/json" })
+          });
+  
+      }
   }

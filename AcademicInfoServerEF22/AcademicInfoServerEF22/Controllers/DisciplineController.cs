@@ -135,7 +135,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         [HttpPost("prezenteSeminar/{materie}/{usernameStudent}/{noAttendance}")]
-        public IActionResult PostPrezenteSeminar([FromRoute] string materie, [FromBody] string usernameStudent,
+        public IActionResult PostPrezenteSeminar([FromRoute] string materie, [FromRoute] string usernameStudent,
                                             [FromRoute] string noAttendance)
         {
             if (!ModelState.IsValid)

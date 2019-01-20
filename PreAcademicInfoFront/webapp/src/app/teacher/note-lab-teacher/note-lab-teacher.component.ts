@@ -22,7 +22,7 @@ export class NoteLabTeacherComponent implements OnInit {
   @Input() grupa: string;
   @Input() tipNota: string;
 
-  columnsToDisplay = ['nrMatricol','nume','prezente'];
+  columnsToDisplay = ['nrMatricol','nume','prezente','prezenteSeminar'];
   grade: string;
   presence: string;
   data: string;
@@ -94,8 +94,19 @@ export class NoteLabTeacherComponent implements OnInit {
     this.teacherService.PostPrezenta(this.materie,student.username,this.presence).subscribe(
       data => {
       //console.log(data);
+      this.toastr.successToastr(this.presence + " rezente salvate","pentru " + student.username); 
     });
   }
 
+  savePresenceSeminar(event, student){
+    let prezentaSeminar = event.target.value;
+    //console.log(student);
+
+    this.teacherService.PostPrezentaSeminar(this.materie,student.username,prezentaSeminar).subscribe(
+      data => {
+      //console.log(data);
+      this.toastr.successToastr(this.presence + " rezente salvate","pentru " + student.username);
+    });
+  }
 
 }
