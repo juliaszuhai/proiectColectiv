@@ -253,7 +253,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
             {
                 gt = GradeType.LAB;
             }
-            //to be added
+
+            if (grade.data == null)
+                grade.data = DateTime.Now.ToString("dd/MM/yyyy");
             
             if (grade.idNota == "")
             {
@@ -272,6 +274,14 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 recievedGrade.DataNotei = grade.data;
             }
             await _context.SaveChangesAsync();
+
+            if (gt == GradeType.EXAMEN)
+            {
+                List<Student> student = new List<Student>();
+                student.Add(_context.Student.Where(s => s.Username.Equals(grade.username)).FirstOrDefault());
+                Service service = new Service ( _context );
+                service.SendMailToStudents(student, "Exam grade", String.Format("Hello!\n\nYour teacher posted youe exam grade: {0}.\nWe hope you did good and we wish you the best of luck :)", grade.grade));
+            }
 
             return Ok();
         }
