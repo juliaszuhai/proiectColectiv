@@ -253,6 +253,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
             {
                 gt = GradeType.LAB;
             }
+
+            if (grade.data == null)
+                grade.data = DateTime.Now.ToString("dd/MM/yyyy");
             
             if (grade.idNota == "")
             {
