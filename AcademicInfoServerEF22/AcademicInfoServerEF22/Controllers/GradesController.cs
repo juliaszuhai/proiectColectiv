@@ -200,6 +200,69 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Json(response);
         }
 
+        // GET: api/Grades/Compute-Final-Grades/<numeMaterie>
+        [HttpGet("Compute-Final-Grades/{numeMaterie}")]
+        public IActionResult ComputeFinalGrades([FromRoute] string numeMaterie)
+        {
+            Discipline discipline = _context.Discipline.Where(d => d.Nume.Equals(numeMaterie)).FirstOrDefault();
+
+            if (discipline == null)
+            {
+                Dictionary<string, string> err = new Dictionary<string, string>();
+                err.Add("error", String.Format("There is no discipline called: '{0}'!", numeMaterie));
+                return Json(err);
+            }
+
+            List<GradesToDiscipline> gradeToDiscipline = _context.GradeToDiscipline.Where(
+                gtd => gtd.Discipline.Nume.Equals(numeMaterie)
+            ).ToList();
+
+            foreach (var gtd in gradeToDiscipline)
+            {
+                double finalGrade = 0;
+
+                foreach(var g in gtd.Grades)
+                    if (!g.Type.ToString().Equals("LAB"))
+                        finalGrade += g.ProcentOuter * g.GradeValue;
+
+                double labGrade = 0;
+                foreach (var g in gtd.Grades)
+                    if (g.Type.ToString().Equals("LAB"))
+                        labGrade += g.ProcentInnerType * g.GradeValue;
+
+                finalGrade += labGrade;
+
+                Grade grade = new Grade
+                {
+                    GradeValue = finalGrade,
+                    DataNotei = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Type = GradeType.FINAL,
+                    ProcentInnerType = 100,
+                    ProcentOuter = 100
+                };
+
+                gtd.Grades.Add(grade);
+            }
+
+            List<Student> students = _context.Student.Where(
+                    s => s.Grades.Where(
+                        g => g.Discipline.Nume.Equals(numeMaterie)
+                    ).FirstOrDefault() != null
+                ).ToList();
+
+            Service service = new Service(_context);
+
+            service.SendMailToStudents(
+                students,
+                "Final grades",
+                "Hello!\n\nYour teacher posted youe final grade.\nWe hope you passed and we wish you the best of luck :)"
+            );
+
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response.Add("success", "The final grades were successfully computed and the students were notified!");
+            return Json(response);
+        }
+
         // GET: api/Grades/Statistics/2018/Info-Engleza
         [HttpGet("Statistics/{year}/{specialization}")]
         public IActionResult GradeBuckets([FromRoute] string year, [FromRoute] string specialization)
