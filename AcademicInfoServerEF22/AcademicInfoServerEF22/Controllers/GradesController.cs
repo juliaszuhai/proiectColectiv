@@ -201,7 +201,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
         }
 
         // GET: api/Grades/Compute-Final-Grades/<numeMaterie>
-        [HttpGet("Compute-Final-Grades/{numeMaterie}")]
+        [HttpGet("ComputeFinalGrades/{numeMaterie}")]
         public IActionResult ComputeFinalGrades([FromRoute] string numeMaterie)
         {
             Discipline discipline = _context.Discipline.Where(d => d.Nume.Equals(numeMaterie)).FirstOrDefault();
@@ -231,6 +231,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                         labGrade += g.ProcentInnerType * g.GradeValue;
 
                 finalGrade += labGrade;
+                finalGrade = finalGrade / 100;
 
                 Grade grade = new Grade
                 {
