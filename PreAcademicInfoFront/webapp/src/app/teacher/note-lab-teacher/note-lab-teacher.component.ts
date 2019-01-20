@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { TeacherService, StudentData } from '../teacher.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 
 @Component({
   selector: 'app-note-lab-teacher',
@@ -29,7 +31,7 @@ export class NoteLabTeacherComponent implements OnInit {
   nrLabs = [];
 
   prezenta:string;
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService,public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.teacherService.getStudents(this.materie, this.grupa, this.tipNota)
@@ -70,6 +72,7 @@ export class NoteLabTeacherComponent implements OnInit {
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,student.grades[idx]["id"]).subscribe(
           data => {
           //console.log(data);
+          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru" + student.username);
         });
       }
       else
@@ -78,6 +81,8 @@ export class NoteLabTeacherComponent implements OnInit {
         this.teacherService.PostGrade(student.username, this.grade, "",this.materie,this.tipNota,"").subscribe(
           data => {
           //console.log(data);
+          this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru" + student.username);
+       
         });
       }
   }

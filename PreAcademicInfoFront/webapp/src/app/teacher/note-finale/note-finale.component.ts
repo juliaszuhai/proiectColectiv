@@ -49,7 +49,7 @@ export class NoteFinaleComponent implements OnInit {
       {
         this.teacherService.PostGrade(elem.username, this.grade, this.data,this.materie,this.tipNota,"").subscribe(
           data => {
-          console.log(data);
+            this.toastr.successToastr("nota la" + this.materie+ "(" + this.tipNota +")s-a adaugat cu succes!","nota pentru" + elem.username);
         });
       }
 

@@ -63,6 +63,11 @@ export class PaymentsComponent implements OnInit {
         localStorage['username'];
       }
     });
+    handler.open({
+      name: this.numeTransactie,
+      description: this.tipTranzactie,
+      amount: this.amount
+    });
   }
     openCheckout2() {
       this.numeTransactie = "Plata restanta"+this.selectedMaterie;
