@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NewPassData } from '../signin/authentication-service.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 export interface User{
   username: string;
@@ -90,7 +91,7 @@ export class AdminService {
 
   
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,public toastr: ToastrManager) { }
 
     changePassword(oldPassword: string, newPassword: string, confirmNewPassword: string){
       let username = localStorage['username']

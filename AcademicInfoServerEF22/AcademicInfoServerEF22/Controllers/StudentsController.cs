@@ -146,7 +146,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
             List<Dictionary<string, string>> gradesList = new List<Dictionary<string, string>>();
 
                 // For each grade that we get
-                foreach (var g in student.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault().Grades)
+                foreach (var g in student.Grades.Where(gtd => gtd.Discipline.Nume.Equals(materie)).FirstOrDefault().Grades.Where(g => g.Type == GradeType.LAB))
                 {
                     // Create an inner inner dictionary for his grades
                     var gradeDict = new Dictionary<string, string>();

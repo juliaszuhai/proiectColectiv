@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DisciplineData, AdminService, MailData } from '../admin.service';
 import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 const DISCIPLINE_DATA: DisciplineData[] = [
   {An:"1",semestru:"1", nume:"Fundamentele Programarii", codMaterie:"123455", facultativ:false,obligatoriu:true,optional:false, locuriDisponibile:200, nrCredite:"6",locuriOcupate:200},
@@ -39,7 +40,7 @@ export class NewsComponent implements OnInit {
       );
   }
 
-  constructor(private adminService:AdminService, private router: Router) { 
+  constructor(private adminService:AdminService, private router: Router,public toastr: ToastrManager) { 
     this.mail = {
       titlu : '',
       mesaj : '',
@@ -97,7 +98,11 @@ export class NewsComponent implements OnInit {
   submitForm(){
     this.adminService.sendMail(this.mail).subscribe(data => 
       {
-        console.log(data);
+          this.toastr.successToastr('Mesajul a fost trimis cu succes', 'Felicitari!');
+      },
+      err =>
+      {
+        this.toastr.errorToastr("S-a produs o eroare! Ne cerem scuze","Oops!");
       }
     );
   }
