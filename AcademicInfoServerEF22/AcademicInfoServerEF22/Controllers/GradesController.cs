@@ -49,36 +49,36 @@ namespace AcademicInfoServerEF22EF22.Controllers
                         case "EXAMEN":
                             if (body.Examen != "")
                             {
-                                g.ProcentOuter = 1;
-                                g.ProcentInnerType = double.Parse(body.Examen);
+                                g.ProcentOuter = double.Parse(body.Examen);
+                                g.ProcentInnerType = 100;
                             }
                             break;
                         case "SEMINAR":
                             if (body.Seminar != "")
                             {
-                                g.ProcentOuter = 1;
-                                g.ProcentInnerType = double.Parse(body.Seminar);
+                                g.ProcentOuter = double.Parse(body.Seminar);
+                                g.ProcentInnerType = 100;
                             }
                             break;
                         case "PARTIAL":
                             if (body.Partial != "")
                             {
-                                g.ProcentOuter = 1;
-                                g.ProcentInnerType = double.Parse(body.Partial);
+                                g.ProcentOuter = double.Parse(body.Partial);
+                                g.ProcentInnerType = 100;
                             }
                             break;
                         case "BONUS":
                             if (body.Bonus != "")
                             {
-                                g.ProcentOuter = 1;
-                                g.ProcentInnerType = double.Parse(body.Bonus);
+                                g.ProcentOuter = double.Parse(body.Bonus);
+                                g.ProcentInnerType = 100;
                             }
                             break;
                         case "LAB":
                             break;
                         case "FINAL":
-                            g.ProcentOuter = 1;
-                            g.ProcentInnerType = 1;
+                            g.ProcentOuter = 100;
+                            g.ProcentInnerType = 100;
                             break;
                     }
                 }
@@ -218,18 +218,23 @@ namespace AcademicInfoServerEF22EF22.Controllers
                 double finalGrade = 0;
 
                 foreach(var g in gtd.Grades)
-                    if (!g.Type.ToString().Equals("LAB"))
+                    if (g.Type != GradeType.LAB && g.Type != GradeType.FINAL)
                         finalGrade += g.ProcentOuter * g.GradeValue;
-
+                
                 double labGrade = 0;
+                double outer = 0;
                 foreach (var g in gtd.Grades)
-                    if (g.Type.ToString().Equals("LAB"))
+                    if (g.Type == GradeType.LAB)
+                    {
                         labGrade += g.ProcentInnerType * g.GradeValue;
+                        outer = g.ProcentOuter;
+                    }
 
                 finalGrade += labGrade;
-                finalGrade = finalGrade / 100;
+                
+                finalGrade /= 100;
 
-                Grade grade = _context.Grade.Where(gr => gr.Type.ToString().Equals("FINAL")).FirstOrDefault();
+                Grade grade = gtd.Grades.Where(gr => gr.Type.ToString().Equals("FINAL")).FirstOrDefault();
 
                 if (grade == null)
                 {
@@ -340,7 +345,9 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     DataNotei = grade.data,
                     Type = gt
                 };
-                gtd.Grades.Add(newGrade);
+                if(gt == GradeType.EXAMEN)
+                    if(gtd.Grades.Where(g => g.Type == GradeType.EXAMEN).FirstOrDefault() == null)
+                        gtd.Grades.Add(newGrade);
             }
             else
             {

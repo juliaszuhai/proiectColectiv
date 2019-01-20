@@ -73,8 +73,15 @@ export class FormulaComponent implements OnInit {
     else
       return false;
   }
-
-  submit($event)
+  noteFinale(event)
+  {
+    console.log(this.submitted);
+    //if(this.submitted == true)
+    {
+      this.teacherService.ComputeNotaFinala(this.selectedMaterie).subscribe(data => {});
+    }
+  }
+  submitProcentaje($event)
   {
     let s:number = 0;
     if(this.checkedExamen != true){this.percentageExam = 0;}
@@ -115,18 +122,15 @@ export class FormulaComponent implements OnInit {
       }
       if(sl == 100)
       {
+        
+        console.log(this.submitted);
         this.teacherService.PostProcentaje(this.selectedMaterie,this.percentageExam,this.percentagePartial,
           this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs).subscribe(data => 
             { 
-                this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
-                this.submitted = true;
-                this.teacherService.ComputeNotaFinala(this.selectedMaterie).subscribe(data => {});
-            },
-            err =>
-            {
-              this.toastr.errorToastr(err,"Opps!");
-            }
-            );
+              this.submitted = true;
+                //this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
+            });
+        
       }
       else{
         this.toastr.errorToastr('Suma procentajelor laboratoarelor nu este 100%, ci:'+sl+"%", 'Oops!');
