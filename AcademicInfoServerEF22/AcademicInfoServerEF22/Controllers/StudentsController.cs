@@ -165,6 +165,28 @@ namespace AcademicInfoServerEF22EF22.Controllers
             return Json(gradesList);
         }
 
+        [HttpGet("prezente/{materie}/{username}")]
+        public IActionResult GetPrezenteStdent([FromRoute] string materie, [FromRoute] string username)
+        {
+            string prezenteLab = _context.Student.Where(
+                    st => st.Username.Equals(username)
+                ).First().Grades.Where(
+                    gtd => gtd.Discipline.Nume == materie
+                ).FirstOrDefault().AttendanceLab.ToString();
+
+            string prezenteSeminar = _context.Student.Where(
+                st => st.Username.Equals(username)
+            ).First().Grades.Where(
+                gtd => gtd.Discipline.Nume == materie
+            ).FirstOrDefault().AttendanceSeminary.ToString();
+
+            List<string> prezente = new List<string>();
+            prezente.Add( prezenteLab);
+            prezente.Add(prezenteSeminar);
+
+            return Json(prezente);
+        }
+
         // GET: api/Students/{materie}/{grupa}/{tipNota}
         [HttpGet("{materie}/{grupa}/{tipNota}")]
         public IActionResult GetStudent([FromRoute] string materie, [FromRoute] string grupa, [FromRoute] string tipNota)

@@ -40,7 +40,6 @@ const routes: Routes = [
   providers: [StudentService,LoginGuardGuard,AuthenticationServiceService],
   bootstrap: [AppComponent],
   exports:[
-
    ]
 })
 export class AppModule { }

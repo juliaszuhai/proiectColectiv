@@ -197,6 +197,13 @@ export class StudentService {
     })
   }
 
+  getPrezente(username:string,materie:string):Observable<string[]> {
+      return this.http.get<string[]>(this.baseURL+"/prezente/"+materie+"/"+username,
+        {headers: new HttpHeaders({ "Content-Type": "application/json" })
+      });
+    }
+  
+
   getMaterii(
     teacher:string
   ) :Observable<string[]> {

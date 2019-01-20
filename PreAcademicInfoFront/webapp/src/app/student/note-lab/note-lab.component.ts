@@ -18,7 +18,10 @@ export class NoteLabComponent implements OnInit {
   displayedColumns=['value', 'data'];
   noteleInitiale:LabGrade[];
   notele:LabGrade[];
-
+  prezenteLab:string;
+  prezenteSeminar:string;
+  materie:string;
+  prezente:boolean=false;
 
   ngOnInit() {
     var username=localStorage.getItem("username");
@@ -39,6 +42,7 @@ export class NoteLabComponent implements OnInit {
 
   onChangeMaterie(e) {
     var materieSelectata=this.materii[e.value].viewValue;
+    this.materie = materieSelectata;
     var username=localStorage.getItem("username");
     this.studentService.getLabGrades(username, materieSelectata).subscribe(
       data =>
@@ -50,6 +54,14 @@ export class NoteLabComponent implements OnInit {
         this.notele=this.noteleInitiale;
         this.noteleInitiale=[];
         console.log(this.notele);
+
+        
+          this.studentService.getPrezente(localStorage['username'],this.materie)
+          .subscribe(data => 
+            {
+              this.prezenteLab = data[0];
+              this.prezenteSeminar = data[1];        
+            });
         });
   }
 }
