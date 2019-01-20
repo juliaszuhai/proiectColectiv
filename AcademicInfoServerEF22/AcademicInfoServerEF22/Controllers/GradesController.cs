@@ -97,7 +97,7 @@ namespace AcademicInfoServerEF22EF22.Controllers
                     {
                         Dictionary<string, string> err = new Dictionary<string, string>();
                         err.Add("error", String.Format("The number of lab grades sent by the teacher is not the same as the number of lab grades for the student {0}", s.Username));
-                        return Json(err);
+                        return BadRequest(err);
                     }
 
                     // For each lab grade update the inner and outter fields acordingly

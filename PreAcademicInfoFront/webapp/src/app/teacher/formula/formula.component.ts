@@ -32,7 +32,7 @@ export class FormulaComponent implements OnInit {
   checkedLaborator = false;
   checkedSeminar = false;
   checkedBonus = false;
-
+  submitted:boolean = false;
   percentageLabUnic:number = 0;
   percentageExam: number = 0;
   percentagePartial: number= 0;
@@ -119,6 +119,12 @@ export class FormulaComponent implements OnInit {
           this.percentageSeminar,this.puncteBonus,this.percentageLabOuter,this.notEvenPercetageLabs).subscribe(data => 
             { 
                 this.toastr.successToastr('procentele s-au trimis cu succes',"Felicitari!");
+                this.submitted = true;
+                this.teacherService.ComputeNotaFinala(this.selectedMaterie).subscribe(data => {});
+            },
+            err =>
+            {
+              this.toastr.errorToastr(err,"Opps!");
             }
             );
       }

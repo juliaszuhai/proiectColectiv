@@ -117,6 +117,12 @@ export class TeacherService {
    });
   }
 
+  ComputeNotaFinala(materie:string)
+  {
+    return this.http.post<Percentage>(this.gradesURL+"/ComputeFinalGrade/"+materie, {
+      headers: new HttpHeaders({ "Content-Type": "application/json" })
+    });
+  }
   PostGrade(
     username: string,
     grade: string,
