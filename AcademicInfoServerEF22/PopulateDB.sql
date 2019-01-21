@@ -3,7 +3,7 @@
 -- ii) MANUALLY ADD THE COMMENTED ADMINS AND THE STUDENT
 --iii) RUN THE REST OF THE SCRIPT
 
---TRUNCATE ALL TABLES
+--TRUNCATE ALL TABLES Only if you had data in your database already. if not, don not run this part
 DELETE FROM [Grade];
 DBCC CHECKIDENT('Grade', RESEED, 0);
 DELETE FROM [GradeToDiscipline];
@@ -25,10 +25,11 @@ DELETE FROM [Contracts];
 DELETE FROM [Student];
 DELETE FROM [Teacher];
 DELETE FROM [Admin];
+-------------------------------------------------------------------until here
 
 --Admins (password = 'pass')
---INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a1', 'Str. Fericirii, Nr. 10, Ap. 10', 'admin1@yahoo.com', '0711111111', 'Admin1', 'Admin1', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
---INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a2', 'Str. Nefericirii, Nr. 13, Ap. 66', 'admin2@yahoo.com', '0722222222', 'Admin2', 'Admin2', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
+INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a1', 'Str. Fericirii, Nr. 10, Ap. 10', 'admin1@yahoo.com', '0711111111', 'Admin1', 'Admin1', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
+INSERT INTO [Admin] (Username, Adresa, Email, NumarTelefon, Nume, Prenume, UserType, Password, Salt) VALUES ('a2', 'Str. Nefericirii, Nr. 13, Ap. 66', 'admin2@yahoo.com', '0722222222', 'Admin2', 'Admin2', 2, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>'); 
 
 --Teachers (password = 'pass')
 -- CS Teachers
@@ -67,7 +68,7 @@ INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Passwor
 INSERT INTO [Teacher] (Username,Email,NumarTelefon,Nume,Prenume,UserType,Password,Salt, PictureURL, Description) VALUES ('lorand', 'lorand@cs.ubbcluj.ro', '0711111142', 'Parajdi', 'Lorand', 0, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>', 'http://www.cs.ubbcluj.ro/wp-content/uploads/Parajdi-Lorand.jpg', 'Web: NaN');
 
 --Students (password = 'pass')
---INSERT INTO [Student] VALUES ('andi', 1, 3, 'aaie2000@scs.ubbcluj.ro', 2016, 'A', '0711111110', 'Abrudan', 'Andrei', 1, '1960000000000', 2000, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
+INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('andi', 1, 3, 'aaie2000@scs.ubbcluj.ro', 2016, 'A', '0711111110', 'Abrudan', 'Andrei', 1, '1960000000000', 2000, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('biju', 1, 3, 'delibas.stefan@gmail.com', 2016, 'S', '0711111111', 'Abrudean', 'Sergiu Valentin', 1, '1960000000001', 2001, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt) VALUES ('andre', 1, 3, 'delibas.stefan@gmail.com', 2016, 'A', '0711111112', 'Acatrinei', 'Andreea Laura', 1, '1960000000002', 2002, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
 INSERT INTO [Student] (Username,Active,An,Email,Generatie,InitialaParinte,NumarTelefon,Nume,Prenume,UserType,CNP,NumarMatricol,Password,Salt)VALUES ('ladi', 1, 3, 'delibas.stefan@gmail.com', 2016, 'L', '0711111113', 'Andrasi', 'Ladislau', 1, '1960000000003', 2003, '$2a$11$Tpeb5j/mOlnMPMnVHTJMwOWYmAIg0G1QMMCjL2.OxZiosBzbpSqfO', 'Ӽ3����I>');
